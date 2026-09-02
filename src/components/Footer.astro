@@ -1,6 +1,7 @@
 ---
 import uoftEngWhite from '../assets/uoft-eng-white.svg';
-import defyGravityWhite from '../assets/defy-gravity-white.svg';
+import { Image } from "astro:assets";
+import defyGravityWhite from "../assets/defy-gravity-white.png";
 import SocialLinks from './SocialLinks.astro';
 
 const year = new Date().getFullYear();
@@ -28,11 +29,11 @@ const year = new Date().getFullYear();
     </div>
     <div>
       <h2 class="text-white text-lg font-bold mb-4">Quick links</h2>
-      <ul class="text-on-inverse-muted text-sm space-y-2">
-        <li><a href="/research" class="text-on-inverse-muted hover:text-white transition-colors">Research</a></li>
-        <li><a href="/training" class="text-on-inverse-muted hover:text-white transition-colors">Training</a></li>
-        <li><a href="/partnerships" class="text-on-inverse-muted hover:text-white transition-colors">Partnerships</a></li>
-        <li><a href="/about" class="text-on-inverse-muted hover:text-white transition-colors">About</a></li>
+      <ul class="text-on-inverse-muted text-sm space-y-1">
+        <li><a href="/research" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">Research</a></li>
+        <li><a href="/training" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">Training</a></li>
+        <li><a href="/partnerships" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">Partnerships</a></li>
+        <li><a href="/about" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">About</a></li>
       </ul>
     </div>
     <div>
@@ -50,10 +51,10 @@ const year = new Date().getFullYear();
           class="h-8 w-auto"
         />
       </a>
-      <ul class="text-on-inverse-muted text-sm space-y-2">
-        <li><a href="https://www.engineering.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="text-on-inverse-muted hover:text-white transition-colors">UofT Engineering</a></li>
-        <li><a href="https://www.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="text-on-inverse-muted hover:text-white transition-colors">University of Toronto</a></li>
-        <li><a href="https://ai.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="text-on-inverse-muted hover:text-white transition-colors">AI at UofT</a></li>
+      <ul class="text-on-inverse-muted text-sm space-y-1">
+        <li><a href="https://www.engineering.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">UofT Engineering</a></li>
+        <li><a href="https://www.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">University of Toronto</a></li>
+        <li><a href="https://ai.utoronto.ca/" target="_blank" rel="noopener noreferrer" class="inline-block py-1 text-on-inverse-muted hover:text-white transition-colors">AI at UofT</a></li>
       </ul>
     </div>
   </div>
@@ -74,7 +75,7 @@ const year = new Date().getFullYear();
         rel="noopener noreferrer"
         aria-label="Defy Gravity campaign"
       >
-        <img src={defyGravityWhite.src} alt="Defy Gravity" width={defyGravityWhite.width} height={defyGravityWhite.height} class="h-8 w-auto" />
+        <Image src={defyGravityWhite} alt="Defy Gravity" width={60} densities={[1, 2, 3]} class="h-8 w-auto" />
       </a>
       <p class="text-center text-sm text-on-inverse-muted">
         &copy; {year} Centre for Analytics and Artificial Intelligence Engineering.

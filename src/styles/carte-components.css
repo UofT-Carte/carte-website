@@ -15,33 +15,12 @@
    1. PRIMITIVE TOKENS
    ====================================================================== */
 :root {
-  /* ---- Official U of T palette ---- */
-  --color-uoft-blue:        #1E3765;   /* PMS 655   · Primary */
-  --color-uoft-secondary:   #007894;   /* PMS 633   · Secondary */
-  --color-uoft-secondary-dark: #006279;
-
-  --color-uoft-purple:      #6D247A;
-  --color-uoft-warm-red:    #DC4633;
-  --color-uoft-cool-blue:   #6FC7EA;
-  --color-uoft-teal:        #00A189;
-  --color-uoft-fuchsia:     #AB1368;
-  --color-uoft-dark-green:  #0D534D;
-  --color-uoft-yellow:      #F1C500;
-  --color-uoft-light-green: #8DBF2E;
-
+  /* ---- Official U of T palette, cream canvas and the blue ramp ----
+     Declared once, in theme.css (@theme), which emits them on :root for
+     both Tailwind utilities and the var() references below. */
   --color-white:            #FFFFFF;
-  --color-cool-gray:        #D0D1C9;
   --color-black:            #000000;
-
-  /* ---- Carte-specific extensions ---- */
-  --color-pale-bg:          #FDFBF7;   /* Carte cream page canvas */
-  --color-warm-bg:          #F2F0EB;
-
-  --color-uoft-blue-900:    #12244A;
-  --color-uoft-blue-700:    #1E3765;
-  --color-uoft-blue-500:    #3E5A8F;
-  --color-uoft-blue-100:    #E2E8F2;
-  --color-uoft-blue-050:    #F1F4F9;
+  --color-uoft-blue-700:    var(--color-uoft-blue);
 
   /* Accent tint backgrounds — chart fills, callout washes */
   --color-bg-blue-100:      #E2E8F2;
@@ -203,6 +182,7 @@
   transition: background var(--dur-base) var(--ease-out);
 }
 .carte-btn-primary:hover { background: var(--brand-secondary); }
+.carte-btn-primary[aria-busy="true"] { opacity: 0.7; cursor: progress; }
 
 .carte-btn-ghost {
   display: inline-flex; align-items: center; justify-content: center;
@@ -225,6 +205,12 @@
 .carte-label__req { color: var(--color-danger); margin-left: 2px; }
 .carte-help  { font: 400 12px var(--font-sans); color: var(--color-slate-500); margin: 6px 0 0; }
 .carte-error { font: 500 12px var(--font-sans); color: var(--color-danger); margin: 6px 0 0; }
+
+/* Live region under a form: empty until there is something to say */
+.carte-status { font: 500 14px/1.5 var(--font-sans); margin-top: 12px; }
+.carte-status:empty { margin: 0; }
+.carte-status--error   { color: var(--color-danger); }
+.carte-status--success { color: var(--color-success); }
 
 .carte-input,
 .carte-select,

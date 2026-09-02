@@ -57,7 +57,7 @@
 }
 
 /* Browser surfaces carry the palette too: selection and native control accents */
-html { accent-color: var(--brand-primary); }
+html { accent-color: var(--brand-primary); color-scheme: light; }
 ::selection { background: var(--color-uoft-blue-100); color: var(--text-strong); }
 .on-inverse ::selection,
 .inverse-cta ::selection,

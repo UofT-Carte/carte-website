@@ -23,6 +23,7 @@ const RULES = [
   { id: 'no-slate-body-copy', re: /<p[^>]*\btext-slate-(500|600|700|800|900)\b/, why: 'Paragraph copy uses --text-body / --text-muted / --text-subtle; slate is UI chrome only.' },
   { id: 'no-nested-main', re: /<main\b/, only: /src\/components\//, why: 'One <main> landmark per page; it lives in BaseLayout.' },
   { id: 'no-outline-none', re: /\bfocus:outline-none\b/, why: 'Keep the global :focus-visible ring; never remove the outline.' },
+  { id: 'decorative-svg-hidden', re: /<svg(?![^>]*aria-hidden)(?![^>]*role=)/, only: /src\/(pages|components)\//, why: 'Inline icons are decorative: add aria-hidden="true"; the adjacent text carries the meaning.' },
   { id: 'no-literal-hex', re: /(?<![\w-])#[0-9a-fA-F]{6}\b/, only: /src\/(pages|components)\//, skip: /^\s*(\/\/|\*)/, why: 'Colours come from tokens (var(--…)), not literals.' },
 ];
 
@@ -35,12 +36,12 @@ function walk(dir, out = []) {
   return out;
 }
 
-// The Tailwind palette (theme.css) and the design-system primitives
-// (carte-components.css) declare the same colours; they must agree.
+// The palette is declared once, in theme.css (@theme). carte-components.css
+// must not redeclare any of those colours as a literal.
 const palette = (file) => Object.fromEntries([...readFileSync(join(ROOT, file), 'utf8').matchAll(/(--color-[\w-]+):\s*(#[0-9a-fA-F]{6})\b/g)].map(([, k, v]) => [k, v.toLowerCase()]));
 const themeColours = palette('src/styles/theme.css');
 const systemColours = palette('src/styles/carte-components.css');
-const paletteDrift = Object.keys(themeColours).filter((k) => k in systemColours && themeColours[k] !== systemColours[k]);
+const paletteDrift = Object.keys(themeColours).filter((k) => k in systemColours);
 
 const files = SCAN.flatMap((d) => walk(join(ROOT, d)));
 const findings = [];
@@ -55,7 +56,7 @@ for (const file of files) {
   });
 }
 
-for (const k of paletteDrift) findings.push({ file: 'src/styles/theme.css', line: 0, id: 'palette-in-sync', why: `${k} differs between theme.css (${themeColours[k]}) and carte-components.css (${systemColours[k]}).` });
+for (const k of paletteDrift) findings.push({ file: 'src/styles/theme.css', line: 0, id: 'palette-single-source', why: `${k} is redeclared in carte-components.css (${systemColours[k]}); theme.css is the only source.` });
 
 if (findings.length) {
   const byRule = {};
