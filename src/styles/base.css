@@ -3,10 +3,15 @@
     scroll-behavior: smooth;
   }
 
+  /* The page colour lives on <html> only. A background on <body> paints above
+     the fixed, z-index:-10 dot field (InteractiveDots) and hides it. */
+  html {
+    background-color: var(--surface-page);
+  }
+
   html, body {
     font-family: var(--font-sans);
     color: var(--text-body);
-    background-color: var(--surface-page);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
