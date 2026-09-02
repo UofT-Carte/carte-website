@@ -35,6 +35,13 @@ function walk(dir, out = []) {
   return out;
 }
 
+// The Tailwind palette (theme.css) and the design-system primitives
+// (carte-components.css) declare the same colours; they must agree.
+const palette = (file) => Object.fromEntries([...readFileSync(join(ROOT, file), 'utf8').matchAll(/(--color-[\w-]+):\s*(#[0-9a-fA-F]{6})\b/g)].map(([, k, v]) => [k, v.toLowerCase()]));
+const themeColours = palette('src/styles/theme.css');
+const systemColours = palette('src/styles/carte-components.css');
+const paletteDrift = Object.keys(themeColours).filter((k) => k in systemColours && themeColours[k] !== systemColours[k]);
+
 const files = SCAN.flatMap((d) => walk(join(ROOT, d)));
 const findings = [];
 for (const file of files) {
@@ -47,6 +54,8 @@ for (const file of files) {
     }
   });
 }
+
+for (const k of paletteDrift) findings.push({ file: 'src/styles/theme.css', line: 0, id: 'palette-in-sync', why: `${k} differs between theme.css (${themeColours[k]}) and carte-components.css (${systemColours[k]}).` });
 
 if (findings.length) {
   const byRule = {};

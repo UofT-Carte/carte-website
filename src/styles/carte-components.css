@@ -211,7 +211,7 @@
   color: var(--brand-primary); background: transparent;
   border: 2px solid var(--brand-primary);
   border-radius: var(--radius-pill); cursor: pointer;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
 .carte-btn-ghost:hover { background: var(--color-uoft-blue-100); }
 
@@ -275,7 +275,7 @@
   width: 18px; height: 18px; flex: none; margin: 0;
   border: 1.5px solid var(--color-slate-300); background: #fff;
   border-radius: 4px; cursor: pointer; position: relative;
-  transition: all var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
 .carte-check input[type="radio"] { border-radius: 50%; }
 .carte-check input[type="checkbox"]:hover,
@@ -323,9 +323,22 @@
   outline: 2px solid var(--border-focus);
   outline-offset: 2px;
 }
+/* Inputs and checks draw their own ring in their :focus rules above. */
 .carte-input:focus-visible,
 .carte-select:focus-visible,
 .carte-textarea:focus-visible,
-.carte-btn-primary:focus-visible,
-.carte-btn-ghost:focus-visible,
 .carte-check input:focus-visible { outline: none; }
+
+/* Buttons keep the ring, pushed out so it clears the pill edge. */
+.carte-btn-primary:focus-visible,
+.carte-btn-ghost:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+/* On U of T Blue the Secondary Blue ring is 2.3:1; use the on-inverse
+   text colour there (white on blue is 12:1). */
+.inverse-cta :focus-visible,
+.on-inverse :focus-visible {
+  outline-color: var(--text-on-inverse);
+}

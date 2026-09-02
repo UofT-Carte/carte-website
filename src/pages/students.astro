@@ -87,19 +87,19 @@ import CheckItem from '../components/CheckItem.astro';
 
         <h3 class="carte-h3 mt-8 mb-4">How many internships can you do?</h3>
         <div class="grid md:grid-cols-2 gap-4 mt-6">
-          <div class="p-4 bg-info rounded-lg border border-slate-200">
+          <div class="p-4 bg-info rounded-lg border border-subtle">
             <h4 class="font-bold text-uoft-blue mb-2">Students (undergraduate or graduate)</h4>
             <p class="text-sm text-body">Eligible for any number of internships. You must remain enrolled as a student throughout the internship and have time to commit to the project.</p>
           </div>
-          <div class="p-4 bg-info rounded-lg border border-slate-200">
+          <div class="p-4 bg-info rounded-lg border border-subtle">
             <h4 class="font-bold text-uoft-blue mb-2">Postdocs</h4>
             <p class="text-sm text-body">Can complete up to nine four-month internships, up to a maximum of three years total.</p>
           </div>
-          <div class="p-4 bg-info rounded-lg border border-slate-200">
+          <div class="p-4 bg-info rounded-lg border border-subtle">
             <h4 class="font-bold text-uoft-blue mb-2">Graduates</h4>
             <p class="text-sm text-body">Can complete up to three four-month internships within two years of your graduation date.</p>
           </div>
-          <div class="p-4 bg-info rounded-lg border border-slate-200">
+          <div class="p-4 bg-info rounded-lg border border-subtle">
             <h4 class="font-bold text-uoft-blue mb-2">Important</h4>
             <p class="text-sm text-body">You may not participate in more than one internship at the same time.</p>
           </div>
@@ -126,7 +126,7 @@ import CheckItem from '../components/CheckItem.astro';
   </section>
 
   <!-- CV Bank Detailed Section -->
-  <section id="cv-bank" class="py-20 lg:py-28 bg-white scroll-mt-24">
+  <section id="cv-bank" class="py-20 lg:py-28 bg-card scroll-mt-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="carte-h2 mb-4">Student CV bank</h2>
@@ -149,18 +149,18 @@ import CheckItem from '../components/CheckItem.astro';
         </ul>
 
         <h3 class="carte-h3 mt-8 mb-4">What to include in your CV</h3>
-        <div class="bg-slate-50 rounded-lg p-6 mt-6">
+        <div class="bg-sunken rounded-lg p-6 mt-6">
           <ul class="space-y-2 text-body">
-            <li>✓ Your academic background and current program</li>
-            <li>✓ Relevant coursework and technical skills</li>
-            <li>✓ Previous research experience or projects</li>
-            <li>✓ Programming languages and tools you're familiar with</li>
-            <li>✓ Research interests and areas you'd like to explore</li>
-            <li>✓ Availability (full-time, part-time, summer, etc.)</li>
+            <CheckItem>Your academic background and current program</CheckItem>
+            <CheckItem>Relevant coursework and technical skills</CheckItem>
+            <CheckItem>Previous research experience or projects</CheckItem>
+            <CheckItem>Programming languages and tools you're familiar with</CheckItem>
+            <CheckItem>Research interests and areas you'd like to explore</CheckItem>
+            <CheckItem>Availability (full-time, part-time, summer, etc.)</CheckItem>
           </ul>
         </div>
 
-        <div class="bg-info rounded-xl p-6 mt-6 border border-slate-200">
+        <div class="bg-info rounded-xl p-6 mt-6 border border-subtle">
           <p class="text-body">
             <strong>Need help with your CV?</strong> We'd be glad to review your CV before it's added to the bank. Just reach out to us at <a href="mailto:carte@utoronto.ca" class="text-secondary-blue hover:text-secondary-blue-dark font-semibold underline">carte@utoronto.ca</a> and we'll provide feedback to help you present your skills and experience in the best possible way.
           </p>

@@ -1,6 +1,20 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import heroImage from '../assets/hero-image.jpg';
+
+// The photo only renders from lg (1024px) up, in a column that is half the
+// viewport minus padding. Build a srcset for that slot; below lg the
+// <picture> resolves to a 1×1 transparent GIF so phones download nothing.
+const heroWidths = [640, 960, 1280, 1600];
+const heroSources = await Promise.all(
+  heroWidths.map(async (width) => {
+    const img = await getImage({ src: heroImage, width, format: 'webp' });
+    return `${img.src} ${width}w`;
+  })
+);
+const heroSrcset = heroSources.join(', ');
+const heroFallback = await getImage({ src: heroImage, width: 1280, format: 'webp' });
+const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
 function generateOrganicShape() {
   const tl = Math.floor(Math.random() * 40) + 30;
@@ -24,7 +38,7 @@ const organicShapeBorderRadius = generateOrganicShape();
           <h1 class="text-5xl tracking-tight font-extrabold text-uoft-blue sm:text-6xl md:text-7xl leading-[1.1]">
             Learn and apply AI with Canada's leading engineers.
           </h1>
-          <p class="mt-6 text-lg sm:mt-8 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-8 md:text-xl lg:mx-0 font-normal leading-relaxed" style="color:var(--text-muted)">
+          <p class="mt-6 text-lg sm:mt-8 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-8 md:text-xl lg:mx-0 font-normal leading-relaxed text-muted">
             One partnership connects you to AI expertise across the entirety of UofT Engineering.<br><br>From executive workshops to multi-year research collaborations, we help you move AI from concept to practice.
           </p>
           <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
@@ -34,7 +48,7 @@ const organicShapeBorderRadius = generateOrganicShape();
 
           <!-- Newsletter signup -->
           <details class="mt-8 sm:mt-10 group sm:text-center lg:text-left relative">
-            <summary class="inline-flex items-center gap-2 text-sm cursor-pointer list-none select-none transition-colors" style="color:var(--text-muted)">
+            <summary class="inline-flex items-center gap-2 py-3 -my-3 text-sm cursor-pointer list-none select-none transition-colors text-muted">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
@@ -44,7 +58,7 @@ const organicShapeBorderRadius = generateOrganicShape();
               </svg>
             </summary>
 
-            <div class="absolute left-0 sm:left-1/2 lg:left-0 sm:-translate-x-1/2 lg:translate-x-0 top-full mt-2 z-[9999] p-5 bg-white rounded-xl border border-slate-200 w-[calc(100vw-2rem)] sm:w-[400px] newsletter-panel">
+            <div class="absolute left-0 sm:left-1/2 lg:left-0 sm:-translate-x-1/2 lg:translate-x-0 top-full mt-2 z-[9999] p-5 bg-card rounded-xl border border-subtle w-[calc(100vw-2rem)] sm:w-[400px] newsletter-panel">
               <form id="hero-subscribe-form" class="space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
                   <div>
@@ -102,28 +116,23 @@ const organicShapeBorderRadius = generateOrganicShape();
   <!-- Organic shape image (desktop only) -->
   <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 p-4 lg:p-12 items-center justify-center">
     <div class="w-full h-96 lg:h-full bg-uoft-blue flex items-center justify-center overflow-hidden relative organic-shape" style={`border-radius: ${organicShapeBorderRadius}`}>
-      <Image src={heroImage} alt="Carte" class="w-full h-full object-cover" loading="eager" />
+      <picture class="contents">
+        <source media="(max-width: 1023px)" srcset={BLANK_GIF} />
+        <source media="(min-width: 1024px)" srcset={heroSrcset} sizes="calc(50vw - 6rem)" type="image/webp" />
+        <img
+          src={heroFallback.src}
+          width={heroImage.width}
+          height={heroImage.height}
+          alt="Laptop on a lectern showing the welcome slide for the Carte and Data Sciences Institute machine learning bootcamp for faculty, with participants talking at round tables in the classroom behind"
+          class="w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
     </div>
   </div>
 </div>
-
-<script>
-  function generateOrganicShape() {
-    const tl = Math.floor(Math.random() * 40) + 30;
-    const tr = Math.floor(Math.random() * 40) + 30;
-    const br = Math.floor(Math.random() * 40) + 30;
-    const bl = Math.floor(Math.random() * 40) + 30;
-    const tl2 = Math.floor(Math.random() * 40) + 30;
-    const tr2 = Math.floor(Math.random() * 40) + 30;
-    const br2 = Math.floor(Math.random() * 40) + 30;
-    const bl2 = Math.floor(Math.random() * 40) + 30;
-    const shape = document.querySelector('.organic-shape') as HTMLElement;
-    if (shape) {
-      shape.style.borderRadius = `${tl}% ${tr}% ${br}% ${bl}% / ${tl2}% ${tr2}% ${br2}% ${bl2}%`;
-    }
-  }
-  generateOrganicShape();
-</script>
 
 <script>
   function setupHeroForm() {

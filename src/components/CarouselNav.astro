@@ -1,0 +1,64 @@
+---
+// Previous / next controls for a horizontally scrolling card row. `target` is
+// the id of the scroll container; `label` names what the buttons page through
+// ("training programs") so the accessible names read as sentences.
+interface Props {
+  target: string;
+  label: string;
+  count?: string;
+}
+
+const { target, label, count } = Astro.props;
+---
+
+<div class="flex items-center gap-3 mt-6 sm:mt-0" data-carousel-nav={target}>
+  {count && <span class="text-sm text-subtle mr-2">{count}</span>}
+  <button
+    type="button"
+    data-dir="prev"
+    class="w-11 h-11 rounded-full bg-card border border-subtle flex items-center justify-center hover:bg-info hover:border-secondary-blue transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+    aria-label={`Previous ${label}`}
+  >
+    <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+    </svg>
+  </button>
+  <button
+    type="button"
+    data-dir="next"
+    class="w-11 h-11 rounded-full bg-card border border-subtle flex items-center justify-center hover:bg-info hover:border-secondary-blue transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+    aria-label={`Next ${label}`}
+  >
+    <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // Astro includes this once per page, however many navs are rendered.
+  document.querySelectorAll<HTMLElement>('[data-carousel-nav]').forEach((nav) => {
+    const carousel = document.getElementById(nav.dataset.carouselNav || '');
+    const prev = nav.querySelector<HTMLButtonElement>('[data-dir="prev"]');
+    const next = nav.querySelector<HTMLButtonElement>('[data-dir="next"]');
+    if (!carousel || !prev || !next) return;
+
+    // One card plus the row gap, read from the layout rather than hard-coded
+    const step = () => {
+      const first = carousel.firstElementChild as HTMLElement | null;
+      const gap = parseFloat(getComputedStyle(carousel).columnGap) || 0;
+      return first ? first.offsetWidth + gap : carousel.clientWidth;
+    };
+
+    const update = () => {
+      prev.disabled = carousel.scrollLeft <= 0;
+      next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
+    };
+
+    prev.addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => carousel.scrollBy({ left: step(), behavior: 'smooth' }));
+    carousel.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+</script>

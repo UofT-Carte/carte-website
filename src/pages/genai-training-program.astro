@@ -120,7 +120,7 @@ const faqs = [
         </CheckItem>
       </ul>
 
-      <div class="bg-info rounded-xl p-6 border border-slate-200">
+      <div class="bg-info rounded-xl p-6 border border-subtle">
         <h3 class="font-bold text-uoft-blue mb-2">Recognition and support</h3>
         <p class="text-body mb-2">
           You receive CAD $4,000 in research or professional development funds,
@@ -137,7 +137,7 @@ const faqs = [
   </section>
 
   <!-- How it works -->
-  <section class="py-20 lg:py-28 bg-white scroll-mt-24">
+  <section class="py-20 lg:py-28 bg-card scroll-mt-24">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="carte-h2 mb-4">How it works</h2>
@@ -162,7 +162,7 @@ const faqs = [
           </div>
         </div>
         <div class="flex items-start gap-5">
-          <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-sunken font-bold flex items-center justify-center text-lg" style="color:var(--brand-primary)">3</div>
+          <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-sunken font-bold flex items-center justify-center text-lg text-uoft-blue">3</div>
           <div>
             <h3 class="carte-h4 mb-1">Students learn AI for their discipline</h3>
             <p class="text-muted">Roughly 4,100 undergraduates take the workshops, from any discipline and with no prior AI experience required. Modules run as co-curricular workshops and, where a faculty member chooses, embedded in their own courses.</p>
@@ -172,15 +172,15 @@ const faqs = [
 
       <h3 class="carte-h3 mb-6 text-center">Key dates</h3>
       <div class="grid sm:grid-cols-3 gap-6">
-        <div class="bg-slate-50 rounded-xl p-6 text-center">
+        <div class="bg-sunken rounded-xl p-6 text-center">
           <div class="font-bold text-secondary-blue mb-1">July 10, 2026</div>
           <p class="text-muted text-sm">Faculty training session</p>
         </div>
-        <div class="bg-slate-50 rounded-xl p-6 text-center">
+        <div class="bg-sunken rounded-xl p-6 text-center">
           <div class="font-bold text-secondary-blue mb-1">Early August 2026</div>
           <p class="text-muted text-sm">First version of your module</p>
         </div>
-        <div class="bg-slate-50 rounded-xl p-6 text-center">
+        <div class="bg-sunken rounded-xl p-6 text-center">
           <div class="font-bold text-secondary-blue mb-1">Fall 2026</div>
           <p class="text-muted text-sm">Facilitators run student workshops</p>
         </div>
@@ -199,19 +199,19 @@ const faqs = [
       </div>
 
       <div class="space-y-5">
-        <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <div class="bg-card rounded-xl border border-subtle p-6">
           <h3 class="carte-h4 mb-1">You keep the rights to what you create</h3>
           <p class="text-muted">Copyright in the teaching materials you design rests with you, as it does for the other course materials you create at U of T. How your module may be used and shared within the university is set out with you in full before you commit.</p>
         </div>
-        <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <div class="bg-card rounded-xl border border-subtle p-6">
           <h3 class="carte-h4 mb-1">The academic work is yours</h3>
           <p class="text-muted">The Cognizant Foundation funds the program; the content of your module is your academic work. The funder's role, and how it is recognized, are set out with you in full before you commit.</p>
         </div>
-        <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <div class="bg-card rounded-xl border border-subtle p-6">
           <h3 class="carte-h4 mb-1">You have final say over your module</h3>
           <p class="text-muted">You approve any version of the module that carries your name or your discipline. Changes suggested by facilitators or program staff come to you for sign-off before students see them.</p>
         </div>
-        <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <div class="bg-card rounded-xl border border-subtle p-6">
           <h3 class="carte-h4 mb-1">The CAD $4,000 is not tied to enrolment</h3>
           <p class="text-muted">It is paid in recognition of designing your module and mentoring your facilitator. It does not depend on how many students enrol in or attend the workshops.</p>
         </div>
@@ -227,7 +227,7 @@ const faqs = [
       </div>
       <div class="space-y-4">
         {faqs.map(faq => (
-          <details class="group bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <details class="group bg-card rounded-2xl border border-subtle overflow-hidden">
             <summary class="px-6 py-5 cursor-pointer list-none select-none flex items-center justify-between gap-4">
               <h3 class="text-lg font-bold text-uoft-blue">{faq.q}</h3>
               <svg class="w-5 h-5 text-secondary-blue transition-transform duration-300 group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

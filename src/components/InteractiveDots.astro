@@ -36,16 +36,23 @@ const { scrollColorTransition = false } = Astro.props;
   const MAX_DPR = 2; // 3x backing stores triple the fill cost for no visible gain at 1.5px dots
   const CULL_MARGIN = MAX_CONNECTION_DISTANCE; // draw a little beyond the viewport so lines don't clip
 
-  // Colour themes for the scroll-based transition (canvas needs RGB triples;
-  // these mirror --surface-page / --brand-primary in carte-components.css)
-  const LIGHT_BG = [253, 251, 247];
-  const LIGHT_DOT = [30, 55, 101];
+  // Colour themes for the scroll-based transition. The canvas needs RGB
+  // triples, so read the palette primitives (theme.css) once at start-up.
+  const rootStyle = getComputedStyle(document.documentElement);
+  function tokenRgb(name: string, fallback: number[]): number[] {
+    const m = rootStyle.getPropertyValue(name).trim().match(/^#([0-9a-f]{6})$/i);
+    if (!m) return fallback;
+    const n = parseInt(m[1], 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  const LIGHT_BG = tokenRgb('--color-pale-bg', [253, 251, 247]);
+  const LIGHT_DOT = tokenRgb('--color-uoft-blue', [30, 55, 101]);
   const LIGHT_DOT_BASE_OPACITY = 0.06;
   const LIGHT_DOT_ACTIVE_OPACITY = 0.15;
   const LIGHT_LINE_MAX_OPACITY = 0.18;
 
-  const DARK_BG = [30, 55, 101];
-  const DARK_DOT = [253, 251, 247];
+  const DARK_BG = LIGHT_DOT;
+  const DARK_DOT = LIGHT_BG;
   const DARK_DOT_BASE_OPACITY = 0.12;
   const DARK_DOT_ACTIVE_OPACITY = 0.35;
   const DARK_LINE_MAX_OPACITY = 0.25;
@@ -87,6 +94,7 @@ const { scrollColorTransition = false } = Astro.props;
   let animationId = 0;
   let running = false;
   let anyActivation = false;
+  let lastBg = '';
 
   // Seeded random number generator for stable, repeatable connections
   function seededRandom(seed: number): () => number {
@@ -236,7 +244,13 @@ const { scrollColorTransition = false } = Astro.props;
     const baseOpacity = lerp(LIGHT_DOT_BASE_OPACITY, DARK_DOT_BASE_OPACITY, currentScrollT);
     const activeOpacity = lerp(LIGHT_DOT_ACTIVE_OPACITY, DARK_DOT_ACTIVE_OPACITY, currentScrollT);
     const lineMax = lerp(LIGHT_LINE_MAX_OPACITY, DARK_LINE_MAX_OPACITY, currentScrollT);
-    container.style.backgroundColor = `rgb(${bg[0]}, ${bg[1]}, ${bg[2]})`;
+    // Only touch the DOM when the colour actually moves (idle frames otherwise
+    // trigger a style recalc on the fixed backdrop every frame)
+    const bgCss = `rgb(${bg[0]}, ${bg[1]}, ${bg[2]})`;
+    if (bgCss !== lastBg) {
+      container.style.backgroundColor = bgCss;
+      lastBg = bgCss;
+    }
 
     // Page-space drawing on a viewport-sized canvas
     ctx.setTransform(dpr, 0, 0, dpr, 0, -scrollY * dpr);
@@ -344,15 +358,6 @@ const { scrollColorTransition = false } = Astro.props;
 
     resize();
   }
-
-  document.addEventListener('astro:before-swap', () => {
-    cancelAnimationFrame(animationId);
-    document.removeEventListener('mousemove', handleMouseMove);
-    document.removeEventListener('mouseleave', handleMouseLeave);
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', resize);
-    document.removeEventListener('visibilitychange', handleVisibility);
-  });
 
   init();
 </script>
