@@ -32,82 +32,27 @@ const organicShapeBorderRadius = generateOrganicShape();
 ---
 <div class="relative bg-transparent overflow-visible">
   <div class="max-w-7xl mx-auto overflow-visible">
-    <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 pt-12 overflow-visible">
-      <div class="mt-6 mx-auto max-w-7xl px-4 sm:mt-8 sm:px-6 md:mt-10 lg:mt-12 lg:px-8 xl:mt-16 overflow-visible">
+    <div class="relative z-10 pb-8 sm:pb-12 md:pb-14 lg:max-w-2xl lg:w-full lg:pb-8 pt-8 sm:pt-12 overflow-visible">
+      <div class="mt-4 mx-auto max-w-7xl px-4 sm:mt-6 sm:px-6 md:mt-8 lg:px-8 overflow-visible">
         <div class="sm:text-center lg:text-left overflow-visible">
           <h1 class="text-5xl tracking-tight font-extrabold text-uoft-blue sm:text-6xl md:text-7xl leading-[1.1]">
             Learn and apply AI with Canada's leading engineers.
           </h1>
           <p class="mt-6 text-lg sm:mt-8 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-8 md:text-xl lg:mx-0 font-normal leading-relaxed text-muted">
-            One partnership connects you to AI expertise across the entirety of UofT Engineering.<br><br>From executive workshops to multi-year research collaborations, we help you move AI from concept to practice.
+            Carte is the applied AI centre of UofT Engineering. We connect organizations, faculty and students to put AI into practice, from a first workshop to a multi-year research collaboration.
           </p>
-          <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
-            <a href="/partnerships" class="carte-btn-primary">Partner with us</a>
-            <a href="/training" class="carte-btn-ghost">Build AI skills</a>
-          </div>
-
-          <!-- Newsletter signup -->
-          <details class="mt-8 sm:mt-10 group sm:text-center lg:text-left relative">
-            <summary class="inline-flex items-center gap-2 py-3 -my-3 text-sm cursor-pointer list-none select-none transition-colors text-muted">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-              </svg>
-              <span>Subscribe to our newsletter</span>
-              <svg class="w-3 h-3 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
-            </summary>
-
-            <div class="absolute left-0 sm:left-1/2 lg:left-0 sm:-translate-x-1/2 lg:translate-x-0 top-full mt-2 z-[9999] p-5 bg-card rounded-xl border border-subtle w-[calc(100vw-2rem)] sm:w-[400px] newsletter-panel">
-              <form id="hero-subscribe-form" class="space-y-3" data-subscribe>
-                <div class="space-y-3" data-subscribe-fields>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                  <div>
-                    <label for="hero-email" class="carte-label">Email<span class="carte-label__req">*</span></label>
-                    <input type="email" name="email" id="hero-email" class="carte-input" autocomplete="email" required />
-                  </div>
-                  <div>
-                    <label for="hero-first-name" class="carte-label">First name</label>
-                    <input type="text" name="first_name" id="hero-first-name" class="carte-input" autocomplete="given-name" />
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                  <div>
-                    <label for="hero-last-name" class="carte-label">Last name</label>
-                    <input type="text" name="last_name" id="hero-last-name" class="carte-input" autocomplete="family-name" />
-                  </div>
-                  <div>
-                    <label for="hero-organization" class="carte-label">Organization</label>
-                    <input type="text" name="organization" id="hero-organization" class="carte-input" autocomplete="organization" />
-                    <p class="carte-help">If you're not at UofT.</p>
-                  </div>
-                </div>
-                <div class="text-left">
-                  <label for="hero-academic-unit" class="carte-label">Academic unit</label>
-                  <select name="academic_unit" id="hero-academic-unit" class="carte-select">
-                    <option value="">Select if you're at UofT</option>
-                    <option value="Applied Science &amp; Engineering">Applied Science & Engineering</option>
-                    <option value="Arts &amp; Science">Arts & Science</option>
-                    <option value="Medicine">Medicine</option>
-                    <option value="Management">Management</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <fieldset class="text-left">
-                  <legend class="carte-label">Affiliation</legend>
-                  <div class="flex flex-wrap gap-x-4 gap-y-1">
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Graduate Student" /> Graduate</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Faculty" /> Faculty</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Postdoc" /> Postdoc</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="External Partner" /> External</label>
-                  </div>
-                </fieldset>
-                </div>
-                <p class="carte-status" role="status" data-subscribe-status></p>
-                <button type="submit" class="carte-btn-primary w-full">Subscribe</button>
-              </form>
+          <!-- Newsletter: one field, in flow. Details are collected on /contact. -->
+          <form id="hero-subscribe-form" class="mt-8 sm:mt-10 max-w-md sm:mx-auto lg:mx-0 text-left" data-subscribe>
+            <div data-subscribe-fields>
+              <label for="hero-email" class="carte-label">Newsletter</label>
+              <div class="flex items-stretch gap-2">
+                <input type="email" name="email" id="hero-email" class="carte-input h-auto" autocomplete="email" placeholder="you@example.com" required />
+                <button type="submit" class="carte-btn-primary shrink-0">Subscribe</button>
+              </div>
+              <p class="carte-help">Occasional updates on training, funding calls and events.</p>
             </div>
-          </details>
+            <p class="carte-status" role="status" data-subscribe-status></p>
+          </form>
         </div>
       </div>
     </div>

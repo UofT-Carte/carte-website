@@ -51,6 +51,9 @@ const { target, label, count } = Astro.props;
     };
 
     const update = () => {
+      const fits = carousel.scrollWidth <= carousel.clientWidth + 10;
+      prev.hidden = fits;
+      next.hidden = fits;
       prev.disabled = carousel.scrollLeft <= 0;
       next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
     };

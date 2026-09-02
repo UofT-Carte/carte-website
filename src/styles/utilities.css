@@ -6,7 +6,7 @@
   }
 }
 
-/* Semantic text colours — prefer these over text-slate-* for copy */
+/* Semantic text colours — the only text colours in use */
 @utility text-strong { color: var(--text-strong); }
 @utility text-body   { color: var(--text-body); }
 @utility text-muted  { color: var(--text-muted); }

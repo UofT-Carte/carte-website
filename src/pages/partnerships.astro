@@ -12,6 +12,9 @@ const featuredServices = allPartnerships
   .filter(p => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
+// Arrow links name their destination instead of "Learn more"
+const linkLabels: Record<string, string> = { '/training': 'See training programs', '/research': 'See our research' };
+
 const secondaryServices = allPartnerships
   .filter(p => !p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
@@ -24,11 +27,15 @@ const secondaryServices = allPartnerships
       <div class="max-w-3xl">
         <h1 class="carte-h1 mb-6">
           Partner with<br/>
-          world-class AI expertise
+          world-class AI expertise.
         </h1>
         <p class="text-xl text-muted leading-relaxed">
           From sponsored research to hands-on training, we offer multiple pathways to apply AI in your organization. Connect with 100+ faculty across 8 engineering departments — and let us help you navigate funding programs like NSERC Alliance and Mitacs Accelerate.
         </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a class="carte-btn-primary" href="/contact">Get in touch</a>
+          <a class="carte-btn-ghost" href="#mitacs-accelerate">See how funding works</a>
+        </div>
       </div>
     </div>
   </section>
@@ -38,7 +45,7 @@ const secondaryServices = allPartnerships
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="carte-h2 mb-4">How we work with partners</h2>
-        <p class="text-lg text-muted max-w-2xl mx-auto">From sponsored research to hands-on training, we offer multiple ways to engage with UofT's AI expertise.</p>
+        <p class="text-lg text-muted max-w-2xl mx-auto">Four ways in, from a single funded internship to a multi-year research program.</p>
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -46,8 +53,8 @@ const secondaryServices = allPartnerships
         <a href="#mitacs-accelerate" class="carte-card card-demo block">
           <span class="tag">Funding Program</span>
           <h3>Mitacs Accelerate</h3>
-          <p>Leverage government funding to work with talented students on your AI research challenges. Contribute $7,500+ per internship and Mitacs matches it to create a $15,000+ research award.</p>
-          <span class="link-arrow">Learn more →</span>
+          <p>Contribute $7,500+ per internship and Mitacs matches it, so a UofT student works on your research problem with a $15,000+ award.</p>
+          <span class="link-arrow">See the funding model →</span>
         </a>
         
         {featuredServices.filter(service => service.data.title !== "Sponsored Research").map((service) => (
@@ -60,7 +67,7 @@ const secondaryServices = allPartnerships
             <h3>{service.data.title}</h3>
             <p>{service.data.description}</p>
             {service.data.link && (
-              <a href={service.data.link} class="link-arrow">Learn more →</a>
+              <a href={service.data.link} class="link-arrow">{linkLabels[service.data.link] ?? 'Learn more'} →</a>
             )}
           </article>
         ))}
@@ -75,7 +82,7 @@ const secondaryServices = allPartnerships
           <div class="text-center mb-12">
             <h2 class="carte-h2 mb-4">Mitacs Accelerate</h2>
             <p class="text-xl text-muted max-w-2xl mx-auto">
-              Leverage government funding to work with talented students on your AI research challenges. Mitacs Accelerate provides cost-effective access to UofT's brightest minds.
+              Mitacs matches your contribution so a UofT student can work on your research problem for four to six months.
             </p>
           </div>
   
@@ -84,12 +91,12 @@ const secondaryServices = allPartnerships
               <div>
                 <h3 class="carte-h3 mb-4">How it works for partners</h3>
                 <p class="text-body mb-6 leading-relaxed">
-                  Mitacs Accelerate creates dynamic collaborations between your organization and UofT students. You contribute starting at <strong>$7,500 CAD</strong> per four- or six-month internship, and Mitacs matches it to create a <strong>$15,000 CAD</strong> research award.
+                  Mitacs Accelerate pairs your organization with a UofT student and an academic supervisor. You contribute starting at <strong>$7,500 CAD</strong> per four- or six-month internship, and Mitacs matches it to create a <strong>$15,000 CAD</strong> research award.
                 </p>
                 
                 <h4 class="carte-h4 mb-3 mt-6">Benefits for your organization</h4>
                 <ul class="space-y-2 text-muted">
-                  <CheckItem iconClass="text-secondary-blue">Leverage government funding to stretch your research dollars</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">Government matching doubles what your contribution buys</CheckItem>
                   <CheckItem iconClass="text-secondary-blue">Work with highly skilled graduate students, postdocs, and recent graduates</CheckItem>
                   <CheckItem iconClass="text-secondary-blue">Tackle specific problems with dedicated student researchers</CheckItem>
                   <CheckItem iconClass="text-secondary-blue">Identify potential hires through direct collaboration</CheckItem>
@@ -109,12 +116,12 @@ const secondaryServices = allPartnerships
                 
                 <!-- Funding model: one panel, one switch. The switch swaps the
                      figures in place so keyboard focus never leaves it. -->
-                <div id="funding-visual" class="bg-secondary-blue/10 rounded-xl p-6 mb-6 border border-secondary-blue/10 relative" data-model="standard">
-                  <div class="absolute top-6 right-6 flex items-center gap-2">
+                <div id="funding-visual" class="relative mb-6" data-model="standard">
+                  <div class="absolute top-0 right-0 flex items-center gap-2">
                     <button
                       id="funding-toggle"
                       type="button"
-                      class="relative inline-flex h-7 w-14 items-center rounded-full bg-slate-300 transition-colors"
+                      class="relative inline-flex h-7 w-14 items-center rounded-full bg-uoft-blue-80 transition-colors"
                       role="switch"
                       aria-checked="false"
                       aria-labelledby="funding-toggle-label"
@@ -165,19 +172,16 @@ const secondaryServices = allPartnerships
                     </div>
                   </div>
 
-                  <!-- Repeatability Note -->
-                  <div class="bg-white/60 rounded-lg p-4 border border-secondary-blue/10">
-                    <p class="text-sm text-body text-center">
+                  <p class="text-sm text-body text-center mt-2">
                       <strong class="text-secondary-blue">Internships are repeatable:</strong> For example, 3 four-month internships = one full year of research with sponsored funding
-                    </p>
-                  </div>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
   
           <div class="rounded-lg p-6 border bg-sunken border-subtle">
-            <p class="text-body text-center">
+            <p class="text-body text-center max-w-xl mx-auto">
               <strong>Eligible organizations:</strong> For-profit corporations (must receive more than 50% of funds from non-government sources), eligible not-for-profit corporations, municipalities, or hospitals in Canada. International organizations can participate as additional partners on projects with a Canadian partner.
             </p>
           </div>
@@ -187,7 +191,7 @@ const secondaryServices = allPartnerships
   
 
   <!-- Additional Engagement Options Carousel -->
-  <section class="py-20 lg:py-28">
+  <section id="engagement-options" class="py-20 lg:py-28 scroll-mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
         <div>
@@ -283,7 +287,7 @@ const secondaryServices = allPartnerships
       }
       fundingToggle.setAttribute('aria-checked', String(postdoc));
       fundingToggle.classList.toggle('bg-secondary-blue', postdoc);
-      fundingToggle.classList.toggle('bg-slate-300', !postdoc);
+      fundingToggle.classList.toggle('bg-uoft-blue-80', !postdoc);
       fundingSlider.classList.toggle('translate-x-8', postdoc);
       fundingSlider.classList.toggle('translate-x-1', !postdoc);
       fundingLabel.classList.toggle('text-secondary-blue', postdoc);
@@ -300,8 +304,8 @@ const secondaryServices = allPartnerships
   <section class="py-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="inverse-cta">
-        <h2>Ready to partner?</h2>
-        <p>Whether you're exploring AI applications, looking to upskill your team, or seeking research collaboration — we're here to help you succeed.</p>
+        <h2>Bring us the problem.</h2>
+        <p>One email with your sector, the problem in a sentence and your timeline is enough to start.</p>
         <div class="row">
           <a class="inv-btn primary" href="/contact">Get in touch</a>
         </div>

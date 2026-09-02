@@ -1,136 +1,81 @@
 ---
 import uoftEngBlue from '../assets/uoft-eng-blue.svg';
 import uoftCrest from '../assets/uoft-crest.svg';
-import SocialLinks from './SocialLinks.astro';
 
 const navItems = [
   { label: 'Training', href: '/training' },
   { label: 'Partnerships', href: '/partnerships' },
-  { 
-    label: 'UofT Community', 
-    dropdown: [
-      { label: 'For Students', href: '/students' },
-      { label: 'For Faculty', href: '/faculty' }
-    ]
-  },
+  { label: 'Students', href: '/students' },
+  { label: 'Faculty', href: '/faculty' },
 ];
 
 // Active route: Secondary Blue text + 2px underline (design system Header)
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => current === href;
-
 ---
 
-<header 
-  class="sticky top-0 z-50 transition-all duration-300 bg-transparent"
+<header
+  class="sticky top-0 z-50 border-b border-transparent bg-transparent transition-colors duration-300"
   id="main-header"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-24 items-center">
-      <div class="flex items-center">
-        <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
-          <!-- U of T Engineering logo - full on lg+, crest on smaller screens -->
-          <a
-            href="https://www.engineering.utoronto.ca/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-shrink-0 flex items-center px-3 -mx-3 py-2"
-          >
-            <!-- <picture> so only one of the two marks is downloaded -->
-            <picture>
-              <source media="(min-width: 1280px)" srcset={uoftEngBlue.src} width={uoftEngBlue.width} height={uoftEngBlue.height} />
-              <img
-                src={uoftCrest.src}
-                alt="University of Toronto Engineering"
-                width={uoftCrest.width}
-                height={uoftCrest.height}
-                class="h-8 xl:h-12 w-auto"
-              />
-            </picture>
-          </a>
-          <div class="w-px h-6 sm:h-8 bg-slate-300"></div>
-          <a href="/" class="text-uoft-blue font-bold text-2xl tracking-tighter hover:text-secondary-blue transition-colors">
-            Carte
-          </a>
-        </div>
+      <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
+        <!-- U of T Engineering mark: full signature on xl+, crest below. The
+             institutional link lives in the footer so the first tab stop
+             stays on this site. -->
+        <picture class="flex items-center">
+          <source media="(min-width: 1280px)" srcset={uoftEngBlue.src} width={uoftEngBlue.width} height={uoftEngBlue.height} />
+          <img
+            src={uoftCrest.src}
+            alt="University of Toronto Engineering"
+            width={uoftCrest.width}
+            height={uoftCrest.height}
+            class="h-8 xl:h-12 w-auto"
+          />
+        </picture>
+        <div class="w-px h-6 sm:h-8 bg-cool-gray-50"></div>
+        <a href="/" class="text-uoft-blue font-bold text-2xl tracking-tight hover:text-secondary-blue transition-colors">
+          Carte
+        </a>
       </div>
-      <nav aria-label="Main" class="hidden md:ml-8 md:flex md:items-center md:space-x-6 lg:ml-10 lg:space-x-10">
+      <nav aria-label="Main" class="hidden md:ml-8 md:flex md:items-center md:space-x-6 lg:ml-10 lg:space-x-8">
         {navItems.map(item => (
-          item.dropdown ? (
-            <div class="relative nav-dropdown" data-dropdown>
-              <button
-                type="button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-controls="community-menu"
-                class:list={[
-                  'nav-dropdown__button inline-flex items-center text-base font-medium hover:text-secondary-blue transition-colors relative',
-                  item.dropdown.some(s => isActive(s.href)) ? 'text-secondary-blue' : 'text-slate-600',
-                ]}
-              >
-                {item.label}
-                <svg class="ml-1 w-4 h-4 nav-dropdown__chevron transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-                <span class:list={[
-                  'nav-dropdown__underline absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform transition-transform origin-left',
-                  item.dropdown.some(s => isActive(s.href)) ? 'scale-x-100' : 'scale-x-0',
-                ]}></span>
-              </button>
-              <div id="community-menu" class="nav-dropdown__menu absolute left-0 pt-2 w-48 z-50">
-                <div class="bg-card rounded-lg border border-subtle py-2">
-                  {item.dropdown.map(subItem => (
-                    <a
-                      href={subItem.href}
-                      aria-current={isActive(subItem.href) ? 'page' : undefined}
-                      class="block px-4 py-2 text-sm text-slate-700 hover:bg-sunken hover:text-secondary-blue transition-colors"
-                    >
-                      {subItem.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              class:list={[
-                'inline-flex items-center text-base font-medium hover:text-secondary-blue transition-colors relative group',
-                isActive(item.href) ? 'text-secondary-blue' : 'text-slate-600',
-              ]}
-            >
-              {item.label}
-              <span class:list={[
-                'absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform group-hover:scale-x-100 transition-transform origin-left',
-                isActive(item.href) ? 'scale-x-100' : 'scale-x-0',
-              ]}></span>
-            </a>
-          )
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center py-2 text-base font-medium hover:text-secondary-blue transition-colors relative group',
+              isActive(item.href) ? 'text-secondary-blue' : 'text-body',
+            ]}
+          >
+            {item.label}
+            <span class:list={[
+              'absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform group-hover:scale-x-100 transition-transform origin-left',
+              isActive(item.href) ? 'scale-x-100' : 'scale-x-0',
+            ]}></span>
+          </a>
         ))}
-        <SocialLinks class="hidden lg:flex items-center ml-4" />
-        <a 
-          href="/contact" 
-          class="inline-flex items-center px-6 py-2.5 text-base font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue hover:-translate-y-0.5 transition-all duration-300 ml-4"
+        <a
+          href="/contact"
+          class="inline-flex items-center px-6 py-2.5 text-base font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue transition-colors ml-4"
         >
           Contact
         </a>
       </nav>
       <!-- Mobile menu button -->
       <div class="-mr-2 flex items-center md:hidden">
-        <button 
-          type="button" 
-          class="inline-flex items-center justify-center p-2 rounded-md text-subtle hover:text-uoft-blue hover:bg-slate-100"
+        <button
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-subtle hover:text-uoft-blue hover:bg-sunken"
           id="mobile-menu-button"
-          aria-controls="mobile-menu" 
+          aria-controls="mobile-menu"
           aria-expanded="false"
         >
           <span class="sr-only">Open main menu</span>
-          <!-- Hamburger icon -->
           <svg class="h-8 w-8" id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <!-- Close icon (hidden by default) -->
           <svg class="h-8 w-8 hidden" id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -140,73 +85,34 @@ const isActive = (href: string) => current === href;
   </div>
 </header>
 
-<!-- Mobile menu (overlay - outside header for proper backdrop-blur) -->
-<div 
-  class="md:hidden hidden fixed left-0 right-0 top-24 z-40" 
+<!-- Mobile menu: a solid sheet under the header -->
+<div
+  class="md:hidden hidden fixed left-0 right-0 top-24 z-40"
   id="mobile-menu"
 >
-  <nav aria-label="Main" class="bg-pale-bg/80 backdrop-blur-lg border-t border-slate-100">
-    <div class="px-4 pt-4 pb-6 space-y-2">
+  <nav aria-label="Main" class="bg-page border-b border-subtle">
+    <div class="px-4 pt-4 pb-6 space-y-1">
       {navItems.map(item => (
-        item.dropdown ? (
-          <div>
-            <div class="px-4 py-2 text-lg font-semibold text-slate-500">
-              {item.label}
-            </div>
-            {item.dropdown.map(subItem => (
-              <a
-                href={subItem.href}
-                class="block px-6 py-2 rounded-lg text-base font-medium text-slate-700 hover:text-secondary-blue hover:bg-slate-100 transition-colors"
-              >
-                {subItem.label}
-              </a>
-            ))}
-          </div>
-        ) : (
-          <a
-            href={item.href}
-            class="block px-4 py-3 rounded-lg text-lg font-medium text-slate-700 hover:text-secondary-blue hover:bg-slate-100 transition-colors"
-          >
-            {item.label}
-          </a>
-        )
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={[
+            'block px-4 py-3 rounded-lg text-lg font-medium hover:text-secondary-blue hover:bg-sunken transition-colors',
+            isActive(item.href) ? 'text-secondary-blue' : 'text-body',
+          ]}
+        >
+          {item.label}
+        </a>
       ))}
-      <a 
-        href="/contact" 
+      <a
+        href="/contact"
         class="block mt-4 mx-4 px-6 py-3 text-center text-lg font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue transition-colors"
       >
         Contact
       </a>
-      <SocialLinks class="flex items-center justify-center gap-2 pt-6 border-t border-subtle mt-4" iconClass="w-6 h-6" />
     </div>
   </nav>
 </div>
-
-<style>
-  /* Desktop disclosure: visible on hover, while focus is inside, or when
-     opened explicitly (click, Enter, Space). visibility:hidden keeps the
-     closed links out of the tab order. */
-  .nav-dropdown__menu {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity var(--dur-fast) var(--ease-out), visibility 0s linear var(--dur-fast);
-  }
-  .nav-dropdown:hover .nav-dropdown__menu,
-  .nav-dropdown:focus-within .nav-dropdown__menu,
-  .nav-dropdown[data-open="true"] .nav-dropdown__menu {
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-  }
-  .nav-dropdown:hover .nav-dropdown__underline,
-  .nav-dropdown:focus-within .nav-dropdown__underline,
-  .nav-dropdown[data-open="true"] .nav-dropdown__underline {
-    transform: scaleX(1);
-  }
-  .nav-dropdown[data-open="true"] .nav-dropdown__chevron {
-    transform: rotate(180deg);
-  }
-</style>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
@@ -215,48 +121,20 @@ const isActive = (href: string) => current === href;
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIconOpen = document.getElementById('menu-icon-open');
     const menuIconClose = document.getElementById('menu-icon-close');
-    
-    // Header scroll effect (triggers sooner on mobile)
-    if (header) {
-      window.addEventListener('scroll', () => {
-        const isMobile = window.innerWidth < 768;
-        const scrollThreshold = isMobile ? 1 : 10;
-        
-        if (window.scrollY > scrollThreshold) {
-          header.classList.remove('bg-transparent');
-          header.classList.add('bg-pale-bg/80', 'backdrop-blur-lg');
-        } else {
-          header.classList.add('bg-transparent');
-          header.classList.remove('bg-pale-bg/80', 'backdrop-blur-lg');
-        }
-      }, { passive: true });
-    }
 
-    // Desktop disclosure ("UofT Community"). Hover and focus-within are
-    // handled in CSS; this adds an explicit open state for click, Enter and
-    // Space, closes on Escape or an outside click, and returns focus.
-    document.querySelectorAll('[data-dropdown]').forEach((dropdown) => {
-      const button = dropdown.querySelector('button');
-      if (!button) return;
-      const setOpen = (open) => {
-        dropdown.dataset.open = open ? 'true' : 'false';
-        button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // Scrolled header: solid page colour with a hairline, so it reads the
+    // same over the cream canvas and over the U of T Blue bands.
+    if (header) {
+      const update = () => {
+        const scrolled = window.scrollY > (window.innerWidth < 768 ? 1 : 10);
+        header.classList.toggle('bg-transparent', !scrolled);
+        header.classList.toggle('border-transparent', !scrolled);
+        header.classList.toggle('bg-page', scrolled);
+        header.classList.toggle('border-subtle', scrolled);
       };
-      button.addEventListener('click', () => setOpen(dropdown.dataset.open !== 'true'));
-      dropdown.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && dropdown.dataset.open === 'true') {
-          e.preventDefault();
-          setOpen(false);
-          button.focus();
-        }
-      });
-      dropdown.addEventListener('focusout', (e) => {
-        if (!dropdown.contains(e.relatedTarget)) setOpen(false);
-      });
-      document.addEventListener('click', (e) => {
-        if (dropdown.dataset.open === 'true' && !dropdown.contains(e.target)) setOpen(false);
-      });
-    });
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    }
 
     // Mobile menu toggle
     if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
@@ -282,27 +160,11 @@ const isActive = (href: string) => current === href;
         if (returnFocus) mobileMenuButton.focus();
       };
 
-      mobileMenuButton.addEventListener('click', () => {
-        if (isOpen()) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-
-      // Close menu when clicking on a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => closeMenu());
-      });
-
-      // Close menu when clicking outside
+      mobileMenuButton.addEventListener('click', () => (isOpen() ? closeMenu() : openMenu()));
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
       document.addEventListener('click', (e) => {
-        if (isOpen() && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-          closeMenu();
-        }
+        if (isOpen() && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) closeMenu();
       });
-
-      // Escape closes and hands focus back to the button
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && isOpen()) closeMenu(true);
       });

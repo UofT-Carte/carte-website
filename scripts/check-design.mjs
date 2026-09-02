@@ -24,6 +24,8 @@ const RULES = [
   { id: 'no-nested-main', re: /<main\b/, only: /src\/components\//, why: 'One <main> landmark per page; it lives in BaseLayout.' },
   { id: 'no-outline-none', re: /\bfocus:outline-none\b/, why: 'Keep the global :focus-visible ring; never remove the outline.' },
   { id: 'decorative-svg-hidden', re: /<svg(?![^>]*aria-hidden)(?![^>]*role=)/, only: /src\/(pages|components)\//, why: 'Inline icons are decorative: add aria-hidden="true"; the adjacent text carries the meaning.' },
+  { id: 'official-neutrals-only', re: /\bslate-\d{2,3}\b|--color-slate|pale-bg|warm-bg|#fdfbf7|#f2f0eb/i, why: 'Neutrals are white, Cool Gray 2 and its 50%/25% tints (theme.css). No Tailwind slate, no cream.' },
+  { id: 'no-blue-wash', re: /uoft-blue-(100|050)\b|bg-blue-100/, why: 'U of T Blue is never tinted below 80%. Quiet panels use --surface-sunken (Cool Gray 2 at 25%).' },
   { id: 'no-literal-hex', re: /(?<![\w-])#[0-9a-fA-F]{6}\b/, only: /src\/(pages|components)\//, skip: /^\s*(\/\/|\*)/, why: 'Colours come from tokens (var(--…)), not literals.' },
 ];
 

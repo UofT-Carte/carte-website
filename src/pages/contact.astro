@@ -1,48 +1,55 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import SocialLinks from '../components/SocialLinks.astro';
+import CheckItem from '../components/CheckItem.astro';
+import alexHeadshot from '../assets/alex-headshot.jpg';
 ---
 
 <BaseLayout title="Contact" description="Get in touch with Carte - send us an email or visit us at the Myhal Centre.">
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24 pb-10">
       <div class="max-w-3xl">
         <h1 class="carte-h1 mb-6">
           Get in touch
         </h1>
         <p class="text-xl text-muted leading-relaxed">
-          Interested in collaborating with Carte? Send us an email.
+          One email is enough to start. Tell us what you're working on and we'll suggest a next step.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Main Content -->
-  <section class="py-20 lg:py-28">
+  <section class="pt-6 pb-20 lg:pb-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
-        
-        <!-- Left Column: Contact Info -->
+
+        <!-- Left column: the email, what to put in it, who reads it -->
         <div>
-          <h2 class="carte-h2 mb-8">Contact information</h2>
-          
-          <div class="space-y-8">
-            <!-- Email -->
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-info">
-                <svg class="w-6 h-6 text-secondary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-bold text-uoft-blue mb-1">Email</h3>
-                <a href="mailto:carte@utoronto.ca" class="text-secondary-blue hover:text-secondary-blue-dark transition-colors text-lg">
-                  carte@utoronto.ca
-                </a>
-              </div>
+          <h2 class="carte-h2 mb-6">Send us an email</h2>
+          <a href="mailto:carte@utoronto.ca" class="carte-btn-primary">Email carte@utoronto.ca</a>
+
+          <h3 class="carte-h4 mt-10 mb-3">What to include</h3>
+          <ul class="space-y-2 text-body">
+            <CheckItem iconClass="text-secondary-blue">Your organization, department or program</CheckItem>
+            <CheckItem iconClass="text-secondary-blue">The problem or opportunity, in a sentence or two</CheckItem>
+            <CheckItem iconClass="text-secondary-blue">Your timeline, even if it's rough</CheckItem>
+            <CheckItem iconClass="text-secondary-blue">Whether you have funding in place or want help finding it</CheckItem>
+          </ul>
+
+          <div class="mt-10 flex items-center gap-4">
+            <div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+              <Image src={alexHeadshot} alt="Alex Olson" width={128} height={128} class="w-full h-full object-cover" />
             </div>
-            
+            <div>
+              <p class="font-bold text-strong">Alex Olson</p>
+              <p class="text-sm text-muted">Director, Carte</p>
+            </div>
+          </div>
+
+          <div class="mt-12 space-y-8">
             <!-- Location -->
             <div class="flex items-start gap-4">
               <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-info">
@@ -52,7 +59,7 @@ import SocialLinks from '../components/SocialLinks.astro';
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-uoft-blue mb-1">Location</h3>
+                <h3 class="font-bold text-uoft-blue mb-1">Visit us</h3>
                 <p class="text-muted">
                   Myhal Centre for Engineering Innovation & Entrepreneurship<br/>
                   55 St George Street<br/>
@@ -60,12 +67,12 @@ import SocialLinks from '../components/SocialLinks.astro';
                 </p>
               </div>
             </div>
-            
+
             <!-- Social -->
             <div class="flex items-start gap-4">
               <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-info">
                 <svg class="w-6 h-6 text-secondary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
               <div>
@@ -75,42 +82,10 @@ import SocialLinks from '../components/SocialLinks.astro';
             </div>
           </div>
         </div>
-        
-        <!-- Right Column: Collapsible Actions -->
-        <div class="space-y-4">
-          <!-- Book a Meeting (temporarily disabled)
-          <details class="group bg-card rounded-2xl border border-subtle overflow-hidden">
-            <summary class="bg-uoft-blue px-6 py-5 cursor-pointer list-none select-none">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h2 class="text-xl font-bold text-white flex items-center gap-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                    Book an Exploratory Meeting
-                  </h2>
-                  <p class="text-on-inverse-muted text-sm mt-1">Schedule a 30-minute call to discuss how Carte can help</p>
-                </div>
-                <svg class="w-6 h-6 text-white transition-transform duration-300 group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-            </summary>
-            <div class="p-0">
-              <iframe
-                src="https://outlook.office.com/book/Carte1@utoronto.onmicrosoft.com/?ismsaljsauthenabled"
-                width="100%"
-                height="520"
-                scrolling="yes"
-                style="border:0"
-                title="Book a meeting with Carte"
-              ></iframe>
-            </div>
-          </details>
-          -->
-          
-          <!-- Newsletter Signup -->
-          <details class="group bg-card rounded-2xl border border-subtle overflow-hidden">
+
+        <!-- Right column: newsletter -->
+        <div>
+          <details class="group bg-card rounded-2xl border border-subtle overflow-hidden" id="newsletter">
             <summary class="px-6 py-5 cursor-pointer list-none select-none bg-uoft-blue">
               <div class="flex items-center justify-between">
                 <div>
@@ -120,7 +95,7 @@ import SocialLinks from '../components/SocialLinks.astro';
                     </svg>
                     Subscribe to newsletter
                   </h2>
-                  <p class="text-on-inverse-muted text-sm mt-1">Stay updated on AI research, training, and events</p>
+                  <p class="text-on-inverse-muted text-sm mt-1">Occasional updates on training, funding calls and events</p>
                 </div>
                 <svg class="w-6 h-6 text-white transition-transform duration-300 group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -128,105 +103,80 @@ import SocialLinks from '../components/SocialLinks.astro';
               </div>
             </summary>
             <div class="p-6">
-              <p class="text-muted mb-6">
-                Get occasional updates about AI research, upcoming training opportunities, and events at Carte.
-              </p>
               <form id="contact-subscribe-form" class="space-y-4" data-subscribe>
                 <div class="space-y-4" data-subscribe-fields>
-                <!-- Email -->
-                <div>
-                  <label for="contact-email" class="carte-label">
-                    Email<span class="carte-label__req">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="contact-email"
-                    placeholder="you@example.com"
-                    class="carte-input"
-                    required
-                  />
-                </div>
-
-                <!-- Name Row -->
-                <div class="grid grid-cols-2 gap-3">
                   <div>
-                    <label for="contact-first-name" class="carte-label">First name</label>
+                    <label for="contact-email" class="carte-label">
+                      Email<span class="carte-label__req">*</span>
+                    </label>
                     <input
-                      type="text"
-                      name="first_name"
-                      id="contact-first-name"
+                      type="email"
+                      name="email"
+                      id="contact-email"
+                      placeholder="you@example.com"
                       class="carte-input"
+                      autocomplete="email"
+                      required
                     />
                   </div>
+
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label for="contact-first-name" class="carte-label">First name</label>
+                      <input type="text" name="first_name" id="contact-first-name" class="carte-input" autocomplete="given-name" />
+                    </div>
+                    <div>
+                      <label for="contact-last-name" class="carte-label">Last name</label>
+                      <input type="text" name="last_name" id="contact-last-name" class="carte-input" autocomplete="family-name" />
+                    </div>
+                  </div>
+
                   <div>
-                    <label for="contact-last-name" class="carte-label">Last name</label>
-                    <input
-                      type="text"
-                      name="last_name"
-                      id="contact-last-name"
-                      class="carte-input"
-                    />
+                    <label for="contact-organization" class="carte-label">Organization</label>
+                    <input type="text" name="organization" id="contact-organization" class="carte-input" autocomplete="organization" />
+                    <p class="carte-help">If you're not at UofT.</p>
                   </div>
-                </div>
 
-                <!-- Organization -->
-                <div>
-                  <label for="contact-organization" class="carte-label">Organization</label>
-                  <input
-                    type="text"
-                    name="organization"
-                    id="contact-organization"
-                    class="carte-input"
-                  />
-                  <p class="carte-help">If you're not at UofT.</p>
-                </div>
-
-                <!-- Academic Unit -->
-                <div>
-                  <label for="contact-academic-unit" class="carte-label">Academic unit</label>
-                  <select
-                    name="academic_unit"
-                    id="contact-academic-unit"
-                    class="carte-select"
-                  >
-                    <option value="">Select if you're at UofT</option>
-                    <option value="Applied Science &amp; Engineering">Applied Science & Engineering</option>
-                    <option value="Architecture, Landscape &amp; Design">Architecture, Landscape & Design</option>
-                    <option value="Arts &amp; Science">Arts & Science</option>
-                    <option value="Continuing Studies">Continuing Studies</option>
-                    <option value="Dentistry">Dentistry</option>
-                    <option value="Education">Education</option>
-                    <option value="Information">Information</option>
-                    <option value="Kinesiology &amp; Physical Education">Kinesiology & Physical Education</option>
-                    <option value="Law">Law</option>
-                    <option value="Management">Management</option>
-                    <option value="Medicine">Medicine</option>
-                    <option value="Music">Music</option>
-                    <option value="Nursing">Nursing</option>
-                    <option value="Pharmacy">Pharmacy</option>
-                    <option value="Public Health">Public Health</option>
-                    <option value="Social Work">Social Work</option>
-                    <option value="University of Toronto Mississauga">University of Toronto Mississauga</option>
-                    <option value="University of Toronto Scarborough">University of Toronto Scarborough</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <!-- Affiliation Type -->
-                <fieldset>
-                  <legend class="carte-label">Affiliation</legend>
-                  <div class="grid grid-cols-2 gap-2 text-sm">
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Undergraduate" /> Undergraduate</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Graduate Student" /> Graduate Student</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Postdoc" /> Postdoc</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Faculty" /> Faculty</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Librarian" /> Librarian</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="UofT Staff" /> UofT Staff</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="Alumni" /> Alumni</label>
-                    <label class="carte-check"><input type="checkbox" name="affiliation" value="External Partner" /> External Partner</label>
+                  <div>
+                    <label for="contact-academic-unit" class="carte-label">Academic unit</label>
+                    <select name="academic_unit" id="contact-academic-unit" class="carte-select">
+                      <option value="">Select if you're at UofT</option>
+                      <option value="Applied Science &amp; Engineering">Applied Science & Engineering</option>
+                      <option value="Architecture, Landscape &amp; Design">Architecture, Landscape & Design</option>
+                      <option value="Arts &amp; Science">Arts & Science</option>
+                      <option value="Continuing Studies">Continuing Studies</option>
+                      <option value="Dentistry">Dentistry</option>
+                      <option value="Education">Education</option>
+                      <option value="Information">Information</option>
+                      <option value="Kinesiology &amp; Physical Education">Kinesiology & Physical Education</option>
+                      <option value="Law">Law</option>
+                      <option value="Management">Management</option>
+                      <option value="Medicine">Medicine</option>
+                      <option value="Music">Music</option>
+                      <option value="Nursing">Nursing</option>
+                      <option value="Pharmacy">Pharmacy</option>
+                      <option value="Public Health">Public Health</option>
+                      <option value="Social Work">Social Work</option>
+                      <option value="University of Toronto Mississauga">University of Toronto Mississauga</option>
+                      <option value="University of Toronto Scarborough">University of Toronto Scarborough</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
-                </fieldset>
+
+                  <!-- One affiliation: the choices are mutually exclusive -->
+                  <fieldset>
+                    <legend class="carte-label">Affiliation</legend>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Undergraduate" /> Undergraduate</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Graduate Student" /> Graduate student</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Postdoc" /> Postdoc</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Faculty" /> Faculty</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Librarian" /> Librarian</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="UofT Staff" /> UofT staff</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="Alumni" /> Alumni</label>
+                      <label class="carte-check"><input type="radio" name="affiliation" value="External Partner" /> External partner</label>
+                    </div>
+                  </fieldset>
                 </div>
 
                 <p class="carte-status" role="status" data-subscribe-status></p>
@@ -236,13 +186,12 @@ import SocialLinks from '../components/SocialLinks.astro';
             </div>
           </details>
         </div>
-        
+
       </div>
     </div>
   </section>
 
-<script>
-  import "../scripts/subscribe";
-</script>
-
+  <script>
+    import "../scripts/subscribe";
+  </script>
 </BaseLayout>

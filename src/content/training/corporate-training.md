@@ -11,7 +11,7 @@ testimonial:
   attribution: "Corporate executive, 2023"
 ---
 
-Our executive briefings are tailored to help senior leaders understand the AI landscape and make informed strategic decisions. Sessions cover:
+Our executive briefings help senior leaders understand what AI can and cannot do for their organization, and decide accordingly. Sessions cover:
 
 - Current state of AI and machine learning capabilities
 - Industry-specific trends and medium-term outlook

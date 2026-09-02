@@ -1,6 +1,6 @@
 ---
 title: "Sponsored research"
-description: "Partner with world-class faculty on applied AI research. We facilitate collaborations and help leverage government funding through NSERC Alliance, Mitacs, and other programs."
+description: "Partner with world-class faculty on applied AI research. We facilitate collaborations and help you secure government funding through NSERC Alliance, Mitacs, and other programs."
 featured: true
 tags: ["Research", "Funding", "Collaboration"]
 order: 1
@@ -11,7 +11,7 @@ Carte connects industry partners with leading faculty researchers at the Univers
 
 **What we offer:**
 - Facilitated introductions to faculty affiliates with relevant expertise
-- Support to leverage government funding (NSERC Alliance, Mitacs)
+- Support securing government funding (NSERC Alliance, Mitacs)
 - Project scoping and research design guidance
 - Access to graduate student talent
 

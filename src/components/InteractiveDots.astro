@@ -14,7 +14,7 @@ interface Props {
 const { scrollColorTransition = false } = Astro.props;
 ---
 
-<div id="dots-container" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-pale-bg" data-scroll-transition={scrollColorTransition.toString()} aria-hidden="true">
+<div id="dots-container" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-canvas" data-scroll-transition={scrollColorTransition.toString()} aria-hidden="true">
   <canvas id="dots-canvas" class="block pointer-events-none"></canvas>
 </div>
 
@@ -45,7 +45,7 @@ const { scrollColorTransition = false } = Astro.props;
     const n = parseInt(m[1], 16);
     return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
   }
-  const LIGHT_BG = tokenRgb('--color-pale-bg', [253, 251, 247]);
+  const LIGHT_BG = tokenRgb('--color-canvas', [255, 255, 255]);
   const LIGHT_DOT = tokenRgb('--color-uoft-blue', [30, 55, 101]);
   const LIGHT_DOT_BASE_OPACITY = 0.06;
   const LIGHT_DOT_ACTIVE_OPACITY = 0.15;
