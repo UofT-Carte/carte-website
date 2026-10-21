@@ -10,9 +10,9 @@
     "a11y": "pa11y-ci --config .pa11yci.json"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^8.1.1",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.5",
+    "astro": "^7.4.2",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
