@@ -10,7 +10,12 @@ const realFetch = fetch;
 
 before(async () => {
   global.fetch = async (url, options) => {
-    if (url.includes('resend.com')) return mockFetch(url, options);
+    try {
+      const parsed = new URL(typeof url === 'string' ? url : url.url);
+      if (parsed.hostname === 'resend.com') return mockFetch(url, options);
+    } catch {
+      // Fall through to real fetch for non-URL inputs or unparsable values.
+    }
     return realFetch(url, options);
   };
   server = createServer(handleRequest);
