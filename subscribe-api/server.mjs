@@ -1,6 +1,8 @@
 import { createServer } from 'node:http';
 
 const PORT = process.env.PORT || 3000;
+const MAX_BODY_BYTES = 10_000;
+const MAX_EMAIL_LENGTH = 254;
 
 export async function handleRequest(req, res) {
   if (req.method !== 'POST' || req.url !== '/api/subscribe') {
@@ -9,8 +11,18 @@ export async function handleRequest(req, res) {
     return;
   }
 
+  // Keep draining an oversized body (without buffering it) so the client gets the 413
   let body = '';
-  for await (const chunk of req) body += chunk;
+  let size = 0;
+  for await (const chunk of req) {
+    size += chunk.length;
+    if (size <= MAX_BODY_BYTES) body += chunk;
+  }
+  if (size > MAX_BODY_BYTES) {
+    res.writeHead(413, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Request too large' }));
+    return;
+  }
 
   let data;
   try {
@@ -23,7 +35,8 @@ export async function handleRequest(req, res) {
 
   const { email, firstName, lastName, organization, academicUnit, affiliationTypes } = data;
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // Length check first: the regex is quadratic on long inputs
+  if (typeof email !== 'string' || email.length > MAX_EMAIL_LENGTH || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     res.writeHead(400, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'Valid email required' }));
     return;
