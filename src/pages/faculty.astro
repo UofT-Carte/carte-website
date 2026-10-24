@@ -6,7 +6,6 @@ import CheckItem from '../components/CheckItem.astro';
 const sections = [
   { id: 'mitacs-faculty', label: 'Mitacs supervision' },
   { id: 'training', label: 'Faculty training' },
-  { id: 'genai', label: 'Generative AI modules' },
   { id: 'funding', label: 'Funding applications' },
 ];
 const fundingMailto = `mailto:carte@utoronto.ca?subject=${encodeURIComponent('Funding application')}`;
@@ -21,7 +20,7 @@ const fundingMailto = `mailto:carte@utoronto.ca?subject=${encodeURIComponent('Fu
           Support for UofT Engineering faculty working with AI.
         </h1>
         <p class="text-xl text-muted leading-relaxed max-w-2xl">
-          Supervise a funded Mitacs intern, join the annual ML bootcamp, design a generative AI module for your discipline, or get help with a funding application.
+          Supervise a funded Mitacs intern, join the annual ML bootcamp, or get help with a funding application.
         </p>
       </div>
 
@@ -85,16 +84,6 @@ const fundingMailto = `mailto:carte@utoronto.ca?subject=${encodeURIComponent('Fu
         </figure>
 
         <a class="link-arrow" href="/training">See all training programs →</a>
-      </section>
-
-      <!-- Generative AI Training Program -->
-      <section id="genai" class="py-16 border-t border-subtle scroll-mt-28">
-        <h2 class="carte-h2 mb-6">Design a generative AI module for your discipline.</h2>
-        <p class="text-lg text-body leading-relaxed mb-8">
-          The Cognizant–U of T Generative AI Training Program recruits faculty to design short modules that show students how generative AI applies to their field. You shape the content; a trained graduate student or postdoc facilitator delivers the workshops.
-        </p>
-
-        <a class="link-arrow" href="/genai-training-program">See the faculty role →</a>
       </section>
 
       <!-- Funding support -->
