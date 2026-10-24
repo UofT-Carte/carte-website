@@ -79,6 +79,21 @@
 .stat .num { font: 800 56px/1 var(--font-sans); color: var(--brand-primary); letter-spacing: -.03em; }
 .stat .lbl { font: 500 15px var(--font-sans); color: var(--text-muted); margin-top: 6px; }
 
+/* ---- Work list ---------------------------------------------------- */
+/* Named, dated work on the inverse band. */
+.work-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.2); }
+.work-list li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 4px 24px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.2); }
+.work-list .year,
+.work-list .title { font: 700 18px/1.3 var(--font-sans); color: var(--text-on-inverse); margin: 0; }
+.work-list .year { font-variant-numeric: tabular-nums; }
+.work-list .where { grid-column: 2; margin: 0; font: 500 14px/1.5 var(--font-sans); color: var(--text-on-inverse-muted); }
+.work-more { display: inline-flex; gap: 6px; margin-top: 16px; color: var(--text-on-inverse); font: 600 15px var(--font-sans); text-decoration: none; }
+.work-more .label { border-bottom: 2px solid var(--brand-accent-warm); padding-bottom: 2px; }
+@media (max-width: 640px) {
+  .work-list li { grid-template-columns: 1fr; }
+  .work-list .where { grid-column: 1; }
+}
+
 /* ---- Front doors ------------------------------------------------- */
 /* Three equal cells: the audience as a title in the door's colour, one line
    of what they do with Carte, and an arrow with the yellow underline. */

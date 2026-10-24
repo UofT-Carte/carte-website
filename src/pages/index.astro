@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import { heroImage, heroAlt } from '../assets/hero';
 
 // Three front doors, one house: every audience gets a door of the same size
@@ -30,6 +31,15 @@ const doors = [
     href: '/students',
   },
 ];
+
+// Proof is named work, not aggregate numbers: Director-approved picks from
+// the research collection, with no figures beside them.
+const recentWorkIds = ['cascadedebate', 'anybald', 'safecasa', 'prostate-cancer-mortality', 'gemmas'];
+const recentWork = await Promise.all(recentWorkIds.map(async id => {
+  const paper = await getEntry('research', id);
+  if (!paper) throw new Error(`Recent work: no research entry "${id}"`);
+  return paper;
+}));
 ---
 
 <BaseLayout title="Home" scrollColorTransition={true}>
@@ -101,7 +111,7 @@ const doors = [
 
         <a href="/partnerships#engagement-options" class="carte-card card-demo flex flex-col">
           <div class="title-row"><svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
           </svg><h3>Student talent</h3></div>
           <p class="flex-grow">Capstone projects, funded internships, and direct access to engineering students.</p>
           <span class="link-arrow mt-auto">Work with students →</span>
@@ -110,33 +120,21 @@ const doors = [
     </div>
   </section>
 
-  <!-- Impact / By the Numbers -->
+  <!-- Recent work: named, dated papers are the proof -->
   <section class="py-20 lg:py-28 bg-inverse">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="carte-h2 mb-4 text-on-inverse">Our impact</h2>
-        <p class="text-lg max-w-2xl mx-auto text-on-inverse-muted">
-          Since 2019, we've trained professionals, built partnerships, and connected talent across sectors.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div class="stat">
-          <div class="num">150+</div>
-          <div class="lbl">Professionals trained</div>
-        </div>
-        <div class="stat">
-          <div class="num">5+</div>
-          <div class="lbl">Sectors served</div>
-        </div>
-        <div class="stat">
-          <div class="num">1,000+</div>
-          <div class="lbl">Student community</div>
-        </div>
-        <div class="stat">
-          <div class="num">30+</div>
-          <div class="lbl">Applied AI projects</div>
-        </div>
+      <div class="on-inverse mb-16">
+        <h2 class="carte-h2 mb-8 text-on-inverse">Recent work.</h2>
+        <ul class="work-list">
+          {recentWork.map(paper => (
+            <li>
+              <span class="year">{paper.data.year}</span>
+              <p class="title">{paper.data.title}</p>
+              <p class="where">{[paper.data.venue, paper.data.partner].filter(Boolean).join(' · ')}</p>
+            </li>
+          ))}
+        </ul>
+        <a class="work-more" href="/research"><span class="label">See all research</span> →</a>
       </div>
 
       <!-- The close: the page's best line at full h2 strength, contact first -->

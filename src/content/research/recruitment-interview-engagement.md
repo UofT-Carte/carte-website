@@ -1,6 +1,7 @@
 ---
 title: "Predicting Interview Engagement in Real-Time Recruitment: Class Imbalance and Behavioral Feature Analysis"
-authors: "Kim, J., Seo, M., Choi, E. & Olson, A."
+authors: "Kim, J., Seo, M., Choi, E. & Olson, A.W."
+partner: "Guhuza"
 venue: "NML@ICDM 2025 (Workshop co-located with ICDM, Washington DC)"
 year: 2025
 description: "Machine learning models for predicting candidate interview engagement on a real-time recruitment platform under extreme class imbalance, highlighting the importance of behavioral and temporal features alongside algorithmic match scores."
