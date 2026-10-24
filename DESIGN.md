@@ -143,11 +143,11 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
     padding: "4px 12px"
-  door-chip:
-    backgroundColor: "{colors.uoft-blue}"
-    textColor: "{colors.white}"
-    typography: "{typography.label}"
-    padding: "10px 18px"
+  door-title:
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.uoft-blue}"
+    typography: "{typography.title}"
+    padding: "18px 18px 0"
   band-inverse:
     backgroundColor: "{colors.uoft-blue}"
     textColor: "{colors.white}"
@@ -167,7 +167,7 @@ components:
 
 Carte is the applied AI centre of UofT Engineering, and its promise is that one relationship reaches the whole network: more than a hundred faculty across eight departments, seven hundred graduate students and postdocs, and the partners who work with them. The site makes that literal. Under every page sits a neural network drawn on a 24px lattice, each node seeded with two to four connections to its neighbours. It rests at 6% U of T Blue on white, and wherever the reader's cursor lands, activation spreads outward through the connections, four hops deep, decaying as it goes, then fading. Touch one node and its neighbourhood lights up. That is the positioning, animated.
 
-Everything above the network is institutional, plainspoken and alive. The colours are the University of Toronto's own: U of T Blue for structure, Secondary Blue for anything that responds, white and Cool Gray 2 for everything neutral, and the official accents kept to pinpricks. Photography is Carte's real rooms and people in natural light, photojournalistic, never stock. Surfaces are flat white separated by hairlines and by full bands of U of T Blue; there are no shadows, no gradients, no tints of the primary. The voice says one thing per sentence and ends its headlines with a period.
+Everything above the network is institutional, plainspoken and alive. The colours are the University of Toronto's own: U of T Blue for structure, Secondary Blue for anything that responds, white and Cool Gray 2 for everything neutral, and the official accents kept to underlines and a single title. Photography is Carte's real rooms and people in natural light, photojournalistic, never stock. Surfaces are flat white separated by hairlines and by full bands of U of T Blue; there are no shadows, no gradients, no tints of the primary. The voice says one thing per sentence and ends its headlines with a period.
 
 The density is calm and columnar: a 1280px rail, sections of 80px and 112px, three-up card sets, body copy capped at 36rem. Nothing decorates. The network is the only thing that moves, and it moves only where the reader is.
 
@@ -177,25 +177,25 @@ The density is calm and columnar: a 1280px rail, sections of 80px and 112px, thr
 - Real photography of Carte's rooms and people, photojournalistic and in daylight
 - Flat white surfaces, 1px hairlines, full U of T Blue bands for sectioning
 - Host Grotesk alone; 800 for display and h1, 700 below; sentence case except labels
-- Accents as 7px dots and 2px underlines, never as fills
+- Accents as 2px underlines, never as fills
 
 ## Colors
 
 The University of Toronto's palette applied without additions: one structural blue, one responsive blue, the official neutrals, and accents at the scale of punctuation.
 
 ### Primary
-- **U of T Blue** (#1e3765, PMS 655): headings, primary buttons, the impact band, the closing block, the footer, the students door chip, and body copy. It must be present in every composition, and it is never tinted below 80%.
+- **U of T Blue** (#1e3765, PMS 655): headings, primary buttons, the impact band, the closing block, the footer, the students door title, and body copy. It must be present in every composition, and it is never tinted below 80%.
 - **U of T Blue 900** (#12244a): the strongest text, h1 to h4 and input values. A shade, not a tint.
 - **U of T Blue 500** (#3e5a8f): muted copy, card descriptions, the lead under a heading.
 - **U of T Blue 80** (#4b5f84): the 80% tint, the University's floor for the primary. Metadata, help text, placeholders, and input borders at rest, where it gives 6.5:1 on white.
 
 ### Secondary
-- **Secondary Blue** (#007894, PMS 633): the one colour that responds. Links, hover on buttons and cards, the active route, focus rings, the partners door chip. **Secondary Blue Dark** (#006279) for link hover.
+- **Secondary Blue** (#007894, PMS 633): the one colour that responds. Links, hover on buttons and cards, the active route, focus rings, the partners door title. **Secondary Blue Dark** (#006279) for link hover.
 
 ### Tertiary
-- **Accent Yellow** (#f1c500): the dot in the partners and students chips; the 2px underline under every door link.
-- **Accent Cool Blue** (#6fc7ea): the dot in the faculty chip.
-- **Accent Dark Green** (#0d534d): the faculty chip fill, the one accent used as a surface, at chip size only.
+- **Accent Yellow** (#f1c500): the 2px underline under every door link.
+- **Accent Cool Blue** (#6fc7ea): reserved.
+- **Accent Dark Green** (#0d534d): the faculty door title, the one accent used for text.
 - **Teal, Purple, Warm Red, Fuchsia, Light Green** (#00a189, #6d247a, #dc4633, #ab1368, #8dbf2e): reserved for charts, callouts and social, at 80%, 50% or 25% where a tint is needed.
 
 ### Neutral
@@ -208,7 +208,7 @@ The University of Toronto's palette applied without additions: one structural bl
 ### Named Rules
 **The Ink Rule.** U of T Blue is the only structural colour. A surface that is not white, Cool Gray 25 or U of T Blue needs a reason written beside it.
 **The Eighty Rule.** U of T Blue is never tinted below 80%. Quiet panels are Cool Gray 25, not a blue wash.
-**The Pinprick Rule.** Accents are 7px dots and 2px underlines. An accent filling anything larger than a chip is off-brand.
+**The Pinprick Rule.** Accents are 2px underlines and, on the faculty door, a title. An accent used as a fill is off-brand.
 **The Paper Rule.** The page colour lives on `html`, never on `body`. A background on `body` hides the network.
 
 ## Typography
@@ -236,7 +236,7 @@ The University of Toronto's palette applied without additions: one structural bl
 
 ## Layout
 
-A single 1280px content rail with 16px, 24px and 32px gutters at the three breakpoints. Sections are 80px tall, 112px for major ones from `lg`. Page heroes are left-aligned in a 48rem column with 80px to 96px of top padding; the home hero is shorter so the three door cards land inside a 900px viewport at 1440. Section headings are centred with a 42rem subtitle. Card sets are three-up at 32px gap, four-up for the home cards, and 320px fixed cards in horizontal carousels whose arrows hide when every card fits. The door row is a three-column grid from 768px and stacks below. Sectioning is done by full-width U of T Blue bands and, sparingly, Cool Gray 25 bands; never by shadow. The header is the only sticky element, 96px tall, transparent at the top and solid white with a hairline once scrolled. Body copy caps at 36rem. Below 640px, doors stack chip over pitch over link.
+A single 1280px content rail with 16px, 24px and 32px gutters at the three breakpoints. Sections are 80px tall, 112px for major ones from `lg`. Page heroes are left-aligned in a 48rem column with 80px to 96px of top padding; the home hero is shorter so the three door cards land inside a 900px viewport at 1440. Section headings are centred with a 42rem subtitle. Card sets are three-up at 32px gap, four-up for the home cards, and 320px fixed cards in horizontal carousels whose arrows hide when every card fits. The door row is a three-column grid from 768px and stacks below. Sectioning is done by full-width U of T Blue bands and, sparingly, Cool Gray 25 bands; never by shadow. The header is the only sticky element, 96px tall, transparent at the top and solid white with a hairline once scrolled. Body copy caps at 36rem. Below 640px, doors stack title over pitch over link.
 
 ## Elevation & Depth
 
@@ -267,7 +267,7 @@ Exact, institutional, one colour moves. Controls rest in U of T Blue and white; 
 
 ### Badges and chips
 - **Badge:** label type in U of T Blue on Cool Gray 25, pill, 4px 12px
-- **Door chip:** label type in white on U of T Blue (students), Secondary Blue (partners) or Dark Green (faculty), a 7px accent dot before the text, a full-width header bar on its door card
+- **Door title:** 700 at 24px in U of T Blue (students), Secondary Blue (partners) or Dark Green (faculty), sentence case, the first line of its door card
 
 ### Cards / Containers
 - **Corner Style:** 20px
@@ -294,7 +294,7 @@ Exact, institutional, one colour moves. Controls rest in U of T Blue and white; 
 A fixed, viewport-sized canvas behind the page draws the field in page space: 1.5px nodes on a 24px lattice at 6% U of T Blue on white, two to four seeded connections per node within three cells. Cursor proximity within 60px activates nodes, activation spreads up to four hops through the connections at 0.55 decay, lines draw at up to 18% opacity, and everything fades at 0.08 per frame. The frame loop runs only while something changes. Under reduced motion the field is static. On the home page the field interpolates to U of T Blue with white nodes between 75% and 80% of scroll.
 
 ### Doors (signature)
-Three equal white cards under the home hero, one per audience: a chip header bar, one line of what that audience does with Carte at 15px/500, and an arrow link with a 2px yellow underline. The chip colour names the door.
+Three equal white cards under the home hero, one per audience: the audience as a 24px title in the door's colour, one line of what that audience does with Carte at 15px/500, and an arrow link with a 2px yellow underline. The title colour names the door.
 
 ### Closing block
 A U of T Blue block at 24px radius, centred, with an 800 heading, a muted white paragraph at 48ch, and a white primary pill beside a ghost pill. On the home page the heading is at section size.

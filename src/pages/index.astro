@@ -3,26 +3,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 
 // Three front doors, one house: every audience gets a door of the same size
-// inside the first viewport. Copy names what each audience actually does
-// with Carte, not what Carte is.
+// inside the first viewport. The audience is a title in the door's colour;
+// the copy names what each audience actually does with Carte.
 const doors = [
   {
     tone: 'partners',
-    chip: 'For partners',
+    audience: 'For partners',
     pitch: 'Training, funded research and student talent through one relationship with UofT Engineering.',
     label: 'Partner with us',
     href: '/partnerships',
   },
   {
     tone: 'faculty',
-    chip: 'For faculty',
+    audience: 'For faculty',
     pitch: 'Supervise a funded Mitacs intern, join the annual ML bootcamp, or get help with an NSERC Alliance application.',
     label: 'See faculty programs',
     href: '/faculty',
   },
   {
     tone: 'students',
-    chip: 'For students',
+    audience: 'For students',
     pitch: 'Paid applied-AI research roles, the Mitacs Project Explorer and the student CV bank.',
     label: 'Find a project',
     href: '/students',
@@ -39,7 +39,7 @@ const doors = [
       <div class="door-row">
         {doors.map(door => (
           <div class:list={['door', `door--${door.tone}`]}>
-            <span class="chip"><span class="dot"></span>{door.chip}</span>
+            <span class="audience">{door.audience}</span>
             <p class="pitch">{door.pitch}</p>
             <a class="cta" href={door.href}><span class="label">{door.label}</span> →</a>
           </div>

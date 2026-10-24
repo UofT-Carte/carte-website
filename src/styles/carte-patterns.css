@@ -80,9 +80,8 @@
 .stat .lbl { font: 500 15px var(--font-sans); color: var(--text-muted); margin-top: 6px; }
 
 /* ---- Front doors ------------------------------------------------- */
-/* Three equal cells: a chip header carrying the audience, one line of what
-   they do with Carte, and the arrow. The chip dot and yellow underline are
-   the accent signature; the chip colour names the door. */
+/* Three equal cells: the audience as a title in the door's colour, one line
+   of what they do with Carte, and an arrow with the yellow underline. */
 .door-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 768px) { .door-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
 
@@ -93,16 +92,13 @@
   transition: border-color var(--dur-base) var(--ease-out);
 }
 .door:hover, .door:focus-within { border-color: var(--brand-secondary); }
-.door .chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 18px; background: var(--brand-primary); color: #fff;
-  font: 700 12px var(--font-sans); letter-spacing: .06em; text-transform: uppercase;
+.door .audience {
+  display: block; padding: 18px 18px 0;
+  font: 700 24px/1.2 var(--font-sans); letter-spacing: -0.01em; color: var(--brand-primary);
 }
-.door .chip .dot { width: 7px; height: 7px; border-radius: var(--radius-pill); background: var(--brand-accent-warm); }
-.door--partners .chip { background: var(--brand-secondary); }
-.door--faculty .chip { background: var(--color-uoft-dark-green); }
-.door--faculty .chip .dot { background: var(--brand-accent-cool); }
-.door .pitch { flex: 1; margin: 0; padding: 16px 18px 0; color: var(--text-body); font: 500 15px/1.5 var(--font-sans); }
+.door--partners .audience { color: var(--brand-secondary); }
+.door--faculty .audience { color: var(--color-uoft-dark-green); }
+.door .pitch { flex: 1; margin: 0; padding: 8px 18px 0; color: var(--text-body); font: 500 15px/1.5 var(--font-sans); }
 .door .cta {
   display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
   margin: 14px 18px 16px; min-height: 24px;
