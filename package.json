@@ -11,12 +11,12 @@
     "design:check": "node scripts/check-design.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/mdx": "^8.1.1",
     "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.5",
+    "astro": "^7.4.2",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
-    "pa11y-ci": "^4.1.1"
+    "pa11y-ci": "^5.0.0"
   }
 }

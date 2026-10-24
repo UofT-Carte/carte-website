@@ -10,7 +10,12 @@ const realFetch = fetch;
 
 before(async () => {
   global.fetch = async (url, options) => {
-    if (url.includes('resend.com')) return mockFetch(url, options);
+    try {
+      const parsed = new URL(typeof url === 'string' ? url : url.url);
+      if (parsed.hostname === 'api.resend.com') return mockFetch(url, options);
+    } catch {
+      // Fall through to real fetch for non-URL inputs or unparsable values.
+    }
     return realFetch(url, options);
   };
   server = createServer(handleRequest);
@@ -41,6 +46,24 @@ test('returns 400 when email is invalid format', async () => {
   assert.equal(res.status, 400);
   const json = await res.json();
   assert.equal(json.error, 'Valid email required');
+});
+
+test('returns 400 when email is longer than 254 characters', async () => {
+  mockFetch = async () => ({ ok: true, json: async () => ({}) });
+  const res = await post({ email: 'jane@' + 'a'.repeat(250) + '.com' });
+  assert.equal(res.status, 400);
+});
+
+test('returns 400 when email is not a string', async () => {
+  const res = await post({ email: ['jane@example.com'] });
+  assert.equal(res.status, 400);
+});
+
+test('returns 413 when the body is too large', async () => {
+  const res = await post({ email: 'jane@example.com', firstName: 'x'.repeat(20_000) });
+  assert.equal(res.status, 413);
+  const json = await res.json();
+  assert.equal(json.error, 'Request too large');
 });
 
 test('returns 200 on successful subscription', async () => {
