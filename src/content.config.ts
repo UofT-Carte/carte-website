@@ -8,6 +8,8 @@ const research = defineCollection({
     authors: z.string(),
     venue: z.string(),
     year: z.number(),
+    // Organization that set and co-supervised the project, named in text only
+    partner: z.string().optional(),
     description: z.string(),
     featured: z.boolean().default(false),
     // For secondary papers (smaller cards with icons)
