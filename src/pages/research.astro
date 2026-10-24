@@ -11,9 +11,10 @@ const featuredResearch = allResearch
   .filter(paper => paper.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
+// Newest first, then by order within a year
 const secondaryResearch = allResearch
   .filter(paper => !paper.data.featured)
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
 ---
 
 <BaseLayout title="Research" description="Carte-supported research publications spanning computer vision, healthcare AI, sustainability, and more.">
@@ -49,6 +50,7 @@ const secondaryResearch = allResearch
               ))}
             </div>
             <h3>{paper.data.title}</h3>
+            <p class="meta">{[paper.data.venue, paper.data.year, paper.data.partner].filter(Boolean).join(" · ")}</p>
             {paper.data.description && <p>{paper.data.description}</p>}
             {paper.data.link && <a href={paper.data.link} class="link-arrow">Read the paper →</a>}
           </article>
@@ -128,6 +130,8 @@ const secondaryResearch = allResearch
               </div>
 
               <h3>{paper.data.title}</h3>
+
+              <p class="meta">{[paper.data.venue, paper.data.year, paper.data.partner].filter(Boolean).join(" · ")}</p>
 
               {paper.data.description && <p>{paper.data.description}</p>}
             </article>
