@@ -1,4 +1,4 @@
-// Newsletter subscribe forms (hero and contact page). One handler for every
+// Newsletter subscribe forms (homepage and contact page). One handler for every
 // form marked data-subscribe: posts to /api/subscribe, reports the outcome in
 // the form's live region, and keeps keyboard focus inside the form.
 const TIMEOUT_MS = 10000;

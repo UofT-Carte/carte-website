@@ -28,18 +28,11 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAE
           <p class="mt-6 text-lg sm:mt-8 sm:text-xl sm:max-w-xl sm:mx-auto md:mt-8 md:text-xl lg:mx-0 font-normal leading-relaxed text-muted">
             Carte is the applied AI centre of UofT Engineering. We connect organizations, faculty and students to put AI into practice, from a first workshop to a multi-year research collaboration.
           </p>
-          <!-- Newsletter: one field, in flow. Details are collected on /contact. -->
-          <form id="hero-subscribe-form" class="mt-8 sm:mt-10 max-w-md sm:mx-auto lg:mx-0 text-left" data-subscribe>
-            <div data-subscribe-fields>
-              <label for="hero-email" class="carte-label">Newsletter</label>
-              <div class="flex items-stretch gap-2">
-                <input type="email" name="email" id="hero-email" class="carte-input h-auto" autocomplete="email" placeholder="you@example.com" required />
-                <button type="submit" class="carte-btn-primary shrink-0">Subscribe</button>
-              </div>
-              <p class="carte-help">Occasional updates on training, funding calls and events.</p>
-            </div>
-            <p class="carte-status" role="status" data-subscribe-status></p>
-          </form>
+          <!-- The hero asks for the outcome that matters most: a partnership
+               enquiry. /contact carries the email and what to include. -->
+          <div class="mt-8 sm:mt-10">
+            <a class="carte-btn-primary" href="/contact">Start a partnership enquiry</a>
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +58,3 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAE
     </div>
   </div>
 </div>
-
-<script>
-  import "../scripts/subscribe";
-</script>

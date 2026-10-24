@@ -102,4 +102,27 @@ const recentWork = await Promise.all(recentWorkIds.map(async id => {
       </div>
     </div>
   </section>
+
+  <!-- Newsletter: one field, at the end of the page for readers who want to
+       keep in touch. Its own white surface: by here the dot field has turned
+       U of T Blue. Details are collected on /contact. -->
+  <section class="py-16 bg-card" aria-label="Newsletter">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <form id="home-subscribe-form" class="max-w-md" data-subscribe>
+        <div data-subscribe-fields>
+          <label for="home-email" class="carte-label">Newsletter</label>
+          <div class="flex items-stretch gap-2">
+            <input type="email" name="email" id="home-email" class="carte-input h-auto" autocomplete="email" placeholder="you@example.com" required />
+            <button type="submit" class="carte-btn-primary shrink-0">Subscribe</button>
+          </div>
+          <p class="carte-help">Occasional updates on training, funding calls and events.</p>
+        </div>
+        <p class="carte-status" role="status" data-subscribe-status></p>
+      </form>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  import "../scripts/subscribe";
+</script>
