@@ -1,24 +1,49 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
+
+// Three front doors, one house: every audience gets a door of the same size
+// inside the first viewport. The audience is a title in the door's colour;
+// the copy names what each audience actually does with Carte.
+const doors = [
+  {
+    tone: 'partners',
+    audience: 'For partners',
+    pitch: 'Training, funded research and student talent through one relationship with UofT Engineering.',
+    label: 'Partner with us',
+    href: '/partnerships',
+  },
+  {
+    tone: 'faculty',
+    audience: 'For faculty',
+    pitch: 'Supervise a funded Mitacs intern, join the annual ML bootcamp, or get help with an NSERC Alliance application.',
+    label: 'See faculty programs',
+    href: '/faculty',
+  },
+  {
+    tone: 'students',
+    audience: 'For students',
+    pitch: 'Paid applied-AI research roles, the Mitacs Project Explorer and the student CV bank.',
+    label: 'Find a project',
+    href: '/students',
+  },
+];
 ---
 
 <BaseLayout title="Home" scrollColorTransition={true}>
   <Hero />
 
-  <!-- Student & Faculty Callout rows -->
-  <section class="py-8" style="background:var(--surface-warm)">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-4">
-      <div class="callout flex-1">
-        <span class="chip"><span class="dot"></span>For Students</span>
-        <span class="pitch">Research roles, AI Scholars, capstone projects.</span>
-        <a class="cta" href="/students"><span class="label">Find yours</span> →</a>
-      </div>
-      <div class="callout flex-1">
-        <span class="chip" style="background:var(--color-uoft-dark-green)"><span class="dot" style="background:var(--brand-accent-cool)"></span>For Faculty</span>
-        <span class="pitch">Funding, co-supervision, training for your cohort.</span>
-        <a class="cta" href="/faculty"><span class="label">See resources</span> →</a>
+  <!-- Three front doors -->
+  <section class="pb-12 sm:pb-16" aria-label="Who Carte is for">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="door-row">
+        {doors.map(door => (
+          <div class:list={['door', `door--${door.tone}`]}>
+            <span class="audience">{door.audience}</span>
+            <p class="pitch">{door.pitch}</p>
+            <a class="cta" href={door.href}><span class="label">{door.label}</span> →</a>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -26,59 +51,55 @@ import Section from '../components/Section.astro';
   <!-- Our Approach Section -->
   <section class="py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl sm:text-4xl font-extrabold mb-6" style="color:var(--text-strong)">Applied AI for real problems</h2>
-        <p class="text-lg leading-relaxed" style="color:var(--text-muted)">
+      <div class="max-w-2xl mx-auto text-center mb-12">
+        <h2 class="carte-h2 mb-6 text-strong">Applied AI for real problems</h2>
+        <p class="text-lg leading-relaxed text-muted">
           We're not a traditional research lab. Carte specializes in translation — helping organizations implement AI through training, partnerships, and practical collaboration.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         <a href="/partnerships" class="carte-card card-demo flex flex-col">
-          <svg class="w-6 h-6 mb-4" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="title-row"><svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-          </svg>
-          <h3>Research partnerships</h3>
+          </svg><h3>Research partnerships</h3></div>
           <p class="flex-grow">Access over 100 faculty across UofT Engineering for interdisciplinary AI challenges.</p>
-          <span class="link-arrow mt-auto">Partner with us →</span>
+          <span class="link-arrow mt-auto">See how we work →</span>
         </a>
 
         <a href="/training" class="carte-card card-demo flex flex-col">
-          <svg class="w-6 h-6 mb-4" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="title-row"><svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-          </svg>
-          <h3>Custom training</h3>
-          <p class="flex-grow">Industry-focused AI training tailored to your team's needs and technical level.</p>
+          </svg><h3>Custom training</h3></div>
+          <p class="flex-grow">Industry-focused AI training built around your team's work and technical level.</p>
           <span class="link-arrow mt-auto">Explore programs →</span>
         </a>
 
-        <a href="/partnerships" class="carte-card card-demo flex flex-col">
-          <svg class="w-6 h-6 mb-4" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="/partnerships#mitacs-accelerate" class="carte-card card-demo flex flex-col">
+          <div class="title-row"><svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <h3>Funding support</h3>
-          <p class="flex-grow">Programs like Mitacs fund AI initiatives. We support you from application through delivery.</p>
-          <span class="link-arrow mt-auto">Learn more →</span>
+          </svg><h3>Funding support</h3></div>
+          <p class="flex-grow">Government programs such as Mitacs Accelerate and NSERC Alliance match your research funding. We support you from application through delivery.</p>
+          <span class="link-arrow mt-auto">See how funding works →</span>
         </a>
 
-        <a href="/partnerships" class="carte-card card-demo flex flex-col">
-          <svg class="w-6 h-6 mb-4" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="/partnerships#engagement-options" class="carte-card card-demo flex flex-col">
+          <div class="title-row"><svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-          </svg>
-          <h3>Talent pipeline</h3>
-          <p class="flex-grow">Capstone projects, internships, and direct access to top engineering students.</p>
-          <span class="link-arrow mt-auto">Hire students →</span>
+          </svg><h3>Student talent</h3></div>
+          <p class="flex-grow">Capstone projects, funded internships, and direct access to engineering students.</p>
+          <span class="link-arrow mt-auto">Work with students →</span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Impact / By the Numbers -->
-  <section class="py-20 lg:py-28" style="background:var(--surface-inverse)">
+  <section class="py-20 lg:py-28 bg-inverse">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text-on-inverse)">Our impact</h2>
-        <p class="text-lg max-w-2xl mx-auto" style="color:var(--text-on-inverse-muted)">
+        <h2 class="carte-h2 mb-4 text-on-inverse">Our impact</h2>
+        <p class="text-lg max-w-2xl mx-auto text-on-inverse-muted">
           Since 2019, we've trained professionals, built partnerships, and connected talent across sectors.
         </p>
       </div>
@@ -86,28 +107,29 @@ import Section from '../components/Section.astro';
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
         <div class="stat">
           <div class="num">150+</div>
-          <div class="lbl">Professionals Trained</div>
+          <div class="lbl">Professionals trained</div>
         </div>
         <div class="stat">
           <div class="num">5+</div>
-          <div class="lbl">Sectors Served</div>
+          <div class="lbl">Sectors served</div>
         </div>
         <div class="stat">
           <div class="num">1,000+</div>
-          <div class="lbl">Student Community</div>
+          <div class="lbl">Student community</div>
         </div>
         <div class="stat">
           <div class="num">30+</div>
-          <div class="lbl">Applied AI Projects</div>
+          <div class="lbl">Applied AI projects</div>
         </div>
       </div>
 
-      <div class="inverse-cta">
-        <h3>Bring a real problem. Leave with a plan.</h3>
+      <!-- The close: the page's best line at full h2 strength, contact first -->
+      <div class="inverse-cta inverse-cta--lead">
+        <h2>Bring a real problem. Leave with a plan.</h2>
         <p>From a 3-day genomic ML intensive to LLM workshops for educators — we design sector-specific AI training that delivers. Training satisfaction: 4.8/5.</p>
         <div class="row">
-          <a class="inv-btn primary" href="/training">Explore Training</a>
-          <a class="inv-btn ghost" href="/contact">Get in Touch</a>
+          <a class="inv-btn primary" href="/contact">Get in touch</a>
+          <a class="inv-btn ghost" href="/training">Explore training</a>
         </div>
       </div>
     </div>

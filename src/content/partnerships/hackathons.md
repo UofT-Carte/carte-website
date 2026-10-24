@@ -16,7 +16,7 @@ Partner with Carte to run student competitions focused on emerging AI methodolog
 - Access to creative solutions from talented students
 - Brand visibility among top engineering students
 - Opportunity to identify potential hires
-- Hands-on engagement with cutting-edge technologies
+- Hands-on work with current AI tools
 
 Interested in sponsoring a hackathon? Contact us to discuss possibilities.
 

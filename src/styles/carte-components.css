@@ -15,42 +15,22 @@
    1. PRIMITIVE TOKENS
    ====================================================================== */
 :root {
-  /* ---- Official U of T palette ---- */
-  --color-uoft-blue:        #1E3765;   /* PMS 655   · Primary */
-  --color-uoft-secondary:   #007894;   /* PMS 633   · Secondary */
-
-  --color-uoft-purple:      #6D247A;
-  --color-uoft-warm-red:    #DC4633;
-  --color-uoft-cool-blue:   #6FC7EA;
-  --color-uoft-teal:        #00A189;
-  --color-uoft-fuchsia:     #AB1368;
-  --color-uoft-dark-green:  #0D534D;
-  --color-uoft-yellow:      #F1C500;
-  --color-uoft-light-green: #8DBF2E;
-
+  /* ---- Official U of T palette, cream canvas and the blue ramp ----
+     Declared once, in theme.css (@theme), which emits them on :root for
+     both Tailwind utilities and the var() references below. */
   --color-white:            #FFFFFF;
   --color-black:            #000000;
+  --color-uoft-blue-700:    var(--color-uoft-blue);
+  /* Neutral chrome comes from Cool Gray 2 and its tints (theme.css). The
+     Tailwind slate ramp and the U of T Blue washes are retired. */
 
-  /* ---- Carte-specific extensions ---- */
-  --color-pale-bg:          #FDFBF7;   /* Carte cream page canvas */
-  --color-warm-bg:          #F2F0EB;
-
-  --color-uoft-blue-900:    #12244A;
-  --color-uoft-blue-700:    #1E3765;
-  --color-uoft-blue-500:    #3E5A8F;
-  --color-uoft-blue-100:    #E2E8F2;
-  --color-uoft-blue-050:    #F1F4F9;
-
-  /* Slate neutrals for UI chrome */
-  --color-slate-900: #0F172A;
-  --color-slate-700: #334155;
-  --color-slate-600: #475569;
-  --color-slate-500: #64748B;
-  --color-slate-400: #94A3B8;
-  --color-slate-300: #CBD5E1;
-  --color-slate-200: #E2E8F0;
-  --color-slate-100: #F1F5F9;
-  --color-slate-050: #F8FAFC;
+  /* Accent tint backgrounds — chart fills, callout washes (25% tints) */
+  --color-bg-teal-100:      #D6F2EC;
+  --color-bg-yellow-100:    #FDF3C2;
+  --color-bg-purple-100:    #ECDBF0;
+  --color-bg-red-100:       #FADBD4;
+  --color-bg-fuchsia-100:   #F5D0E3;
+  --color-bg-green-100:     #E6F2D0;
 
   /* ---- Feedback ---- */
   --color-success:    #0D6B4C;
@@ -60,11 +40,42 @@
   --color-danger:     #DC2626;
   --color-danger-bg:  #FEE2E2;
   --color-info:       var(--color-uoft-secondary);
-  --color-info-bg:    var(--color-uoft-blue-050);
+  --color-info-bg:    var(--color-cool-gray-25);
 
   /* ---- Type primitives ---- */
   --font-sans: 'Host Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --weight-light: 300;     /* long-form editorial only */
+  --weight-regular: 400;   /* body */
+  --weight-medium: 500;    /* nav, small */
+  --weight-semibold: 600;  /* labels, links */
+  --weight-bold: 700;      /* h2–h4, micro */
+  --weight-extrabold: 800; /* display, h1 */
+
+  --text-display: 76px;
+  --text-h1: 60px;
+  --text-h2: 42px;
+  --text-h3: 24px;
+  --text-h4: 18px;
+  --text-lead: 20px;
+  --text-body-size: 16px;
+  --text-small: 14px;
+  --text-micro: 12px;
+  --text-mono-size: 13px;
+
+  --tracking-display: -0.03em;
+  --tracking-h1: -0.025em;
+  --tracking-h2: -0.02em;
+  --tracking-micro: 0.1em;
+  --leading-display: 1.02;
+  --leading-body: 1.65;
+
+  /* ---- Layout ---- */
+  --container-max: 1280px;   /* max-w-7xl — the content rail */
+  --section-py: 80px;        /* py-20 */
+  --section-py-lg: 112px;    /* lg:py-28 */
+  --header-h: 96px;          /* h-24 sticky header */
 
   /* ---- Radii ---- */
   --radius-sm:   6px;
@@ -108,25 +119,26 @@
      ====================================================================== */
 
   /* Surfaces */
-  --surface-page:    var(--color-pale-bg);
+  --surface-page:    var(--color-canvas);
   --surface-card:    var(--color-white);
-  --surface-sunken:  var(--color-slate-050);
-  --surface-warm:    var(--color-warm-bg);
-  --surface-info:    var(--color-uoft-blue-050);
+  --surface-sunken:  var(--color-cool-gray-25);
+  --surface-warm:    var(--color-cool-gray-25);
+  --surface-info:    var(--color-cool-gray-25);
   --surface-inverse: var(--color-uoft-blue);
 
   /* Text */
   --text-strong:          var(--color-uoft-blue-900);
   --text-body:            var(--color-uoft-blue);
   --text-muted:           var(--color-uoft-blue-500);
-  --text-subtle:          #5E6B84;
+  --text-subtle:          var(--color-uoft-blue-80);
   --text-on-inverse:      var(--color-white);
   --text-on-inverse-muted:rgba(255, 255, 255, 0.78);
   --text-link:            var(--color-uoft-secondary);
 
   /* Borders */
-  --border-subtle: var(--color-slate-200);
-  --border-warm:   #E7E5E0;
+  --border-subtle: var(--color-cool-gray-50);
+  --border-warm:   var(--color-cool-gray-50);
+  --border-control: var(--color-uoft-blue-80);   /* 3:1 on white for input boundaries */
   --border-strong: var(--color-uoft-blue);
   --border-focus:  var(--color-uoft-secondary);
 
@@ -136,6 +148,13 @@
   --brand-accent-warm: var(--color-uoft-yellow);
   --brand-accent-cool: var(--color-uoft-cool-blue);
 
+  /* Overlays */
+  --overlay-photo:   rgba(30, 55, 101, 0.35);  /* flat blue over photography */
+  --overlay-section: rgba(30, 55, 101, 0.88);
+  /* Section washes that let the dot field read through a band (site extension) */
+  --tint-warm:  rgba(255, 255, 255, 0.70);
+  --tint-white: rgba(255, 255, 255, 0.50);
+  --tint-info:  rgba(0, 120, 148, 0.05);
   --focus-ring: 0 0 0 3px rgba(0, 120, 148, 0.30);
 }
 
@@ -154,6 +173,7 @@
   transition: background var(--dur-base) var(--ease-out);
 }
 .carte-btn-primary:hover { background: var(--brand-secondary); }
+.carte-btn-primary[aria-busy="true"] { opacity: 0.7; cursor: progress; }
 
 .carte-btn-ghost {
   display: inline-flex; align-items: center; justify-content: center;
@@ -162,20 +182,26 @@
   color: var(--brand-primary); background: transparent;
   border: 2px solid var(--brand-primary);
   border-radius: var(--radius-pill); cursor: pointer;
-  transition: all var(--dur-base) var(--ease-out);
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
-.carte-btn-ghost:hover { background: var(--color-uoft-blue-100); }
+.carte-btn-ghost:hover { background: var(--color-cool-gray-25); }
 
 /* ---- Forms --------------------------------------------------------- */
 .carte-label {
   display: block;
   font-family: var(--font-sans); font-weight: 600; font-size: 14px;
-  color: var(--color-slate-700);
+  color: var(--text-strong);
   margin-bottom: 6px; letter-spacing: -0.005em;
 }
 .carte-label__req { color: var(--color-danger); margin-left: 2px; }
-.carte-help  { font: 400 12px var(--font-sans); color: var(--color-slate-500); margin: 6px 0 0; }
+.carte-help  { font: 400 12px var(--font-sans); color: var(--text-subtle); margin: 6px 0 0; }
 .carte-error { font: 500 12px var(--font-sans); color: var(--color-danger); margin: 6px 0 0; }
+
+/* Live region under a form: empty until there is something to say */
+.carte-status { font: 500 14px/1.5 var(--font-sans); margin-top: 12px; }
+.carte-status:empty { margin: 0; }
+.carte-status--error   { color: var(--color-danger); }
+.carte-status--success { color: var(--color-success); }
 
 .carte-input,
 .carte-select,
@@ -183,17 +209,17 @@
   width: 100%; box-sizing: border-box;
   padding: 10px 16px; border-radius: var(--radius-md);
   font: 400 14px var(--font-sans); color: var(--text-strong);
-  background: var(--surface-card); border: 1px solid var(--color-slate-300);
+  background: var(--surface-card); border: 1px solid var(--border-control);
   outline: none;
   transition: border-color var(--dur-fast) var(--ease-out);
 }
 .carte-textarea { padding: 12px 16px; min-height: 112px; resize: vertical; line-height: 1.55; }
 .carte-input::placeholder,
-.carte-textarea::placeholder { color: var(--color-slate-500); }
+.carte-textarea::placeholder { color: var(--text-subtle); }
 
 .carte-input:hover,
 .carte-select:hover,
-.carte-textarea:hover { border-color: var(--text-subtle); }
+.carte-textarea:hover { border-color: var(--brand-primary); }
 
 .carte-input:focus,
 .carte-select:focus,
@@ -218,15 +244,15 @@
 
 .carte-check {
   display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
-  font: 400 14px var(--font-sans); color: var(--color-slate-600);
+  font: 400 14px var(--font-sans); color: var(--text-body);
 }
 .carte-check input[type="checkbox"],
 .carte-check input[type="radio"] {
   appearance: none; -webkit-appearance: none;
   width: 18px; height: 18px; flex: none; margin: 0;
-  border: 1.5px solid var(--color-slate-300); background: #fff;
+  border: 1.5px solid var(--border-control); background: #fff;
   border-radius: 4px; cursor: pointer; position: relative;
-  transition: all var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
 .carte-check input[type="radio"] { border-radius: 50%; }
 .carte-check input[type="checkbox"]:hover,
@@ -274,9 +300,22 @@
   outline: 2px solid var(--border-focus);
   outline-offset: 2px;
 }
+/* Inputs and checks draw their own ring in their :focus rules above. */
 .carte-input:focus-visible,
 .carte-select:focus-visible,
 .carte-textarea:focus-visible,
-.carte-btn-primary:focus-visible,
-.carte-btn-ghost:focus-visible,
 .carte-check input:focus-visible { outline: none; }
+
+/* Buttons keep the ring, pushed out so it clears the pill edge. */
+.carte-btn-primary:focus-visible,
+.carte-btn-ghost:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+/* On U of T Blue the Secondary Blue ring is 2.3:1; use the on-inverse
+   text colour there (white on blue is 12:1). */
+.inverse-cta :focus-visible,
+.on-inverse :focus-visible {
+  outline-color: var(--text-on-inverse);
+}

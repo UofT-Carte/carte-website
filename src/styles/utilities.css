@@ -1,7 +1,3 @@
-@utility wave-divider {
-  clip-path: ellipse(70% 100% at 50% 100%);
-}
-
 @utility hide-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -9,3 +5,26 @@
     display: none;
   }
 }
+
+/* Semantic text colours — the only text colours in use */
+@utility text-strong { color: var(--text-strong); }
+@utility text-body   { color: var(--text-body); }
+@utility text-muted  { color: var(--text-muted); }
+@utility text-subtle { color: var(--text-subtle); }
+@utility text-link   { color: var(--text-link); }
+
+/* Semantic surfaces */
+@utility bg-page    { background-color: var(--surface-page); }
+@utility bg-card    { background-color: var(--surface-card); }
+@utility bg-sunken  { background-color: var(--surface-sunken); }
+@utility bg-warm    { background-color: var(--surface-warm); }
+@utility bg-info    { background-color: var(--surface-info); }
+@utility bg-inverse { background-color: var(--surface-inverse); }
+
+/* Text on inverse (U of T Blue) surfaces */
+@utility text-on-inverse       { color: var(--text-on-inverse); }
+@utility text-on-inverse-muted { color: var(--text-on-inverse-muted); }
+
+/* Semantic borders (pair with Tailwind's `border` for the 1px hairline) */
+@utility border-subtle { border-color: var(--border-subtle); }
+@utility border-warm   { border-color: var(--border-warm); }

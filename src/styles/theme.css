@@ -14,9 +14,26 @@
   --color-accent-yellow:      #f1c500;
   --color-accent-light-green: #8dbf2e;
 
-  /* Neutrals */
-  --color-cool-gray: #d0d1c9;
-  --color-pale-bg:   #FDFBF7;
+  /* Design-system names for the same values (carte-design-system/tokens/colors.css) */
+  --color-uoft-secondary:      #007894;
+  --color-uoft-secondary-dark: #006279;
+  --color-uoft-purple:         #6d247a;
+  --color-uoft-warm-red:       #dc4633;
+  --color-uoft-cool-blue:      #6fc7ea;
+  --color-uoft-teal:           #00a189;
+  --color-uoft-fuchsia:        #ab1368;
+  --color-uoft-dark-green:     #0d534d;
+  --color-uoft-yellow:         #f1c500;
+  --color-uoft-light-green:    #8dbf2e;
+  --color-uoft-blue-900:       #12244a;
+  --color-uoft-blue-500:       #3e5a8f;
+  --color-uoft-blue-80:        #4b5f84;   /* the 80% tint, U of T's minimum for U of T Blue */
+
+  /* Neutrals: the official set. White canvas, Cool Gray 2 and its permitted tints. */
+  --color-canvas:       #ffffff;
+  --color-cool-gray:    #d0d1c9;   /* Cool Gray 2 (PMS) */
+  --color-cool-gray-50: #e7e8e4;   /* 50% tint: hairlines */
+  --color-cool-gray-25: #f3f4f2;   /* 25% tint: quiet panels and bands */
 
   /* Fonts */
   --font-sans: 'Host Grotesk', system-ui, sans-serif;

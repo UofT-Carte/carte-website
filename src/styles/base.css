@@ -3,14 +3,67 @@
     scroll-behavior: smooth;
   }
 
-  body {
-    @apply antialiased;
+  /* The page colour lives on <html> only. A background on <body> paints above
+     the fixed, z-index:-10 dot field (InteractiveDots) and hides it. */
+  html {
     background-color: var(--surface-page);
-    color: var(--text-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-extrabold;
-    color: var(--text-strong);
+  html, body {
+    font-family: var(--font-sans);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+
+  /* Weight, tracking and colour per the type roles. Sizes come from the
+     .carte-h* role classes (or Tailwind utilities), never from the tag. */
+  h1 { font-weight: 800; letter-spacing: -0.025em; color: var(--text-strong); }
+  h2 { font-weight: 700; letter-spacing: -0.02em;  color: var(--text-strong); }
+  h3 { font-weight: 700; letter-spacing: -0.01em;  color: var(--text-strong); }
+  h4, h5, h6 { font-weight: 700; color: var(--text-strong); }
+
+  a { color: var(--text-link); text-decoration: none; }
+  a:hover { color: var(--brand-primary); }
 }
+
+/* Skip link: visually hidden until focused, then a brand pill at the top-left */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-primary);
+  color: var(--text-on-inverse);
+  font: 700 14px var(--font-sans);
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Reduced motion: keep colour and opacity feedback, drop spatial movement.
+   The dot field goes static in InteractiveDots; here we stop smooth scrolling
+   and restrict transitions to non-spatial properties. */
+@media (prefers-reduced-motion: reduce) {
+  html, .scroll-smooth { scroll-behavior: auto !important; }
+  *, ::before, ::after {
+    transition-property: color, background-color, border-color, outline-color, opacity !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .skip-link { transform: translateY(-200%); }
+  .skip-link:focus-visible { transform: none; }
+}
+
+/* Browser surfaces carry the palette too: selection and native control accents */
+html { accent-color: var(--brand-primary); color-scheme: light; }
+::selection { background: var(--color-cool-gray-50); color: var(--text-strong); }
+.on-inverse ::selection,
+.inverse-cta ::selection,
+.bg-inverse ::selection { background: rgba(255, 255, 255, 0.28); color: var(--text-on-inverse); }

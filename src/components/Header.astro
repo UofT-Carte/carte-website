@@ -5,162 +5,77 @@ import uoftCrest from '../assets/uoft-crest.svg';
 const navItems = [
   { label: 'Training', href: '/training' },
   { label: 'Partnerships', href: '/partnerships' },
-  { 
-    label: 'UofT Community', 
-    dropdown: [
-      { label: 'For Students', href: '/students' },
-      { label: 'For Faculty', href: '/faculty' }
-    ]
-  },
+  { label: 'Students', href: '/students' },
+  { label: 'Faculty', href: '/faculty' },
 ];
 
-const socialLinks = [
-  { 
-    label: 'LinkedIn', 
-    href: 'https://www.linkedin.com/company/carte-toronto/',
-    icon: 'linkedin'
-  },
-  { 
-    label: 'Instagram', 
-    href: 'https://www.instagram.com/carte_uoft/',
-    icon: 'instagram'
-  },
-  { 
-    label: 'YouTube', 
-    href: 'https://www.youtube.com/channel/UC9mYr0Ru6hAeajusllYVC4g',
-    icon: 'youtube'
-  },
-  { 
-    label: 'GitHub', 
-    href: 'https://github.com/UofT-Carte/',
-    icon: 'github'
-  },
-];
+// Active route: Secondary Blue text + 2px underline (design system Header)
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => current === href;
 ---
 
-<header 
-  class="sticky top-0 z-50 transition-all duration-300 bg-transparent"
+<header
+  class="sticky top-0 z-50 border-b border-transparent bg-transparent transition-colors duration-300"
   id="main-header"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-24 items-center">
-      <div class="flex items-center">
-        <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
-          <!-- U of T Engineering logo - full on lg+, crest on smaller screens -->
-          <a
-            href="https://www.engineering.utoronto.ca/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-shrink-0"
-          >
-            <img
-              src={uoftEngBlue.src}
-              alt="University of Toronto Engineering"
-              class="hidden xl:block h-12 w-auto"
-            />
-            <img
-              src={uoftCrest.src}
-              alt="University of Toronto"
-              class="xl:hidden h-8 w-auto"
-            />
-          </a>
-          <div class="w-px h-6 sm:h-8 bg-slate-300"></div>
-          <a href="/" class="text-uoft-blue font-bold text-2xl tracking-tighter hover:text-secondary-blue transition-colors">
-            Carte
-          </a>
-        </div>
+      <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
+        <!-- U of T Engineering mark: full signature on xl+, crest below. The
+             institutional link lives in the footer so the first tab stop
+             stays on this site. -->
+        <picture class="flex items-center">
+          <source media="(min-width: 1280px)" srcset={uoftEngBlue.src} width={uoftEngBlue.width} height={uoftEngBlue.height} />
+          <img
+            src={uoftCrest.src}
+            alt="University of Toronto Engineering"
+            width={uoftCrest.width}
+            height={uoftCrest.height}
+            class="h-8 xl:h-12 w-auto"
+          />
+        </picture>
+        <div class="w-px h-6 sm:h-8 bg-cool-gray-50"></div>
+        <a href="/" class="text-uoft-blue font-bold text-2xl tracking-tight hover:text-secondary-blue transition-colors">
+          Carte
+        </a>
       </div>
-      <div class="hidden sm:ml-10 sm:flex sm:items-center sm:space-x-10">
+      <nav aria-label="Main" class="hidden md:ml-8 md:flex md:items-center md:space-x-6 lg:ml-10 lg:space-x-8">
         {navItems.map(item => (
-          item.dropdown ? (
-            <div class="relative group">
-              <button
-                class="inline-flex items-center text-base font-medium text-slate-600 hover:text-secondary-blue transition-colors relative group"
-              >
-                {item.label}
-                <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-              </button>
-              <div class="absolute left-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div class="bg-white rounded-lg shadow-lg border border-slate-200 py-2">
-                  {item.dropdown.map(subItem => (
-                    <a
-                      href={subItem.href}
-                      class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-secondary-blue transition-colors"
-                    >
-                      {subItem.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <a
-              href={item.href}
-              class="inline-flex items-center text-base font-medium text-slate-600 hover:text-secondary-blue transition-colors relative group"
-            >
-              {item.label}
-              <span class="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            </a>
-          )
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'inline-flex items-center py-2 text-base font-medium hover:text-secondary-blue transition-colors relative group',
+              isActive(item.href) ? 'text-secondary-blue' : 'text-body',
+            ]}
+          >
+            {item.label}
+            <span class:list={[
+              'absolute bottom-0 left-0 w-full h-0.5 bg-secondary-blue transform group-hover:scale-x-100 transition-transform origin-left',
+              isActive(item.href) ? 'scale-x-100' : 'scale-x-0',
+            ]}></span>
+          </a>
         ))}
-        <!-- Social links -->
-        <div class="flex items-center gap-3 ml-6">
-          {socialLinks.map(social => (
-            <a 
-              href={social.href} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="text-slate-400 hover:text-secondary-blue transition-colors flex items-center justify-center"
-              aria-label={social.label}
-            >
-              {social.icon === 'linkedin' && (
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              )}
-              {social.icon === 'instagram' && (
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              )}
-              {social.icon === 'youtube' && (
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-              )}
-              {social.icon === 'github' && (
-                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.005.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.413-.012 2.74 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                </svg>
-              )}
-            </a>
-          ))}
-        </div>
-        <a 
-          href="/contact" 
-          class="inline-flex items-center px-6 py-2.5 text-base font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ml-4"
+        <a
+          href="/contact"
+          class="inline-flex items-center px-6 py-2.5 text-base font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue transition-colors ml-4"
         >
           Contact
         </a>
-      </div>
+      </nav>
       <!-- Mobile menu button -->
-      <div class="-mr-2 flex items-center sm:hidden">
-        <button 
-          type="button" 
-          class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none" 
+      <div class="-mr-2 flex items-center md:hidden">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-subtle hover:text-uoft-blue hover:bg-sunken"
           id="mobile-menu-button"
-          aria-controls="mobile-menu" 
+          aria-controls="mobile-menu"
           aria-expanded="false"
         >
           <span class="sr-only">Open main menu</span>
-          <!-- Hamburger icon -->
           <svg class="h-8 w-8" id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <!-- Close icon (hidden by default) -->
           <svg class="h-8 w-8 hidden" id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -170,78 +85,33 @@ const socialLinks = [
   </div>
 </header>
 
-<!-- Mobile menu (overlay - outside header for proper backdrop-blur) -->
-<div 
-  class="sm:hidden hidden fixed left-0 right-0 top-24 z-40" 
+<!-- Mobile menu: a solid sheet under the header -->
+<div
+  class="md:hidden hidden fixed left-0 right-0 top-24 z-40"
   id="mobile-menu"
 >
-  <div class="bg-pale-bg/80 backdrop-blur-lg border-t border-slate-100 shadow-lg">
-    <div class="px-4 pt-4 pb-6 space-y-2">
+  <nav aria-label="Main" class="bg-page border-b border-subtle">
+    <div class="px-4 pt-4 pb-6 space-y-1">
       {navItems.map(item => (
-        item.dropdown ? (
-          <div>
-            <div class="px-4 py-2 text-lg font-semibold text-slate-500">
-              {item.label}
-            </div>
-            {item.dropdown.map(subItem => (
-              <a
-                href={subItem.href}
-                class="block px-6 py-2 rounded-lg text-base font-medium text-slate-700 hover:text-secondary-blue hover:bg-slate-100 transition-colors"
-              >
-                {subItem.label}
-              </a>
-            ))}
-          </div>
-        ) : (
-          <a
-            href={item.href}
-            class="block px-4 py-3 rounded-lg text-lg font-medium text-slate-700 hover:text-secondary-blue hover:bg-slate-100 transition-colors"
-          >
-            {item.label}
-          </a>
-        )
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={[
+            'block px-4 py-3 rounded-lg text-lg font-medium hover:text-secondary-blue hover:bg-sunken transition-colors',
+            isActive(item.href) ? 'text-secondary-blue' : 'text-body',
+          ]}
+        >
+          {item.label}
+        </a>
       ))}
-      <a 
-        href="/contact" 
+      <a
+        href="/contact"
         class="block mt-4 mx-4 px-6 py-3 text-center text-lg font-bold rounded-full text-white bg-uoft-blue hover:bg-secondary-blue transition-colors"
       >
         Contact
       </a>
-      <!-- Social links -->
-      <div class="flex items-center justify-center gap-6 pt-6 border-t border-slate-200 mt-4">
-        {socialLinks.map(social => (
-          <a 
-            href={social.href} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="text-slate-400 hover:text-secondary-blue transition-colors flex items-center justify-center"
-            aria-label={social.label}
-          >
-            {social.icon === 'linkedin' && (
-              <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            )}
-            {social.icon === 'instagram' && (
-              <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            )}
-            {social.icon === 'youtube' && (
-              <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            )}
-            {social.icon === 'github' && (
-              <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.005.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.413-.012 2.74 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-              </svg>
-            )}
-          </a>
-        ))}
-      </div>
     </div>
-  </div>
+  </nav>
 </div>
 
 <script is:inline>
@@ -251,59 +121,52 @@ const socialLinks = [
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIconOpen = document.getElementById('menu-icon-open');
     const menuIconClose = document.getElementById('menu-icon-close');
-    
-    // Header scroll effect (triggers sooner on mobile)
+
+    // Scrolled header: solid page colour with a hairline, so it reads the
+    // same over the cream canvas and over the U of T Blue bands.
     if (header) {
-      window.addEventListener('scroll', () => {
-        const isMobile = window.innerWidth < 640;
-        const scrollThreshold = isMobile ? 1 : 10;
-        
-        if (window.scrollY > scrollThreshold) {
-          header.classList.remove('bg-transparent');
-          header.classList.add('bg-pale-bg/80', 'backdrop-blur-lg', 'shadow-sm');
-        } else {
-          header.classList.add('bg-transparent');
-          header.classList.remove('bg-pale-bg/80', 'backdrop-blur-lg', 'shadow-sm');
-        }
-      });
+      const update = () => {
+        const scrolled = window.scrollY > (window.innerWidth < 768 ? 1 : 10);
+        header.classList.toggle('bg-transparent', !scrolled);
+        header.classList.toggle('border-transparent', !scrolled);
+        header.classList.toggle('bg-page', scrolled);
+        header.classList.toggle('border-subtle', scrolled);
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      update();
     }
 
     // Mobile menu toggle
     if (mobileMenuButton && mobileMenu && menuIconOpen && menuIconClose) {
+      const isOpen = () => !mobileMenu.classList.contains('hidden');
+      const menuLabel = mobileMenuButton.querySelector('.sr-only') || mobileMenuButton;
+
       const openMenu = () => {
         mobileMenu.classList.remove('hidden');
         menuIconOpen.classList.add('hidden');
         menuIconClose.classList.remove('hidden');
         mobileMenuButton.setAttribute('aria-expanded', 'true');
+        menuLabel.textContent = 'Close main menu';
+        const first = mobileMenu.querySelector('a');
+        if (first) first.focus();
       };
-      
-      const closeMenu = () => {
+
+      const closeMenu = (returnFocus = false) => {
         mobileMenu.classList.add('hidden');
         menuIconOpen.classList.remove('hidden');
         menuIconClose.classList.add('hidden');
         mobileMenuButton.setAttribute('aria-expanded', 'false');
+        menuLabel.textContent = 'Open main menu';
+        if (returnFocus) mobileMenuButton.focus();
       };
-      
-      mobileMenuButton.addEventListener('click', () => {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        if (isOpen) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
 
-      // Close menu when clicking on a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-      });
-      
-      // Close menu when clicking outside
+      mobileMenuButton.addEventListener('click', () => (isOpen() ? closeMenu() : openMenu()));
+      mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
       document.addEventListener('click', (e) => {
-        const isOpen = !mobileMenu.classList.contains('hidden');
-        if (isOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-          closeMenu();
-        }
+        if (isOpen() && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) closeMenu();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) closeMenu(true);
       });
     }
   });

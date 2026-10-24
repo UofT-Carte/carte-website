@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import CarouselNav from '../components/CarouselNav.astro';
+import CheckItem from '../components/CheckItem.astro';
 
 // Fetch all partnership services from content collection
 const allPartnerships = await getCollection('partnerships');
@@ -9,6 +11,9 @@ const allPartnerships = await getCollection('partnerships');
 const featuredServices = allPartnerships
   .filter(p => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
+
+// Arrow links name their destination instead of "Learn more"
+const linkLabels: Record<string, string> = { '/training': 'See training programs', '/research': 'See our research' };
 
 const secondaryServices = allPartnerships
   .filter(p => !p.data.featured)
@@ -20,13 +25,17 @@ const secondaryServices = allPartnerships
   <section class="relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-uoft-blue leading-tight mb-6">
+        <h1 class="carte-h1 mb-6">
           Partner with<br/>
-          world-class AI expertise
+          world-class AI expertise.
         </h1>
-        <p class="text-xl text-slate-600 leading-relaxed">
+        <p class="text-xl text-muted leading-relaxed">
           From sponsored research to hands-on training, we offer multiple pathways to apply AI in your organization. Connect with 100+ faculty across 8 engineering departments — and let us help you navigate funding programs like NSERC Alliance and Mitacs Accelerate.
         </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a class="carte-btn-primary" href="/contact">Get in touch</a>
+          <a class="carte-btn-ghost" href="#mitacs-accelerate">See how funding works</a>
+        </div>
       </div>
     </div>
   </section>
@@ -35,8 +44,8 @@ const secondaryServices = allPartnerships
   <section class="py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-uoft-blue mb-4">How we work with partners</h2>
-        <p class="text-lg text-slate-600 max-w-2xl mx-auto">From sponsored research to hands-on training, we offer multiple ways to engage with UofT's AI expertise.</p>
+        <h2 class="carte-h2 mb-4">How we work with partners</h2>
+        <p class="text-lg text-muted max-w-2xl mx-auto">Four ways in, from a single funded internship to a multi-year research program.</p>
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -44,8 +53,8 @@ const secondaryServices = allPartnerships
         <a href="#mitacs-accelerate" class="carte-card card-demo block">
           <span class="tag">Funding Program</span>
           <h3>Mitacs Accelerate</h3>
-          <p>Leverage government funding to work with talented students on your AI research challenges. Contribute $7,500+ per internship and Mitacs matches it to create a $15,000+ research award.</p>
-          <span class="link-arrow">Learn more →</span>
+          <p>Contribute $7,500+ per internship and Mitacs matches it, so a UofT student works on your research problem with a $15,000+ award.</p>
+          <span class="link-arrow">See the funding model →</span>
         </a>
         
         {featuredServices.filter(service => service.data.title !== "Sponsored Research").map((service) => (
@@ -58,7 +67,7 @@ const secondaryServices = allPartnerships
             <h3>{service.data.title}</h3>
             <p>{service.data.description}</p>
             {service.data.link && (
-              <a href={service.data.link} class="link-arrow">Learn more →</a>
+              <a href={service.data.link} class="link-arrow">{linkLabels[service.data.link] ?? 'Learn more'} →</a>
             )}
           </article>
         ))}
@@ -67,219 +76,112 @@ const secondaryServices = allPartnerships
   </section>
 
     <!-- Mitacs Accelerate Featured Section -->
-    <section id="mitacs-accelerate" class="py-20 lg:py-28 scroll-mt-24" style="background:var(--surface-warm)">
+    <section id="mitacs-accelerate" class="py-20 lg:py-28 scroll-mt-24 bg-warm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-uoft-blue mb-4">Mitacs Accelerate</h2>
-            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-              Leverage government funding to work with talented students on your AI research challenges. Mitacs Accelerate provides cost-effective access to UofT's brightest minds.
+            <h2 class="carte-h2 mb-4">Mitacs Accelerate</h2>
+            <p class="text-xl text-muted max-w-2xl mx-auto">
+              Mitacs matches your contribution so a UofT student can work on your research problem for four to six months.
             </p>
           </div>
   
           <div class="carte-card p-8 lg:p-12 mb-8">
             <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
               <div>
-                <h3 class="text-2xl font-bold text-uoft-blue mb-4">How it works for partners</h3>
-                <p class="text-slate-700 mb-6 leading-relaxed">
-                  Mitacs Accelerate creates dynamic collaborations between your organization and UofT students. You contribute starting at <strong>$7,500 CAD</strong> per four- or six-month internship, and Mitacs matches it to create a <strong>$15,000 CAD</strong> research award.
+                <h3 class="carte-h3 mb-4">How it works for partners</h3>
+                <p class="text-body mb-6 leading-relaxed">
+                  Mitacs Accelerate pairs your organization with a UofT student and an academic supervisor. You contribute starting at <strong>$7,500 CAD</strong> per four- or six-month internship, and Mitacs matches it to create a <strong>$15,000 CAD</strong> research award.
                 </p>
                 
-                <h4 class="text-lg font-bold text-uoft-blue mb-3 mt-6">Benefits for your organization</h4>
-                <ul class="space-y-2 text-slate-600">
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Leverage government funding to stretch your research dollars</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Work with highly skilled graduate students, postdocs, and recent graduates</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Tackle specific problems with dedicated student researchers</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>Identify potential hires through direct collaboration</span>
-                  </li>
+                <h4 class="carte-h4 mb-3 mt-6">Benefits for your organization</h4>
+                <ul class="space-y-2 text-muted">
+                  <CheckItem iconClass="text-secondary-blue">Government matching doubles what your contribution buys</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">Work with highly skilled graduate students, postdocs, and recent graduates</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">Tackle specific problems with dedicated student researchers</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">Identify potential hires through direct collaboration</CheckItem>
                 </ul>
                 
-                <h4 class="text-lg font-bold text-uoft-blue mb-3 mt-6">How Carte helps</h4>
-                <ul class="space-y-2 text-slate-600">
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                      <span>We help you identify and match with qualified students</span>
-                    </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>We provide direct academic supervision</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>We assist with application drafting and submission to ensure all requirements are met</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-secondary-blue flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>We support you through the entire process, from project scoping to completion</span>
-                  </li>
+                <h4 class="carte-h4 mb-3 mt-6">How Carte helps</h4>
+                <ul class="space-y-2 text-muted">
+                  <CheckItem iconClass="text-secondary-blue">We help you identify and match with qualified students</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">We provide direct academic supervision</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">We assist with application drafting and submission to ensure all requirements are met</CheckItem>
+                  <CheckItem iconClass="text-secondary-blue">We support you through the entire process, from project scoping to completion</CheckItem>
                 </ul>
               </div>
   
               <div>
-                <h3 class="text-2xl font-bold text-uoft-blue mb-4">Funding model</h3>
+                <h3 class="carte-h3 mb-4">Funding model</h3>
                 
-                <!-- Funding Model Visual - Standard -->
-                <div id="funding-visual-standard" class="bg-secondary-blue/10 rounded-xl p-6 mb-6 border border-secondary-blue/10 relative">
-                  <!-- Toggle Switch - Upper Right -->
-                  <div class="absolute top-6 right-6 flex items-center gap-2">
-                    <button 
-                      id="funding-toggle" 
-                      class="relative inline-flex h-7 w-14 items-center rounded-full bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-blue focus:ring-offset-2"
+                <!-- Funding model: one panel, one switch. The switch swaps the
+                     figures in place so keyboard focus never leaves it. -->
+                <div id="funding-visual" class="relative mb-6" data-model="standard">
+                  <div class="absolute top-0 right-0 flex items-center gap-2">
+                    <button
+                      id="funding-toggle"
+                      type="button"
+                      class="relative inline-flex h-7 w-14 items-center rounded-full bg-uoft-blue-80 transition-colors"
                       role="switch"
                       aria-checked="false"
-                      aria-label="Toggle to Postdoc model"
+                      aria-labelledby="funding-toggle-label"
                     >
-                      <span 
+                      <span
                         id="funding-toggle-slider"
-                        class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform translate-x-1"
+                        class="inline-block h-5 w-5 transform rounded-full bg-card transition-transform translate-x-1"
                       ></span>
                     </button>
-                    <span id="funding-toggle-label" class="text-sm font-medium text-slate-400">Postdoc</span>
+                    <span id="funding-toggle-label" class="text-sm font-medium text-subtle">Postdoc model</span>
                   </div>
-                  
+
                   <div class="text-center mb-6 pt-12">
-                    <p class="text-sm font-semibold text-slate-600 mb-4">Per 4- or 6-Month Internship</p>
-                    
+                    <p class="text-sm font-semibold text-muted mb-4">Per 4- or 6-Month Internship</p>
+
                     <!-- Funding Flow Diagram -->
                     <div class="flex flex-col items-center gap-4">
                       <!-- Partner Contribution -->
                       <div class="w-full max-w-xs">
                         <div class="bg-uoft-blue rounded-lg p-4 text-white text-center">
                           <div class="text-xs font-medium mb-1 opacity-90">Your Contribution</div>
-                          <div class="text-2xl font-bold">$7,500 CAD</div>
+                          <div class="text-2xl font-bold" data-funding="contribution">$7,500 CAD</div>
                         </div>
                       </div>
-                      
+
                       <!-- Plus Sign -->
-                      <div class="text-2xl font-bold text-slate-400">+</div>
-                      
+                      <div class="text-2xl font-bold text-subtle">+</div>
+
                       <!-- Mitacs Match -->
                       <div class="w-full max-w-xs">
                         <div class="bg-secondary-blue rounded-lg p-4 text-white text-center">
                           <div class="text-xs font-medium mb-1 opacity-90">Mitacs Match</div>
-                          <div class="text-2xl font-bold">$7,500 CAD</div>
+                          <div class="text-2xl font-bold" data-funding="match">$7,500 CAD</div>
                         </div>
                       </div>
-                      
+
                       <!-- Equals Sign -->
-                      <div class="text-2xl font-bold text-slate-400">=</div>
-                      
+                      <div class="text-2xl font-bold text-subtle">=</div>
+
                       <!-- Total Award -->
                       <div class="w-full max-w-xs">
-                        <div class="rounded-lg p-5 text-white text-center border-2" style="background:var(--brand-primary);border-color:var(--brand-secondary)">
+                        <div class="rounded-lg p-5 text-white text-center border-2 bg-uoft-blue border-secondary-blue">
                           <div class="text-xs font-medium mb-1 opacity-90">Total Research Award</div>
-                          <div class="text-3xl font-bold">$15,000 CAD</div>
-                          <div class="text-xs mt-2 opacity-90">($10,000+ to intern)</div>
+                          <div class="text-3xl font-bold" data-funding="total">$15,000 CAD</div>
+                          <div class="text-xs mt-2 opacity-90" data-funding="intern">($10,000+ to intern)</div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- Repeatability Note -->
-                  <div class="bg-white/60 rounded-lg p-4 border border-secondary-blue/10">
-                    <p class="text-sm text-slate-700 text-center">
+
+                  <p class="text-sm text-body text-center mt-2">
                       <strong class="text-secondary-blue">Internships are repeatable:</strong> For example, 3 four-month internships = one full year of research with sponsored funding
-                    </p>
-                  </div>
-                </div>
-                
-                <!-- Funding Model Visual - Postdoc -->
-                <div id="funding-visual-postdoc" class="bg-secondary-blue/10 rounded-xl p-6 mb-6 border border-secondary-blue/10 hidden relative">
-                  <!-- Toggle Switch - Upper Right -->
-                  <div class="absolute top-6 right-6 flex items-center gap-2">
-                    <button 
-                      id="funding-toggle-postdoc" 
-                      class="relative inline-flex h-7 w-14 items-center rounded-full bg-secondary-blue transition-colors focus:outline-none focus:ring-2 focus:ring-secondary-blue focus:ring-offset-2"
-                      role="switch"
-                      aria-checked="true"
-                      aria-label="Toggle to Standard model"
-                    >
-                      <span 
-                        id="funding-toggle-slider-postdoc"
-                        class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform translate-x-8"
-                      ></span>
-                    </button>
-                    <span id="funding-toggle-label-postdoc" class="text-sm font-medium text-secondary-blue font-semibold">Postdoc</span>
-                  </div>
-                  
-                  <div class="text-center mb-6 pt-12">
-                    <p class="text-sm font-semibold text-slate-600 mb-4">Per 4- or 6-Month Internship</p>
-                    
-                    <!-- Funding Flow Diagram -->
-                    <div class="flex flex-col items-center gap-4">
-                      <!-- Partner Contribution -->
-                      <div class="w-full max-w-xs">
-                        <div class="bg-uoft-blue rounded-lg p-4 text-white text-center">
-                          <div class="text-xs font-medium mb-1 opacity-90">Your Contribution</div>
-                          <div class="text-2xl font-bold">$10,000 CAD</div>
-                        </div>
-                      </div>
-                      
-                      <!-- Plus Sign -->
-                      <div class="text-2xl font-bold text-slate-400">+</div>
-                      
-                      <!-- Mitacs Match -->
-                      <div class="w-full max-w-xs">
-                        <div class="bg-secondary-blue rounded-lg p-4 text-white text-center">
-                          <div class="text-xs font-medium mb-1 opacity-90">Mitacs Match</div>
-                          <div class="text-2xl font-bold">$10,000 CAD</div>
-                        </div>
-                      </div>
-                      
-                      <!-- Equals Sign -->
-                      <div class="text-2xl font-bold text-slate-400">=</div>
-                      
-                      <!-- Total Award -->
-                      <div class="w-full max-w-xs">
-                        <div class="rounded-lg p-5 text-white text-center border-2" style="background:var(--brand-primary);border-color:var(--brand-secondary)">
-                          <div class="text-xs font-medium mb-1 opacity-90">Total Research Award</div>
-                          <div class="text-3xl font-bold">$20,000 CAD</div>
-                          <div class="text-xs mt-2 opacity-90">($15,000+ to intern)</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Repeatability Note -->
-                  <div class="bg-white/60 rounded-lg p-4 border border-secondary-blue/10">
-                    <p class="text-sm text-slate-700 text-center">
-                      <strong class="text-secondary-blue">Internships are repeatable:</strong> For example, 3 four-month internships = one full year of research with sponsored funding
-                    </p>
-                  </div>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
   
-          <div class="rounded-lg p-6 border" style="background:var(--surface-sunken);border-color:var(--border-subtle)">
-            <p class="text-slate-700 text-center">
+          <div class="rounded-lg p-6 border bg-sunken border-subtle">
+            <p class="text-body text-center max-w-xl mx-auto">
               <strong>Eligible organizations:</strong> For-profit corporations (must receive more than 50% of funds from non-government sources), eligible not-for-profit corporations, municipalities, or hospitals in Canada. International organizations can participate as additional partners on projects with a Canadian partner.
             </p>
           </div>
@@ -289,34 +191,14 @@ const secondaryServices = allPartnerships
   
 
   <!-- Additional Engagement Options Carousel -->
-  <section class="py-20 lg:py-28">
+  <section id="engagement-options" class="py-20 lg:py-28 scroll-mt-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
         <div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-uoft-blue mb-4">Additional engagement options</h2>
-          <p class="text-lg text-slate-600 max-w-2xl">More ways to connect with Carte and the UofT engineering community.</p>
+          <h2 class="carte-h2 mb-4">Additional engagement options</h2>
+          <p class="text-lg text-muted max-w-2xl">More ways to connect with Carte and the UofT engineering community.</p>
         </div>
-        <!-- Carousel Navigation -->
-        <div class="flex items-center gap-3 mt-6 sm:mt-0">
-          <button 
-            id="carousel-prev" 
-            class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-secondary-blue/10 hover:border-secondary-blue/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            aria-label="Previous"
-          >
-            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-          </button>
-          <button 
-            id="carousel-next" 
-            class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-secondary-blue/10 hover:border-secondary-blue/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-            aria-label="Next"
-          >
-            <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </div>
+        <CarouselNav target="partnerships-carousel" label="engagement options" />
       </div>
       
       <!-- Carousel Container -->
@@ -328,36 +210,36 @@ const secondaryServices = allPartnerships
           {secondaryServices.map((service) => (
             <article class="carte-card card-demo flex-shrink-0 w-[320px] snap-start">
               <!-- Icon -->
-              <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:var(--surface-sunken)">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-sunken">
                 {service.data.icon === "academic" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
                   </svg>
                 )}
                 {service.data.icon === "beaker" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
                   </svg>
                 )}
                 {service.data.icon === "briefcase" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 )}
                 {service.data.icon === "users" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                   </svg>
                 )}
                 {service.data.icon === "mic" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
                   </svg>
                 )}
                 {service.data.icon === "trophy" && (
-                  <svg class="w-6 h-6" style="color:var(--brand-primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-6 h-6 text-uoft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                   </svg>
                 )}
@@ -377,105 +259,55 @@ const secondaryServices = allPartnerships
         </div>
         
         <!-- Fade edges -->
-        <div class="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-[#FDFBF7] to-transparent pointer-events-none"></div>
-        <div class="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-[#FDFBF7] to-transparent pointer-events-none"></div>
+        <div class="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-(--surface-page) to-transparent pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-(--surface-page) to-transparent pointer-events-none"></div>
       </div>
     </div>
   </section>
 
   <script>
-    const carousel = document.getElementById('partnerships-carousel');
-    const prevBtn = document.getElementById('carousel-prev') as HTMLButtonElement | null;
-    const nextBtn = document.getElementById('carousel-next') as HTMLButtonElement | null;
-    const cardWidth = 320 + 24; // card width + gap
-    
-    function updateButtons() {
-      if (prevBtn && nextBtn && carousel) {
-        prevBtn.disabled = carousel.scrollLeft <= 0;
-        nextBtn.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
-      }
-    }
-    
-    prevBtn?.addEventListener('click', () => {
-      carousel?.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-    });
-    
-    nextBtn?.addEventListener('click', () => {
-      carousel?.scrollBy({ left: cardWidth, behavior: 'smooth' });
-    });
-    
-    carousel?.addEventListener('scroll', updateButtons);
-    updateButtons();
-    
-    // Funding model toggle
+    // Funding model switch: swap the figures in place. The switch stays in
+    // the DOM and keeps focus; only aria-checked and the numbers change.
+    const FUNDING = {
+      standard: { contribution: '$7,500 CAD',  match: '$7,500 CAD',  total: '$15,000 CAD', intern: '($10,000+ to intern)' },
+      postdoc:  { contribution: '$10,000 CAD', match: '$10,000 CAD', total: '$20,000 CAD', intern: '($15,000+ to intern)' },
+    } as const;
+    const fundingVisual = document.getElementById('funding-visual');
     const fundingToggle = document.getElementById('funding-toggle');
-    const fundingTogglePostdoc = document.getElementById('funding-toggle-postdoc');
-    const toggleSlider = document.getElementById('funding-toggle-slider');
-    const toggleSliderPostdoc = document.getElementById('funding-toggle-slider-postdoc');
-    const toggleLabel = document.getElementById('funding-toggle-label');
-    const toggleLabelPostdoc = document.getElementById('funding-toggle-label-postdoc');
-    const standardVisual = document.getElementById('funding-visual-standard');
-    const postdocVisual = document.getElementById('funding-visual-postdoc');
-    let isPostdoc = false;
-    
-    function toggleFundingModel() {
-      isPostdoc = !isPostdoc;
-      
-      if (isPostdoc) {
-        // Show postdoc, hide standard
-        standardVisual?.classList.add('hidden');
-        postdocVisual?.classList.remove('hidden');
-        toggleSlider?.classList.remove('translate-x-1');
-        toggleSlider?.classList.add('translate-x-8');
-        toggleSliderPostdoc?.classList.remove('translate-x-1');
-        toggleSliderPostdoc?.classList.add('translate-x-8');
-        // Update toggle colors - ON state
-        fundingToggle?.classList.remove('bg-slate-300');
-        fundingToggle?.classList.add('bg-secondary-blue');
-        fundingTogglePostdoc?.classList.remove('bg-slate-300');
-        fundingTogglePostdoc?.classList.add('bg-secondary-blue');
-        // Update label colors - ON state
-        toggleLabel?.classList.remove('text-slate-400');
-        toggleLabel?.classList.add('text-secondary-blue', 'font-semibold');
-        toggleLabelPostdoc?.classList.remove('text-slate-400');
-        toggleLabelPostdoc?.classList.add('text-secondary-blue', 'font-semibold');
-        fundingToggle?.setAttribute('aria-checked', 'true');
-        fundingTogglePostdoc?.setAttribute('aria-checked', 'true');
-      } else {
-        // Show standard, hide postdoc
-        standardVisual?.classList.remove('hidden');
-        postdocVisual?.classList.add('hidden');
-        toggleSlider?.classList.remove('translate-x-8');
-        toggleSlider?.classList.add('translate-x-1');
-        toggleSliderPostdoc?.classList.remove('translate-x-8');
-        toggleSliderPostdoc?.classList.add('translate-x-1');
-        // Update toggle colors - OFF state
-        fundingToggle?.classList.remove('bg-secondary-blue');
-        fundingToggle?.classList.add('bg-slate-300');
-        fundingTogglePostdoc?.classList.remove('bg-secondary-blue');
-        fundingTogglePostdoc?.classList.add('bg-slate-300');
-        // Update label colors - OFF state
-        toggleLabel?.classList.remove('text-secondary-blue', 'font-semibold');
-        toggleLabel?.classList.add('text-slate-400');
-        toggleLabelPostdoc?.classList.remove('text-secondary-blue', 'font-semibold');
-        toggleLabelPostdoc?.classList.add('text-slate-400');
-        fundingToggle?.setAttribute('aria-checked', 'false');
-        fundingTogglePostdoc?.setAttribute('aria-checked', 'false');
+    const fundingSlider = document.getElementById('funding-toggle-slider');
+    const fundingLabel = document.getElementById('funding-toggle-label');
+
+    function setFundingModel(postdoc: boolean) {
+      if (!fundingVisual || !fundingToggle || !fundingSlider || !fundingLabel) return;
+      const model = postdoc ? 'postdoc' : 'standard';
+      fundingVisual.dataset.model = model;
+      for (const [key, value] of Object.entries(FUNDING[model])) {
+        const el = fundingVisual.querySelector<HTMLElement>(`[data-funding="${key}"]`);
+        if (el) el.textContent = value;
       }
+      fundingToggle.setAttribute('aria-checked', String(postdoc));
+      fundingToggle.classList.toggle('bg-secondary-blue', postdoc);
+      fundingToggle.classList.toggle('bg-uoft-blue-80', !postdoc);
+      fundingSlider.classList.toggle('translate-x-8', postdoc);
+      fundingSlider.classList.toggle('translate-x-1', !postdoc);
+      fundingLabel.classList.toggle('text-secondary-blue', postdoc);
+      fundingLabel.classList.toggle('font-semibold', postdoc);
+      fundingLabel.classList.toggle('text-subtle', !postdoc);
     }
-    
-    fundingToggle?.addEventListener('click', toggleFundingModel);
-    fundingTogglePostdoc?.addEventListener('click', toggleFundingModel);
+
+    fundingToggle?.addEventListener('click', () => {
+      setFundingModel(fundingToggle.getAttribute('aria-checked') !== 'true');
+    });
   </script>
 
   <!-- CTA Section -->
   <section class="py-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="inverse-cta">
-        <h3>Ready to partner?</h3>
-        <p>Whether you're exploring AI applications, looking to upskill your team, or seeking research collaboration — we're here to help you succeed.</p>
+        <h2>Bring us the problem.</h2>
+        <p>One email with your sector, the problem in a sentence and your timeline is enough to start.</p>
         <div class="row">
-          <a class="inv-btn primary" href="/contact">Get in Touch</a>
+          <a class="inv-btn primary" href="/contact">Get in touch</a>
         </div>
       </div>
     </div>
