@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import { getEntry } from 'astro:content';
 
 // Three front doors, one house: every audience gets a door of the same size
 // inside the first viewport. The audience is a title in the door's colour;
@@ -28,6 +29,15 @@ const doors = [
     href: '/students',
   },
 ];
+
+// Proof is named work, not aggregate numbers: Director-approved picks from
+// the research collection, with no figures beside them.
+const recentWorkIds = ['cascadedebate', 'anybald', 'safecasa', 'prostate-cancer-mortality', 'gemmas'];
+const recentWork = await Promise.all(recentWorkIds.map(async id => {
+  const paper = await getEntry('research', id);
+  if (!paper) throw new Error(`Recent work: no research entry "${id}"`);
+  return paper;
+}));
 ---
 
 <BaseLayout title="Home" scrollColorTransition={true}>
@@ -94,33 +104,21 @@ const doors = [
     </div>
   </section>
 
-  <!-- Impact / By the Numbers -->
+  <!-- Recent work: named, dated papers are the proof -->
   <section class="py-20 lg:py-28 bg-inverse">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="carte-h2 mb-4 text-on-inverse">Our impact</h2>
-        <p class="text-lg max-w-2xl mx-auto text-on-inverse-muted">
-          Since 2019, we've trained professionals, built partnerships, and connected talent across sectors.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div class="stat">
-          <div class="num">150+</div>
-          <div class="lbl">Professionals trained</div>
-        </div>
-        <div class="stat">
-          <div class="num">5+</div>
-          <div class="lbl">Sectors served</div>
-        </div>
-        <div class="stat">
-          <div class="num">1,000+</div>
-          <div class="lbl">Student community</div>
-        </div>
-        <div class="stat">
-          <div class="num">30+</div>
-          <div class="lbl">Applied AI projects</div>
-        </div>
+      <div class="on-inverse mb-16">
+        <h2 class="carte-h2 mb-8 text-on-inverse">Recent work.</h2>
+        <ul class="work-list">
+          {recentWork.map(paper => (
+            <li>
+              <span class="year">{paper.data.year}</span>
+              <p class="title">{paper.data.title}</p>
+              <p class="where">{[paper.data.venue, paper.data.partner].filter(Boolean).join(' · ')}</p>
+            </li>
+          ))}
+        </ul>
+        <a class="work-more" href="/research"><span class="label">See all research</span> →</a>
       </div>
 
       <!-- The close: the page's best line at full h2 strength, contact first -->
