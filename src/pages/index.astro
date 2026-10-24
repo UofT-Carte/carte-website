@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
+import { heroImage, heroAlt } from '../assets/hero';
 
 // Three front doors, one house: every audience gets a door of the same size
 // inside the first viewport. The audience is a title in the door's colour;
@@ -57,6 +59,20 @@ const recentWork = await Promise.all(recentWorkIds.map(async id => {
       </div>
     </div>
   </section>
+
+  <!-- Below lg the hero photo opens the second screen, after the doors, so the
+       doors stay at the top of the first. Lazy: it is below the fold. -->
+  <div class="lg:hidden max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
+    <Image
+      src={heroImage}
+      alt={heroAlt}
+      widths={[400, 800, 1200]}
+      sizes="calc(100vw - 2rem)"
+      format="webp"
+      loading="lazy"
+      class="w-full aspect-video object-cover rounded-2xl"
+    />
+  </div>
 
   <!-- Our Approach Section -->
   <section class="py-20 lg:py-28">

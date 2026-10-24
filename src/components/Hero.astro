@@ -1,10 +1,11 @@
 ---
 import { getImage } from 'astro:assets';
-import heroImage from '../assets/hero-image.jpg';
+import { heroImage, heroAlt } from '../assets/hero';
 
 // The photo only renders from lg (1024px) up, in a column that is half the
 // viewport minus padding. Build a srcset for that slot; below lg the
-// <picture> resolves to a 1×1 transparent GIF so phones download nothing.
+// <picture> resolves to a 1×1 transparent GIF so phones never fetch the
+// desktop sizes; the homepage serves them a smaller copy after the doors.
 const heroWidths = [640, 960, 1280, 1600];
 const heroSources = await Promise.all(
   heroWidths.map(async (width) => {
@@ -15,20 +16,6 @@ const heroSources = await Promise.all(
 const heroSrcset = heroSources.join(', ');
 const heroFallback = await getImage({ src: heroImage, width: 1280, format: 'webp' });
 const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
-
-function generateOrganicShape() {
-  const tl = Math.floor(Math.random() * 40) + 30;
-  const tr = Math.floor(Math.random() * 40) + 30;
-  const br = Math.floor(Math.random() * 40) + 30;
-  const bl = Math.floor(Math.random() * 40) + 30;
-  const tl2 = Math.floor(Math.random() * 40) + 30;
-  const tr2 = Math.floor(Math.random() * 40) + 30;
-  const br2 = Math.floor(Math.random() * 40) + 30;
-  const bl2 = Math.floor(Math.random() * 40) + 30;
-  return `${tl}% ${tr}% ${br}% ${bl}% / ${tl2}% ${tr2}% ${br2}% ${bl2}%`;
-}
-
-const organicShapeBorderRadius = generateOrganicShape();
 ---
 <div class="relative bg-transparent overflow-visible">
   <div class="max-w-7xl mx-auto overflow-visible">
@@ -58,9 +45,9 @@ const organicShapeBorderRadius = generateOrganicShape();
     </div>
   </div>
 
-  <!-- Organic shape image (desktop only) -->
+  <!-- Photo column (desktop only; below lg the photo follows the front doors) -->
   <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 p-4 lg:p-12 items-center justify-center">
-    <div class="w-full h-96 lg:h-full bg-uoft-blue flex items-center justify-center overflow-hidden relative organic-shape" style={`border-radius: ${organicShapeBorderRadius}`}>
+    <div class="w-full h-96 lg:h-full bg-uoft-blue flex items-center justify-center overflow-hidden relative rounded-2xl">
       <picture class="contents">
         <source media="(max-width: 1023px)" srcset={BLANK_GIF} />
         <source media="(min-width: 1024px)" srcset={heroSrcset} sizes="calc(50vw - 6rem)" type="image/webp" />
@@ -68,7 +55,7 @@ const organicShapeBorderRadius = generateOrganicShape();
           src={heroFallback.src}
           width={heroImage.width}
           height={heroImage.height}
-          alt="Laptop on a lectern showing the welcome slide for the Carte and Data Sciences Institute machine learning bootcamp for faculty, with participants talking at round tables in the classroom behind"
+          alt={heroAlt}
           class="w-full h-full object-cover"
           loading="eager"
           decoding="async"
