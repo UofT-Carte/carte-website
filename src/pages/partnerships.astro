@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import CarouselNav from '../components/CarouselNav.astro';
 import CheckItem from '../components/CheckItem.astro';
 
@@ -15,6 +15,18 @@ const featuredServices = allPartnerships
 // Arrow links name their destination instead of "Learn more"
 const linkLabels: Record<string, string> = { '/training': 'See training programs', '/research': 'See our research' };
 
+// Proof for partners: papers whose problem a named partner set (Director-approved picks)
+const partnerWorkIds = ['cascadedebate', 'anybald', 'prostate-cancer-mortality', 'faste', 'survey-response-evaluation'];
+const partnerWork = await Promise.all(partnerWorkIds.map(async id => {
+  const paper = await getEntry('research', id);
+  if (!paper?.data.partner) throw new Error(`Partner work: "${id}" missing or has no partner`);
+  return paper;
+}));
+// The rows show one sentence of each paper's description
+const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
+// Venues like "ACL 2026 Industry Track" already carry the year
+const withYear = (venue: string, year: number) => venue.includes(String(year)) ? venue : `${venue} · ${year}`;
+
 const secondaryServices = allPartnerships
   .filter(p => !p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
@@ -26,11 +38,10 @@ const secondaryServices = allPartnerships
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
       <div class="max-w-3xl">
         <h1 class="carte-h1 mb-6">
-          Partner with<br/>
-          world-class AI expertise.
+          One relationship with all of UofT Engineering.
         </h1>
         <p class="text-xl text-muted leading-relaxed">
-          From sponsored research to hands-on training, we offer multiple pathways to apply AI in your organization. Connect with 100+ faculty across 8 engineering departments — and let us help you navigate funding programs like NSERC Alliance and Mitacs Accelerate.
+          LG Electronics, Sunnybrook, ModiFace and other Toronto organizations have brought problems to Carte. We match each one to faculty and students, and help fund the work through NSERC Alliance and Mitacs.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
           <a class="carte-btn-primary" href="/contact">Get in touch</a>
@@ -51,7 +62,6 @@ const secondaryServices = allPartnerships
       <div class="grid md:grid-cols-2 gap-8">
         <!-- Mitacs Accelerate Card (First Position) -->
         <a href="#mitacs-accelerate" class="carte-card card-demo block">
-          <span class="tag">Funding program</span>
           <h3>Mitacs Accelerate</h3>
           <p>Contribute $7,500+ per internship and Mitacs matches it, so a UofT student works on your research problem with a $15,000+ award.</p>
           <span class="link-arrow">See the funding model →</span>
@@ -59,11 +69,6 @@ const secondaryServices = allPartnerships
         
         {featuredServices.map((service) => (
           <article class="carte-card card-demo">
-            <div class="flex flex-wrap gap-2 mb-3">
-              {service.data.tags.map(tag => (
-                <span class="carte-badge">{tag}</span>
-              ))}
-            </div>
             <h3>{service.data.title}</h3>
             <p>{service.data.description}</p>
             {service.data.link && (
@@ -72,6 +77,23 @@ const secondaryServices = allPartnerships
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- Proof: named partners, what the team built, where it was published -->
+  <section class="pb-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="carte-h2 mb-8">Problems partners brought us.</h2>
+      <ul class="work-list work-list--light max-w-3xl">
+        {partnerWork.map(paper => (
+          <li>
+            <p class="title">{paper.data.partner}</p>
+            <p class="summary">{firstSentence(paper.data.description)}</p>
+            <p class="where">{withYear(paper.data.venue, paper.data.year)}</p>
+          </li>
+        ))}
+      </ul>
+      <a class="link-arrow mt-6" href="/research">See all research →</a>
     </div>
   </section>
 
@@ -182,7 +204,7 @@ const secondaryServices = allPartnerships
   
           <div class="rounded-lg p-6 border bg-sunken border-subtle">
             <p class="text-body text-center max-w-xl mx-auto">
-              <strong>Eligible organizations:</strong> For-profit corporations (must receive more than 50% of funds from non-government sources), eligible not-for-profit corporations, municipalities, or hospitals in Canada. International organizations can participate as additional partners on projects with a Canadian partner.
+              <strong>Eligible organizations:</strong> for-profit corporations, not-for-profit corporations, hospitals, municipalities and Indigenous governments in Canada. For-profit partners contribute private-sector funds; projects with other partners must show an economic or productivity focus. Organizations outside Canada can join a project that has a Canadian partner.
             </p>
           </div>
         </div>
@@ -245,12 +267,6 @@ const secondaryServices = allPartnerships
                 )}
               </div>
 
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-2 mb-3">
-                {service.data.tags.map(tag => (
-                  <span class="carte-badge">{tag}</span>
-                ))}
-              </div>
 
               <h3>{service.data.title}</h3>
               <p>{service.data.description}</p>
@@ -304,10 +320,15 @@ const secondaryServices = allPartnerships
   <section class="py-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="inverse-cta">
-        <h2>Bring us the problem.</h2>
-        <p>One email with your sector, the problem in a sentence and your timeline is enough to start.</p>
+        <h2>Your first email can be short.</h2>
+        <ul>
+          <li>Your organization, department or program</li>
+          <li>The problem or opportunity, in a sentence or two</li>
+          <li>Your timeline, even if it's rough</li>
+          <li>Whether you have funding in place or want help finding it</li>
+        </ul>
         <div class="row">
-          <a class="inv-btn primary" href="/contact">Get in touch</a>
+          <a class="inv-btn primary" href="mailto:carte@utoronto.ca">Email carte@utoronto.ca</a>
         </div>
       </div>
     </div>

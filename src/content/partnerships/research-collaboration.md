@@ -1,8 +1,7 @@
 ---
 title: "Sponsored research"
-description: "Partner with world-class faculty on applied AI research. We facilitate collaborations and help you secure government funding through NSERC Alliance, Mitacs, and other programs."
+description: "Faculty and students work on your applied AI problem, and we help fund it through NSERC Alliance, Mitacs and other programs."
 featured: true
-tags: ["Research", "Funding", "Collaboration"]
 order: 1
 link: "/research"
 ---
@@ -15,7 +14,8 @@ Carte connects industry partners with leading faculty researchers at the Univers
 - Project scoping and research design guidance
 - Access to graduate student talent
 
-**Past collaborations have produced:**
-- High-quality publications in top venues
-- Novel AI solutions for real-world problems
-- Trained talent familiar with your industry
+**Recent partner projects that became papers:**
+- CascadeDebate, with LG Electronics Toronto AI Lab (ACL 2026 Industry Track)
+- AnyBald, with ModiFace (WACV 2026)
+- Dynamic mortality prediction for prostate cancer, with Sunnybrook Health Sciences Centre (PAKDD 2026)
+- FASTe, with Lorex Technology (IEEE Access, 2026)

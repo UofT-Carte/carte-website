@@ -1,8 +1,7 @@
 ---
 title: "AI consulting & guidance"
-description: "Get expert guidance on your AI initiatives—from project scoping and feasibility assessment to technical implementation support and best practices."
+description: "Help scoping an AI project, judging whether it is feasible, and building and deploying the model."
 featured: true
-tags: ["Consulting", "Projects", "Strategy"]
 order: 3
 ---
 
