@@ -2,6 +2,9 @@
 title: "Corporate training"
 description: "Training built around your teams, from executive briefings for leadership to multi-day technical workshops."
 featured: true
+gets: "Training built around your teams"
+time: "Half a day to five days"
+funding: "Scoped and quoted for your organization"
 order: 2
 link: "/training"
 ---

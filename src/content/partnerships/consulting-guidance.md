@@ -2,6 +2,9 @@
 title: "AI consulting & guidance"
 description: "Help scoping an AI project, judging whether it is feasible, and building and deploying the model."
 featured: true
+gets: "Help scoping, judging feasibility, building and deploying a model"
+time: "Scoped with you"
+funding: "Scoped and quoted for your organization"
 order: 3
 ---
 

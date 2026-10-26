@@ -57,6 +57,18 @@
 .carte-table tbody tr:last-child { border-bottom: 0; }
 .carte-table td { color: var(--text-body); }
 .carte-table .num { font: 600 14px var(--font-mono); color: var(--text-strong); }
+/* Reading-size table whose rows stack into labelled blocks on phones (partnerships comparison) */
+.carte-table--stack { font: 400 15px/1.5 var(--font-sans); }
+.carte-table--stack tbody th { font: 700 16px var(--font-sans); color: var(--text-strong); vertical-align: top; white-space: nowrap; }
+.carte-table--stack td { vertical-align: top; }
+@media (max-width: 767px) {
+  .carte-table--stack thead { display: none; }
+  .carte-table--stack tr, .carte-table--stack th, .carte-table--stack td { display: block; }
+  .carte-table--stack tbody th { padding-bottom: 4px; white-space: normal; }
+  .carte-table--stack td { padding-top: 4px; padding-bottom: 4px; }
+  .carte-table--stack td::before { content: attr(data-label); display: block; font: 700 11px var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+  .carte-table--stack tbody tr { padding-bottom: 12px; }
+}
 
 /* ---- Inverse CTA block -------------------------------------------- */
 .inverse-cta {

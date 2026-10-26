@@ -46,6 +46,10 @@ const partnerships = defineCollection({
     title: z.string(),
     description: z.string(),
     featured: z.boolean().default(false),
+    // Comparison table on /partnerships (featured engagements only)
+    gets: z.string().optional(),
+    time: z.string().optional(),
+    funding: z.string().optional(),
     // For secondary services (smaller cards with icons)
     icon: z.enum(["beaker", "academic", "briefcase", "users", "mic", "trophy"]).optional(),
     tags: z.array(z.string()).default([]),
