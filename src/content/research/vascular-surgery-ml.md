@@ -5,7 +5,6 @@ venue: "Journal of Vascular Surgery"
 year: 2022
 description: "Applying ML algorithms to identify sex-based differences in surgical thresholds for improved patient outcomes."
 featured: false
-icon: "health"
 tags: ["Healthcare AI", "Clinical"]
 order: 5
 ---

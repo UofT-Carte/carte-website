@@ -5,7 +5,6 @@ duration: "1–2 hour sessions"
 year: 2023
 description: "Interactive workshops for educators on large language models, including sessions like 'ChatGPT in the Classroom' and talks at EdTech and TMLS."
 featured: false
-icon: "academic"
 order: 15
 ---
 

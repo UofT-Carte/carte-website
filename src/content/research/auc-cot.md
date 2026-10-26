@@ -6,7 +6,6 @@ year: 2026
 partner: "LG Electronics Toronto AI Lab"
 description: "Makes a vision-language-action model reason much faster at each step while keeping its task success, by tying its step-by-step reasoning to how uncertain it is about the next action."
 featured: false
-icon: "code"
 tags: ["Robotics"]
 order: 39
 ---

@@ -5,7 +5,6 @@ venue: "International Conference on Electronics, Information, and Communication 
 year: 2026
 description: "A method for making knowledge distillation, where a small model learns from a larger one, more stable."
 featured: false
-icon: "code"
 tags: ["Language models"]
 order: 30
 ---

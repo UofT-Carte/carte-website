@@ -56,6 +56,12 @@ const { target, label, count } = Astro.props;
       next.hidden = fits;
       prev.disabled = carousel.scrollLeft <= 0;
       next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10;
+      // Edge fades only where there is more to scroll, so they never cover a card at rest
+      const frame = carousel.parentElement;
+      if (frame) {
+        frame.dataset.atStart = String(prev.disabled);
+        frame.dataset.atEnd = String(fits || next.disabled);
+      }
     };
 
     prev.addEventListener('click', () => carousel.scrollBy({ left: -step(), behavior: 'smooth' }));

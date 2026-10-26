@@ -5,7 +5,6 @@ venue: "Indoor Air"
 year: 2022
 description: "Research on optimizing air filtration systems through adaptive threshold algorithms for better indoor air quality."
 featured: false
-icon: "air"
 tags: ["Air Quality", "Building Science"]
 order: 6
 ---

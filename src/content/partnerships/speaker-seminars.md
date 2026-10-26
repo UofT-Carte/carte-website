@@ -2,7 +2,6 @@
 title: "Industry speaker seminars"
 description: "Speak to UofT students, faculty and researchers about how your organization uses AI."
 featured: false
-icon: "mic"
 order: 5
 ---
 

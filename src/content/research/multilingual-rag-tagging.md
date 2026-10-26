@@ -6,7 +6,6 @@ year: 2025
 partner: "LG Electronics Toronto AI Lab"
 description: "Question answering over documents in several languages, tagging machine-translated passages by their translation quality so the system can weigh them."
 featured: false
-icon: "globe"
 tags: ["Language models"]
 order: 27
 ---

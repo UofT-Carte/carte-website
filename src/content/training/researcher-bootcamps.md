@@ -4,7 +4,6 @@ audience: "Research groups"
 duration: "3-5 days"
 description: "Fully customized machine learning training tailored to specific research domains, from biomedical sciences to postdoctoral fellows in AI-adjacent fields."
 featured: false
-icon: "flask"
 order: 11
 testimonial:
   quote: "Very interesting material, knowledgeable instructor and helpers, felt like a comprehensive overview of topics."

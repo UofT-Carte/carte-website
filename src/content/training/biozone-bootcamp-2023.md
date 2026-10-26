@@ -5,7 +5,6 @@ duration: "3 days"
 year: 2023
 description: "Intensive ML training covering fundamentals through deep learning, with applications to bioscience problems including gene expression analysis and biological data processing."
 featured: false
-icon: "flask"
 order: 4
 testimonial:
   quote: "Alex was the highlight of the program for sure - he was a fantastic instructor. You could really tell he knew what he was talking about."
