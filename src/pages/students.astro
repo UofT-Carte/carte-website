@@ -1,222 +1,153 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CheckItem from '../components/CheckItem.astro';
+import SectionIndex from '../components/SectionIndex.astro';
+
+// One index drives both the sticky desktop rail and the phone link row.
+const sections = [
+  {
+    id: 'mitacs',
+    label: 'Mitacs internships',
+    children: [
+      { id: 'find-a-project', label: 'Find a project' },
+      { id: 'pay', label: 'Pay' },
+      { id: 'eligibility', label: 'Eligibility' },
+      { id: 'how-many', label: 'How many internships' },
+      { id: 'applying', label: 'Applying' },
+    ],
+  },
+  { id: 'cv-bank', label: 'Student CV bank' },
+  { id: 'mailing-list', label: 'Mailing list' },
+];
+const cvMailto = "mailto:carte@utoronto.ca?subject=Student CV Bank Submission&body=Hi, I'd like to add my CV to the Student CV Bank.%0D%0A%0D%0AMy research interests include: [Please describe]%0D%0AAvailability: [Full-time/Part-time/Summer/etc.]%0D%0A%0D%0A[Please attach your CV]";
 ---
 
 <BaseLayout title="Students" description="Opportunities for UofT Engineering students to engage with applied AI through capstone projects, hackathons, training, and research collaboration.">
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24 pb-12">
       <div class="max-w-3xl">
         <h1 class="carte-h1 mb-6">
           Applied AI research opportunities for UofT students.
         </h1>
+        <p class="text-xl text-muted leading-relaxed max-w-2xl">
+          Paid applied AI research through Mitacs, a CV bank that UofT professors search when they need students, and a mailing list for new openings.
+        </p>
       </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-        <!-- Mitacs Portal -->
-        <a href="#mitacs" class="carte-card card-demo block">
-          <h2 class="carte-h4 mb-2">Mitacs Accelerate</h2>
-          <p>Did you know you can get paid at least $10,000 to work on an AI-related project? Explore funded research opportunities through our Mitacs Project Explorer. Browse available projects from UofT faculty members and find opportunities that match your interests and skills.</p>
-          <span class="link-arrow">How Mitacs works →</span>
-        </a>
-        
-        <!-- Student CV Bank -->
-        <a href="#cv-bank" class="carte-card card-demo block">
-          <h2 class="carte-h4 mb-2">Student CV bank</h2>
-          <p>Get your CV in front of UofT professors who are actively looking for students. Email us your CV and we'll add it to our Student CV Bank, which we share with faculty members across engineering who are seeking talented students for research projects, assistantships, and other opportunities.</p>
-          <span class="link-arrow">How the CV bank works →</span>
-        </a>
-        
-        <!-- Mailing List -->
-        <a href="#mailing-list" class="carte-card card-demo block">
-          <h2 class="carte-h4 mb-2">Join our mailing list</h2>
-          <p>Looking for opportunities? This is the mailing list to join. We work hard to actively share opportunities from our industry partners and UofT professors. Get notified about paid research positions, project openings, hackathons, training programs, and more.</p>
-          <span class="link-arrow">What you'll receive →</span>
-        </a>
-      </div>
+
+      <SectionIndex sections={sections} variant="row" />
     </div>
   </section>
 
-  <!-- Mitacs Detailed Section -->
-  <section id="mitacs" class="py-20 lg:py-28 scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Mitacs Accelerate</h2>
-        <p class="text-xl text-muted max-w-2xl mx-auto">
-          Get paid at least <span class="text-secondary-blue font-bold">$10,000</span> to work on applied AI research projects.
-        </p>
-      </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-16">
+    <SectionIndex sections={sections} variant="rail" />
 
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          Mitacs Accelerate pairs an industry partner, a university supervisor and an intern on one research project. As an intern, you'll work collaboratively with your academic supervisor and a partner organization on a research project while earning significant compensation.
+    <div class="max-w-[36rem]">
+      <!-- Mitacs Accelerate -->
+      <section id="mitacs" class="pb-16 scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Get paid to work on applied AI research.</h2>
+        <p class="text-lg text-body leading-relaxed mb-10">
+          Mitacs Accelerate pairs an industry partner, a university supervisor and an intern on one research project. As the intern, you work on the partner's problem with your supervisor's guidance, and you are paid for it.
         </p>
 
-        <h3 class="carte-h3 mt-8 mb-4">How Carte supports you</h3>
-        <p class="text-muted mb-4">
-          Carte runs Mitacs Accelerate projects with additional support to make the process as smooth as possible for students:
-        </p>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>Start by exploring available projects in our <a href="/mitacs-project-explorer" class="text-secondary-blue hover:text-secondary-blue-dark font-semibold underline">Mitacs Project Explorer</a> to find opportunities that match your interests</CheckItem>
-          <CheckItem>We either match you with a UofT professor who will supervise your project, or Carte directly supervises the project on the academic side</CheckItem>
-          <CheckItem>We help you draft your Mitacs application, ensuring all requirements are met and your proposal is strong</CheckItem>
-          <CheckItem>We support you through every step of the process, from project selection to application submission and beyond</CheckItem>
-        </ul>
-        <h3 class="carte-h3 mt-8 mb-4">Funding & compensation</h3>
-          <p class="text-body mb-3">
-            Each four to six month internship provides a research award, from which you receive at least <strong>$10,000 CAD</strong> as a stipend or salary.
-          </p>
-          <p class="text-body">
-            <strong>Postdoctoral fellows</strong> are eligible for a minimum <strong>$15,000 CAD</strong> stipend.
-          </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">Eligibility</h3>
-        <p class="text-muted mb-4">
-          You're eligible to participate in Mitacs Accelerate if you meet the following criteria:
-        </p>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>You must be a registered student or postdoctoral fellow.</CheckItem>
-          <CheckItem>You may be eligible if you graduated within the last two years.</CheckItem>
-          <CheckItem>Postdoctoral fellows are eligible if your PhD graduation date is less than five years before the project start date (exceptions available).</CheckItem>
-          <CheckItem>Open to Canadian citizens, permanent residents, international students with a valid student visa, or international postdoctoral fellows with a valid work permit.</CheckItem>
-          <CheckItem>Must be 18 years or older.</CheckItem>
+        <h3 id="find-a-project" class="carte-h4 mb-4 scroll-mt-28">Find a project</h3>
+        <ul class="space-y-3 text-muted mb-10">
+          <CheckItem>Browse open projects in the <a href="/mitacs-project-explorer" class="text-secondary-blue hover:text-secondary-blue-dark font-semibold underline">Mitacs Project Explorer</a></CheckItem>
+          <CheckItem>We match you with a UofT professor to supervise, or Carte supervises the project on the academic side</CheckItem>
+          <CheckItem>We help you draft the Mitacs application and stay with you through submission and the project itself</CheckItem>
         </ul>
 
-        <h3 class="carte-h3 mt-8 mb-4">How many internships can you do?</h3>
-        <div class="grid md:grid-cols-2 gap-4 mt-6">
-          <div class="p-4 bg-info rounded-lg border border-subtle">
-            <h4 class="font-bold text-uoft-blue mb-2">Students (undergraduate or graduate)</h4>
-            <p class="text-sm text-body">Eligible for any number of internships. You must remain enrolled as a student throughout the internship and have time to commit to the project.</p>
-          </div>
-          <div class="p-4 bg-info rounded-lg border border-subtle">
-            <h4 class="font-bold text-uoft-blue mb-2">Postdocs</h4>
-            <p class="text-sm text-body">Can complete up to nine four-month internships, up to a maximum of three years total.</p>
-          </div>
-          <div class="p-4 bg-info rounded-lg border border-subtle">
-            <h4 class="font-bold text-uoft-blue mb-2">Graduates</h4>
-            <p class="text-sm text-body">Can complete up to three four-month internships within two years of your graduation date.</p>
-          </div>
-          <div class="p-4 bg-info rounded-lg border border-subtle">
-            <h4 class="font-bold text-uoft-blue mb-2">Important</h4>
-            <p class="text-sm text-body">You may not participate in more than one internship at the same time.</p>
-          </div>
-        </div>
+        <h3 id="pay" class="carte-h4 mb-4 scroll-mt-28">Pay</h3>
+        <p class="text-body leading-relaxed mb-10">
+          Each four- to six-month internship carries a research award, from which you receive at least <strong>$10,000 CAD</strong> as a stipend or salary. Postdoctoral fellows receive at least <strong>$15,000 CAD</strong>.
+        </p>
 
-        <h3 class="carte-h3 mt-8 mb-4">What you'll gain</h3>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>Broaden your professional network by connecting with industry partners and academic supervisors</CheckItem>
-          <CheckItem>Access funding opportunities by earning significant compensation while gaining research experience</CheckItem>
-          <CheckItem>Gain invaluable hands-on experience by working on real research challenges with for-profit and not-for-profit organizations</CheckItem>
-          <CheckItem>Internships start at four months and can scale up based on project needs</CheckItem>
+        <h3 id="eligibility" class="carte-h4 mb-4 scroll-mt-28">Eligibility</h3>
+        <ul class="space-y-3 text-muted mb-10">
+          <CheckItem>You are a registered student or postdoctoral fellow, or you graduated within two years of the project's start date</CheckItem>
+          <CheckItem>Postdoctoral fellows: your PhD was awarded less than five years before the project starts (exceptions are available)</CheckItem>
+          <CheckItem>You are a Canadian citizen, a permanent resident, an international student with a valid student visa, or an international postdoctoral fellow with a valid work permit</CheckItem>
+          <CheckItem>You are 18 or older</CheckItem>
         </ul>
 
-        <h3 class="carte-h3 mt-8 mb-4">Application process</h3>
-        <p class="text-muted mb-4">
-          When you work with Carte, we help you through the entire application process. We'll assist you in drafting your Mitacs application, ensuring all requirements are met and your proposal is strong. Applications are peer-reviewed by Mitacs and typically take approximately six to eight weeks. Proposals with multiple internships or that require revisions may take longer.
-        </p>
-      </div>
-
-      <div class="mt-10 text-center">
-        <a class="carte-btn-primary" href="/mitacs-project-explorer">Explore available projects</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CV Bank Detailed Section -->
-  <section id="cv-bank" class="py-20 lg:py-28 bg-card scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Student CV bank</h2>
-        <p class="text-xl text-muted max-w-2xl mx-auto">
-          Get your CV in front of UofT professors who are actively looking for talented students.
-        </p>
-      </div>
-
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          The Student CV Bank is a curated database of student profiles that we share with UofT faculty members across engineering and beyond. When professors are looking for students for research projects, assistantships, or other opportunities, they turn to our CV Bank to find qualified candidates.
-        </p>
-        
-        <h3 class="carte-h3 mt-8 mb-4">How it works</h3>
-        <ul class="space-y-3 text-muted">
-          <CheckItem>Email us your CV with a brief note about your interests and availability</CheckItem>
-          <CheckItem>We'll add your CV to our secure database</CheckItem>
-          <CheckItem>Faculty members search the CV Bank when they need students</CheckItem>
-          <CheckItem>If a professor finds your profile interesting, they'll reach out directly</CheckItem>
+        <h3 id="how-many" class="carte-h4 mb-4 scroll-mt-28">How many internships</h3>
+        <ul class="space-y-3 text-muted mb-10">
+          <CheckItem><strong>Students:</strong> any number, at UofT's discretion</CheckItem>
+          <CheckItem><strong>Recent graduates:</strong> up to three four-month internships within two years of graduating</CheckItem>
+          <CheckItem><strong>Postdocs:</strong> up to nine four-month internships, three years in total</CheckItem>
+          <CheckItem>One internship at a time</CheckItem>
         </ul>
 
-        <h3 class="carte-h3 mt-8 mb-4">What to include in your CV</h3>
-        <div class="bg-sunken rounded-lg p-6 mt-6">
-          <ul class="space-y-2 text-body">
-            <CheckItem>Your academic background and current program</CheckItem>
-            <CheckItem>Relevant coursework and technical skills</CheckItem>
-            <CheckItem>Previous research experience or projects</CheckItem>
-            <CheckItem>Programming languages and tools you're familiar with</CheckItem>
-            <CheckItem>Research interests and areas you'd like to explore</CheckItem>
-            <CheckItem>Availability (full-time, part-time, summer, etc.)</CheckItem>
-          </ul>
-        </div>
-
-        <div class="bg-info rounded-xl p-6 mt-6 border border-subtle">
-          <p class="text-body">
-            <strong>Need help with your CV?</strong> We'd be glad to review your CV before it's added to the bank. Just reach out to us at <a href="mailto:carte@utoronto.ca" class="text-secondary-blue hover:text-secondary-blue-dark font-semibold underline">carte@utoronto.ca</a> and we'll provide feedback to help you present your skills and experience in the best possible way.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-10 text-center">
-        <a class="carte-btn-primary" href="mailto:carte@utoronto.ca?subject=Student CV Bank Submission&body=Hi, I'd like to add my CV to the Student CV Bank.%0D%0A%0D%0AMy research interests include: [Please describe]%0D%0AAvailability: [Full-time/Part-time/Summer/etc.]%0D%0A%0D%0A[Please attach your CV]">Submit your CV</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mailing List Detailed Section -->
-  <section id="mailing-list" class="py-20 lg:py-28 scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Join our mailing list</h2>
-      </div>
-
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          We work hard to actively share opportunities from our industry partners and UofT professors. Our mailing list is one of the best ways to stay informed about paid research positions, project openings, hackathons, training programs, and other opportunities that come through Carte.
+        <h3 id="applying" class="carte-h4 mb-4 scroll-mt-28">Applying</h3>
+        <p class="text-body leading-relaxed mb-8">
+          Mitacs peer-reviews each application, which takes about six to eight weeks. Proposals with several internships, or that need revisions, can take longer.
         </p>
-        
-        <h3 class="carte-h3 mt-8 mb-4">What you'll receive</h3>
-        <ul class="space-y-3 text-muted">
-          <CheckItem>Mitacs projects and other funded research opportunities</CheckItem>
-          <CheckItem>Opportunities from professors looking for students</CheckItem>
+
+        <a class="link-arrow" href="/mitacs-project-explorer">Explore available projects →</a>
+      </section>
+
+      <!-- CV bank -->
+      <section id="cv-bank" class="py-16 border-t border-subtle scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Put your CV in front of UofT professors.</h2>
+        <p class="text-lg text-body leading-relaxed mb-8">
+          The Student CV Bank is a set of student CVs we share with UofT faculty across engineering and beyond. Professors look there when they need students for research projects, assistantships and other roles.
+        </p>
+
+        <h3 class="carte-h4 mb-4">How it works</h3>
+        <ul class="space-y-3 text-muted mb-8">
+          <CheckItem>Email us your CV with a short note on your interests and availability</CheckItem>
+          <CheckItem>We add it to the CV bank</CheckItem>
+          <CheckItem>Professors search the bank when they need students</CheckItem>
+          <CheckItem>If your profile fits, the professor contacts you directly</CheckItem>
+        </ul>
+
+        <h3 class="carte-h4 mb-4">What to include</h3>
+        <ul class="space-y-3 text-muted mb-8">
+          <CheckItem>Your program and academic background</CheckItem>
+          <CheckItem>Relevant courses and technical skills</CheckItem>
+          <CheckItem>Research experience or projects</CheckItem>
+          <CheckItem>Programming languages and tools</CheckItem>
+          <CheckItem>Research interests</CheckItem>
+          <CheckItem>Availability: full-time, part-time, summer</CheckItem>
+        </ul>
+
+        <p class="text-body leading-relaxed">
+          Want feedback first? Email <a href="mailto:carte@utoronto.ca" class="text-secondary-blue hover:text-secondary-blue-dark font-semibold underline">carte@utoronto.ca</a> and we'll review your CV before it goes in.
+        </p>
+      </section>
+
+      <!-- Mailing list -->
+      <section id="mailing-list" class="pt-16 border-t border-subtle scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Hear about openings first.</h2>
+        <p class="text-lg text-body leading-relaxed mb-8">
+          Our mailing list carries opportunities from industry partners and UofT professors, chosen for engineering students interested in applied AI.
+        </p>
+
+        <h3 class="carte-h4 mb-4">What it sends</h3>
+        <ul class="space-y-3 text-muted mb-8">
+          <CheckItem>Mitacs projects and other paid research roles</CheckItem>
+          <CheckItem>Professors looking for students</CheckItem>
           <CheckItem>Student competitions and innovation challenges</CheckItem>
           <CheckItem>AI and machine learning workshops and events</CheckItem>
-          <CheckItem>Industry speaker events and networking opportunities</CheckItem>
+          <CheckItem>Industry speaker events</CheckItem>
         </ul>
 
-        <h3 class="carte-h3 mt-8 mb-4">Where the opportunities come from</h3>
-        <p class="text-body mb-4">
-          We work directly with industry partners and UofT professors to share opportunities that are specifically relevant to engineering students interested in applied AI.
-        </p>
-      </div>
-
-      <div class="mt-10 text-center">
-        <a class="carte-btn-primary" href="/contact">Subscribe to the mailing list</a>
-      </div>
+        <a class="link-arrow" href="/contact#newsletter">Join the mailing list →</a>
+      </section>
     </div>
-  </section>
+  </div>
 
-
-  <!-- CTA Section -->
-  <section class="py-20 lg:py-28">
+  <!-- Close: the student asks, not the generic one -->
+  <section class="pb-20 lg:pb-28">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="inverse-cta">
-        <h2>Start with one email.</h2>
-        <p>Tell us what you're studying and what you're looking for, and we'll point you to the right program.</p>
+        <h2>Find a project, or send us your CV.</h2>
+        <p>Open Mitacs projects are listed in the Project Explorer. Your CV reaches professors through the CV bank.</p>
         <div class="row">
-          <a class="inv-btn primary" href="/contact">Get in touch</a>
+          <a class="inv-btn primary" href="/mitacs-project-explorer">Explore available projects</a>
+          <a class="inv-btn ghost" href={cvMailto}>Email your CV</a>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
-

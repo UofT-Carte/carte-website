@@ -1,0 +1,44 @@
+---
+// "On this page" index for long pages. Two placements from one list:
+// `rail` is the sticky desktop column beside the content (two levels deep);
+// `row` is the phone and tablet link row under the hero (top level only).
+interface Section {
+  id: string;
+  label: string;
+  children?: { id: string; label: string }[];
+}
+
+interface Props {
+  sections: Section[];
+  variant: 'rail' | 'row';
+}
+
+const { sections, variant } = Astro.props;
+---
+
+{variant === 'rail' ? (
+  <nav class="hidden lg:block" aria-label="On this page">
+    <ul class="sticky top-32 space-y-3 border-l border-subtle pl-5">
+      {sections.map(s => (
+        <li>
+          <a href={`#${s.id}`} class="text-sm font-semibold text-muted hover:text-secondary-blue transition-colors">{s.label}</a>
+          {s.children && (
+            <ul class="mt-2 space-y-2 pl-3">
+              {s.children.map(c => (
+                <li><a href={`#${c.id}`} class="text-sm text-muted hover:text-secondary-blue transition-colors">{c.label}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+) : (
+  <nav class="lg:hidden mt-8" aria-label="On this page">
+    <ul class="flex flex-wrap gap-x-6 gap-y-2">
+      {sections.map(s => (
+        <li><a href={`#${s.id}`} class="link-arrow">{s.label} →</a></li>
+      ))}
+    </ul>
+  </nav>
+)}

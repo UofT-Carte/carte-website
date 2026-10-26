@@ -1,217 +1,106 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CheckItem from '../components/CheckItem.astro';
+import SectionIndex from '../components/SectionIndex.astro';
+
+// One index drives both the sticky desktop rail and the phone link row.
+const sections = [
+  { id: 'mitacs-faculty', label: 'Mitacs supervision' },
+  { id: 'training', label: 'Faculty training' },
+  { id: 'funding', label: 'Funding applications' },
+];
+const fundingMailto = `mailto:carte@utoronto.ca?subject=${encodeURIComponent('Funding application')}`;
 ---
 
 <BaseLayout title="Faculty" description="Opportunities for UofT Engineering faculty to engage with applied AI through Mitacs Accelerate supervision, training programs, and funding support.">
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 lg:pt-24 pb-12">
       <div class="max-w-3xl">
         <h1 class="carte-h1 mb-6">
           Support for UofT Engineering faculty working with AI.
         </h1>
+        <p class="text-xl text-muted leading-relaxed max-w-2xl">
+          Supervise a funded Mitacs intern, join the annual ML bootcamp, or get help with a funding application.
+        </p>
       </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">      
-      <div class="text-center mb-16">
-        <h2 class="carte-h2 mb-4">Featured opportunities</h2>
-        <p class="text-lg text-muted max-w-2xl mx-auto">Supervise funded research projects, enhance your AI expertise, and navigate funding programs with Carte's support.</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-        <!-- Mitacs Accelerate -->
-        <a href="#mitacs-faculty" class="carte-card card-demo block">
-          <h3>Mitacs Accelerate</h3>
-          <p>Supervise paid student interns on industry-partnered research projects. Work with motivated students on funded research projects that connect your lab with industry partners. Mitacs Accelerate provides $15,000-$20,000 research awards per internship, combining industry funding with government matching.</p>
-          <span class="link-arrow">How supervision works →</span>
-        </a>
-        
-        <!-- Faculty Training -->
-        <a href="#training" class="carte-card card-demo block">
-          <h3>Faculty training</h3>
-          <p>Annual ML bootcamp and ongoing workshops for faculty. Join our annual 5-day intensive machine learning bootcamp designed specifically for faculty. Learn alongside colleagues from diverse research backgrounds and gain hands-on AI skills applicable to your research domain.</p>
-          <span class="link-arrow">See the bootcamp →</span>
-        </a>
-        
-        <!-- Funding Support -->
-        <a href="#funding" class="carte-card card-demo block">
-          <h3>Funding support</h3>
-          <p>Navigate NSERC Alliance, Mitacs, and other funding programs. Get expert guidance on proposal development, partner matching, and application processes for major funding programs. We help you maximize your research investment through government funding opportunities.</p>
-          <span class="link-arrow">See what we help with →</span>
-        </a>
-      </div>
+
+      <SectionIndex sections={sections} variant="row" />
     </div>
   </section>
 
-  <!-- Mitacs Accelerate Detailed Section -->
-  <section id="mitacs-faculty" class="py-20 lg:py-28 scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Mitacs Accelerate</h2>
-        <p class="text-xl text-muted max-w-2xl mx-auto">
-          Supervise funded research projects that connect your lab with industry partners.
-        </p>
-      </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-16">
+    <SectionIndex sections={sections} variant="rail" />
 
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          Mitacs Accelerate pairs an industry partner, a university supervisor and an intern on one research project. As a faculty supervisor, you'll work with motivated students and industry partners on applied AI research projects while leveraging government-matched funding.
+    <div class="max-w-[36rem]">
+      <!-- Mitacs Accelerate -->
+      <section id="mitacs-faculty" class="pb-16 scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Supervise a funded Mitacs intern.</h2>
+        <p class="text-lg text-body leading-relaxed mb-4">
+          Mitacs Accelerate pairs an industry partner, a faculty supervisor and an intern on one applied research project. You guide the research; the partner brings the problem and part of the funding; Mitacs matches it.
+        </p>
+        <p class="text-body leading-relaxed mb-8">
+          Each four- to six-month internship carries a <strong>$15,000 CAD</strong> research award, or <strong>$20,000 CAD</strong> for a postdoc. Internships are repeatable: three four-month internships make a funded year of research, without drawing on your own grants.
         </p>
 
-        <h3 class="carte-h3 mt-8 mb-4">Benefits for faculty</h3>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>Access to motivated, funded student researchers for your research projects</CheckItem>
-          <CheckItem>Industry connections that can lead to long-term research partnerships</CheckItem>
-          <CheckItem>Funded research opportunities without requiring your own grant funding</CheckItem>
-          <CheckItem>Supervise students on applied AI problems that a partner will put to use</CheckItem>
+        <h3 class="carte-h4 mb-4">What Carte does</h3>
+        <ul class="space-y-3 text-muted mb-8">
+          <CheckItem>Finds students interested in your research area</CheckItem>
+          <CheckItem>Connects you with industry partners looking for an academic collaborator</CheckItem>
+          <CheckItem>Helps draft and submit the application, and stays involved from scoping to completion</CheckItem>
         </ul>
 
-        <h3 class="carte-h3 mt-8 mb-4">How Carte helps</h3>
-        <p class="text-muted mb-4">
-          Carte facilitates Mitacs Accelerate projects and provides comprehensive support throughout the process:
+        <a class="link-arrow" href="/partnerships#mitacs-accelerate">See the funding model →</a>
+      </section>
+
+      <!-- Faculty training -->
+      <section id="training" class="py-16 border-t border-subtle scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Spend a week learning machine learning.</h2>
+        <p class="text-lg text-body leading-relaxed mb-4">
+          Each year we run a five-day machine learning bootcamp for faculty with the Data Sciences Institute. It starts from foundations and works up to deep learning and reinforcement learning, with hands-on workshops throughout, and the agenda is revised every year.
         </p>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>We help match you with qualified students who are interested in your research area</CheckItem>
-          <CheckItem>We connect you with industry partners looking for academic collaboration</CheckItem>
-          <CheckItem>We assist with application drafting and submission to ensure all requirements are met</CheckItem>
-          <CheckItem>We support you through every step, from project scoping to completion</CheckItem>
+        <p class="text-body leading-relaxed mb-8">
+          You learn alongside colleagues from other research areas, away from the lab and the lecture hall. Between bootcamps we run shorter workshops on large language models and domain-specific topics.
+        </p>
+
+        <figure class="mb-8">
+          <blockquote class="text-lg text-strong leading-relaxed">
+            “I've learned more in one week than in one year of self-directed efforts, which are generally bumped off track by the nature of running a lab/teaching.”
+          </blockquote>
+          <figcaption class="mt-2 text-sm text-muted">Faculty participant, 2023</figcaption>
+        </figure>
+
+        <a class="link-arrow" href="/training">See all training programs →</a>
+      </section>
+
+      <!-- Funding support -->
+      <section id="funding" class="pt-16 border-t border-subtle scroll-mt-28">
+        <h2 class="carte-h2 mb-6">Get help with a funding application.</h2>
+        <p class="text-lg text-body leading-relaxed mb-8">
+          We work with faculty on NSERC Alliance grants, which fund collaborative research between universities and partner organizations, and on Mitacs programs beyond Accelerate.
+        </p>
+
+        <h3 class="carte-h4 mb-4">What we help with</h3>
+        <ul class="space-y-3 text-muted">
+          <CheckItem><strong>Proposal review:</strong> feedback on your draft before you submit</CheckItem>
+          <CheckItem><strong>Partner identification:</strong> industry partners interested in your research</CheckItem>
+          <CheckItem><strong>Budget planning:</strong> a budget that fits the program's rules</CheckItem>
+          <CheckItem><strong>Application guidance:</strong> requirements and deadlines, step by step</CheckItem>
         </ul>
-
-        <h3 class="carte-h3 mt-8 mb-4">Funding model</h3>
-        <div class="bg-info rounded-xl p-6 mt-6 border border-subtle">
-          <p class="text-body mb-3">
-            Each four- to six-month internship provides a <strong>$15,000 CAD</strong> research award (standard) or <strong>$20,000 CAD</strong> (postdoc), combining industry partner contributions with Mitacs matching funds.
-          </p>
-          <p class="text-body">
-            Internships are repeatable, allowing for extended research collaborations. For example, three four-month internships can create a full year of funded research.
-          </p>
-        </div>
-
-        <h3 class="carte-h3 mt-8 mb-4">Your role as supervisor</h3>
-        <p class="text-muted mb-4">
-          As the academic supervisor, you'll provide research guidance and mentorship to the student intern while collaborating with the industry partner. This creates a valuable three-way collaboration that benefits all parties.
-        </p>
-      </div>
-
-      <div class="mt-10 text-center flex flex-wrap gap-4 justify-center">
-        <a class="carte-btn-primary" href="/partnerships#mitacs-accelerate">Learn more about Mitacs</a>
-        <a class="carte-btn-ghost" href="/contact">Contact us</a>
-      </div>
+      </section>
     </div>
-  </section>
+  </div>
 
-  <!-- Faculty Training Detailed Section -->
-  <section id="training" class="py-20 lg:py-28 bg-card scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Faculty training</h2>
-        <p class="text-xl text-muted max-w-2xl mx-auto">
-          Enhance your AI and machine learning expertise through our annual bootcamp and ongoing workshops.
-        </p>
-      </div>
-
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          Our flagship faculty training program is an annual week-long intensive in collaboration with the Data Sciences Institute, designed to equip faculty with AI and machine learning skills applicable to their research domains.
-        </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">Annual ML bootcamp</h3>
-        <p class="text-muted mb-4">
-          The program takes faculty members from foundational concepts through to advanced topics like reinforcement learning, with hands-on workshops and collaborative discussions throughout. Our training agenda is revised annually to incorporate emerging technologies in the field.
-        </p>
-
-        <div class="bg-info rounded-xl p-6 mt-6 border border-subtle">
-          <p class="text-body italic mb-2">
-            "I've learned more in one week than in one year of self-directed efforts, which are generally bumped off track by the nature of running a lab/teaching."
-          </p>
-          <p class="text-muted text-sm">
-            — Faculty participant, 2023
-          </p>
-        </div>
-
-        <h3 class="carte-h3 mt-8 mb-4">What you'll learn</h3>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem>Foundational machine learning concepts and techniques</CheckItem>
-          <CheckItem>Advanced topics including deep learning and reinforcement learning</CheckItem>
-          <CheckItem>Hands-on workshops with practical applications</CheckItem>
-          <CheckItem>Collaborative learning with colleagues from diverse research backgrounds</CheckItem>
-        </ul>
-
-        <h3 class="carte-h3 mt-8 mb-4">Additional workshops</h3>
-        <p class="text-muted mb-4">
-          Beyond the annual bootcamp, we offer specialized workshops on topics like large language models and domain-specific AI applications. These workshops provide opportunities for continued learning and skill development.
-        </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">A week away from the lab</h3>
-        <p class="text-muted mb-4">
-          Past participants have praised the excellent instruction and the opportunity to learn alongside colleagues from diverse research backgrounds. The intensive format allows you to focus fully on learning without the distractions of running a lab or teaching responsibilities.
-        </p>
-      </div>
-
-      <div class="mt-10 text-center flex flex-wrap gap-4 justify-center">
-        <a class="carte-btn-primary" href="/training">View all training programs</a>
-        <a class="carte-btn-ghost" href="/contact">Contact us</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Funding Support Detailed Section -->
-  <section id="funding" class="py-20 lg:py-28 scroll-mt-24">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="carte-h2 mb-4">Funding support</h2>
-        <p class="text-xl text-muted max-w-2xl mx-auto">
-          Navigate NSERC Alliance, Mitacs, and other funding programs with expert guidance.
-        </p>
-      </div>
-
-      <div class="mb-8 max-w-xl mx-auto">
-        <p class="text-lg text-body leading-relaxed">
-          Securing research funding can be complex, but you don't have to navigate it alone. Carte provides expert guidance on proposal development, partner matching, and application processes for major government funding programs.
-        </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">NSERC Alliance</h3>
-        <p class="text-muted mb-4">
-          NSERC Alliance grants support collaborative research projects between academic institutions and partner organizations. We help you identify potential industry partners, develop strong proposals, and navigate the application process to maximize your chances of success.
-        </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">Mitacs programs</h3>
-        <p class="text-muted mb-4">
-          Beyond Mitacs Accelerate, we can help you explore other Mitacs programs that may be relevant to your research. These programs offer various funding mechanisms for collaborative research with industry partners.
-        </p>
-
-        <h3 class="carte-h3 mt-8 mb-4">How Carte assists</h3>
-        <ul class="space-y-3 text-muted mb-6">
-          <CheckItem><strong>Proposal review:</strong> We review your funding proposals and provide feedback to strengthen your applications</CheckItem>
-          <CheckItem><strong>Partner identification:</strong> We help you find industry partners who are interested in collaborating on research projects</CheckItem>
-          <CheckItem><strong>Budget planning:</strong> We assist with budget development and ensure your funding requests align with program requirements</CheckItem>
-          <CheckItem><strong>Application guidance:</strong> We guide you through the application process, ensuring all requirements are met and deadlines are met</CheckItem>
-        </ul>
-
-        <h3 class="carte-h3 mt-8 mb-4">Our experience with these programs</h3>
-        <p class="text-muted mb-4">
-          With over 100 faculty affiliates across 8 engineering departments, we have extensive experience navigating funding programs. We understand the requirements, timelines, and best practices for successful applications. Our goal is to help you maximize your research investment through effective use of government funding opportunities.
-        </p>
-      </div>
-
-      <div class="mt-10 text-center">
-        <a class="carte-btn-primary" href="/contact">Get funding support</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-20 lg:py-28">
+  <!-- Close: the faculty ask, not the generic one -->
+  <section class="pb-20 lg:pb-28">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="inverse-cta">
-        <h2>Tell us what you'd like to do.</h2>
-        <p>Supervise an intern, join the bootcamp, or get help with an application. One email is enough to start.</p>
+        <h2>Applying for NSERC Alliance or Mitacs? Send us your draft.</h2>
+        <p>Or ask about the next faculty bootcamp.</p>
         <div class="row">
-          <a class="inv-btn primary" href="/contact">Get in touch</a>
+          <a class="inv-btn primary" href={fundingMailto}>Email carte@utoronto.ca</a>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
-
