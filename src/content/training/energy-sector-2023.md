@@ -1,6 +1,6 @@
 ---
 title: "Energy sector ML training"
-audience: "Public Energy Organization"
+audience: "Public energy organization"
 duration: "5 days"
 year: 2023
 description: "Week-long customized training for a public organization in the energy sector, covering AI fundamentals through to developing organizational AI strategy."

@@ -1,6 +1,6 @@
 ---
 title: "Executive AI briefings"
-audience: "C-Suite & Senior Leaders"
+audience: "C-suite & senior leaders"
 duration: "Half-day to full-day"
 description: "Strategic AI briefings designed for executive leadership, covering AI capabilities, industry trends, organizational implications, and how to develop an effective AI strategy."
 featured: true

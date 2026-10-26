@@ -1,6 +1,6 @@
 ---
 title: "Applied AI project guidance"
-audience: "Project Teams"
+audience: "Project teams"
 duration: "Ongoing"
 description: "Hands-on consulting and guidance for your organization's AI initiatives. We help teams scope, develop, and implement applied analytics projects that drive real business value."
 featured: true

@@ -1,6 +1,6 @@
 ---
 title: "BioZone machine learning intensive"
-audience: "BioZone Researchers"
+audience: "BioZone researchers"
 duration: "3 days"
 year: 2023
 description: "Intensive ML training covering fundamentals through deep learning, with applications to bioscience problems including gene expression analysis and biological data processing."

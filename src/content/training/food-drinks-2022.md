@@ -1,6 +1,6 @@
 ---
 title: "Food & beverage industry training"
-audience: "Major Food & Drinks Corporation"
+audience: "Major food & drinks corporation"
 duration: "Multi-day"
 year: 2022
 description: "Executive training and hands-on ML workshops for a major corporation, plus guidance on applied AI projects including turnover modeling and production efficiency."

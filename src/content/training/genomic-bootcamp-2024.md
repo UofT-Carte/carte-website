@@ -1,6 +1,6 @@
 ---
 title: "Genomic data science intensive"
-audience: "Clinical & Genomics Researchers"
+audience: "Clinical & genomics researchers"
 duration: "3 days"
 year: 2024
 description: "Intensive training at Princess Margaret Hospital on applying machine learning to genomic and clinical data, adapted from Carte's researcher training programs."

@@ -1,6 +1,6 @@
 ---
 title: "Mitsubishi AI intensive"
-audience: "Corporate Innovation & Strategy Teams"
+audience: "Corporate innovation & strategy teams"
 duration: "3 days"
 year: 2025
 description: "An intensive, in-person AI program for Mitsubishi Corporation Americas, combining executive briefings with hands-on labs in large language models and multi-agent workflows."

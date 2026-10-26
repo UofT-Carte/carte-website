@@ -1,6 +1,6 @@
 ---
 title: "Trade consulting executive training"
-audience: "Trade Consulting Firm"
+audience: "Trade consulting firm"
 duration: "Executive session"
 year: 2024
 description: "Executive-level AI training for C-Suite leaders at a trade consulting firm, covering industry trends and medium-term outlook for AI in the sector."
