@@ -12,7 +12,7 @@ order: 6
 Comprehensive engagement with a major corporation in the food and drinks industry:
 
 **Executive Training**
-- C-Suite briefing on artificial intelligence capabilities and strategy
+- C-suite briefing on artificial intelligence capabilities and strategy
 
 **Staff Training**
 - Multi-day machine learning workshops to upskill employees
