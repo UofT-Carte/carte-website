@@ -9,5 +9,5 @@ tags: ["Deep Learning", "Sustainability"]
 order: 2
 ---
 
-This work develops deep learning models capable of predicting key residential building attributes—such as age, size, and construction type—directly from street-view imagery. By automating the extraction of building characteristics at scale, this research supports more informed urban planning, energy efficiency assessments, and sustainability initiatives across housing stocks.
+This work develops deep learning models capable of predicting key residential building attributes, such as age, size and construction type, directly from street-view imagery. By automating the extraction of building characteristics at scale, this research supports more informed urban planning, energy efficiency assessments, and sustainability initiatives across housing stocks.
 
