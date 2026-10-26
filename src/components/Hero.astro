@@ -2,10 +2,11 @@
 import { getImage } from 'astro:assets';
 import { heroImage, heroAlt } from '../assets/hero';
 
-// The photo only renders from lg (1024px) up, in a column that is half the
-// viewport minus padding. Build a srcset for that slot; below lg the
-// <picture> resolves to a 1×1 transparent GIF so phones never fetch the
-// desktop sizes; the homepage serves them a smaller copy after the doors.
+// The photo renders from lg (1024px) up, in a column between the middle of
+// the page and the content rail (at most 560px wide). Build a srcset for that
+// slot; below lg the <picture> resolves to a 1×1 transparent GIF so phones
+// never fetch the desktop sizes; the homepage serves them a smaller copy
+// after the doors.
 const heroWidths = [640, 960, 1280, 1600];
 const heroSources = await Promise.all(
   heroWidths.map(async (width) => {
@@ -38,18 +39,20 @@ const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAE
     </div>
   </div>
 
-  <!-- Photo column (desktop only; below lg the photo follows the front doors) -->
-  <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 p-4 lg:p-12 items-center justify-center">
+  <!-- Photo column (desktop only; below lg the photo follows the front doors).
+       Right edge sits on the content rail (max-w-7xl less its 2rem padding);
+       anchored bottom-right so cropping never hides the photo credit. -->
+  <div class="hidden lg:flex lg:absolute lg:inset-y-0 lg:left-1/2 lg:right-[max(2rem,calc((100%-80rem)/2+2rem))] lg:py-12 lg:pl-12 items-center justify-center">
     <div class="w-full h-96 lg:h-full bg-uoft-blue flex items-center justify-center overflow-hidden relative rounded-2xl">
       <picture class="contents">
         <source media="(max-width: 1023px)" srcset={BLANK_GIF} />
-        <source media="(min-width: 1024px)" srcset={heroSrcset} sizes="calc(50vw - 6rem)" type="image/webp" />
+        <source media="(min-width: 1024px)" srcset={heroSrcset} sizes="min(calc(50vw - 5rem), 560px)" type="image/webp" />
         <img
           src={heroFallback.src}
           width={heroImage.width}
           height={heroImage.height}
           alt={heroAlt}
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover object-right-bottom"
           loading="eager"
           decoding="async"
           fetchpriority="high"
