@@ -2,7 +2,6 @@
 title: "Capstone design projects"
 description: "Upper-year engineering students work on your applied AI problem for a semester, with faculty supervision."
 featured: false
-icon: "academic"
 order: 4
 ---
 

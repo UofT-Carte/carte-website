@@ -2,7 +2,6 @@
 title: "Hackathons & competitions"
 description: "Sponsor a student competition on an AI method or tool your organization cares about."
 featured: false
-icon: "trophy"
 order: 6
 ---
 

@@ -6,7 +6,6 @@ year: 2026
 partner: "LG Electronics Toronto AI Lab"
 description: "Plans a short route around an obstacle and gives it to the robot's safety filter as guidance, improving both collision avoidance and task success."
 featured: false
-icon: "code"
 tags: ["Robotics"]
 order: 38
 ---
