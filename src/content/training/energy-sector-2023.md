@@ -6,7 +6,6 @@ year: 2023
 description: "Week-long customized training for a public organization in the energy sector, covering AI fundamentals through to developing organizational AI strategy."
 featured: false
 icon: "briefcase"
-tags: ["Energy", "Strategy", "5-Day Program"]
 order: 5
 testimonial:
   quote: "I have been hearing about AI in the news, and wanted to understand how it could apply to my role."

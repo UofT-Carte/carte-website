@@ -5,7 +5,6 @@ duration: "6 months"
 description: "Partnership program bringing graduate students from South Korea to Toronto for an applied AI program, facilitated by Carte in collaboration with Korean institutions."
 featured: false
 icon: "globe"
-tags: ["International", "Graduate", "Partnership"]
 order: 9
 ---
 

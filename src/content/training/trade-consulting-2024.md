@@ -6,7 +6,6 @@ year: 2024
 description: "Executive-level AI training for C-Suite leaders at a trade consulting firm, covering industry trends and medium-term outlook for AI in the sector."
 featured: false
 icon: "briefcase"
-tags: ["Executive", "Strategy", "Consulting"]
 order: 8
 ---
 
