@@ -12,8 +12,6 @@ const featuredServices = allPartnerships
   .filter(p => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
 
-// Arrow links name their destination instead of "Learn more"
-const linkLabels: Record<string, string> = { '/training': 'See training programs', '/research': 'See our research' };
 
 // Proof for partners: papers whose problem a named partner set (Director-approved picks)
 const partnerWorkIds = ['cascadedebate', 'anybald', 'prostate-cancer-mortality', 'faste', 'survey-response-evaluation'];
@@ -26,6 +24,12 @@ const partnerWork = await Promise.all(partnerWorkIds.map(async id => {
 const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
 // Venues like "ACL 2026 Industry Track" already carry the year
 const withYear = (venue: string, year: number) => venue.includes(String(year)) ? venue : `${venue} · ${year}`;
+
+// Comparison rows: Mitacs (from the funding section below) plus the featured services
+const engagements = [
+  { title: "Mitacs Accelerate", href: "#mitacs-accelerate", gets: "A UofT intern on your problem, with academic supervision", time: "4–6 months per internship, repeatable", funding: "From $7,500 CAD per internship, matched by Mitacs" },
+  ...featuredServices.map(s => ({ title: s.data.title, href: s.data.link, gets: s.data.gets, time: s.data.time, funding: s.data.funding })),
+];
 
 const secondaryServices = allPartnerships
   .filter(p => !p.data.featured)
@@ -51,32 +55,25 @@ const secondaryServices = allPartnerships
     </div>
   </section>
 
-  <!-- Featured Services Section (Static Grid) -->
+  <!-- Four engagements, compared on what differs: what you get, time, funding -->
   <section class="py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="carte-h2 mb-4">How we work with partners</h2>
-        <p class="text-lg text-muted max-w-2xl mx-auto">Four ways in, from a single funded internship to a multi-year research program.</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Mitacs Accelerate Card (First Position) -->
-        <a href="#mitacs-accelerate" class="carte-card card-demo block">
-          <h3>Mitacs Accelerate</h3>
-          <p>Contribute $7,500+ per internship and Mitacs matches it, so a UofT student works on your research problem with a $15,000+ award.</p>
-          <span class="link-arrow">See the funding model →</span>
-        </a>
-        
-        {featuredServices.map((service) => (
-          <article class="carte-card card-demo">
-            <h3>{service.data.title}</h3>
-            <p>{service.data.description}</p>
-            {service.data.link && (
-              <a href={service.data.link} class="link-arrow">{linkLabels[service.data.link] ?? 'Learn more'} →</a>
-            )}
-          </article>
-        ))}
-      </div>
+      <h2 class="carte-h2 mb-8">Four ways to work with us.</h2>
+      <table class="carte-table carte-table--stack">
+        <thead>
+          <tr><th scope="col"><span class="sr-only">Engagement</span></th><th scope="col">You get</th><th scope="col">Time</th><th scope="col">How it's paid for</th></tr>
+        </thead>
+        <tbody>
+          {engagements.map(e => (
+            <tr>
+              <th scope="row">{e.href ? <a href={e.href} class="link-arrow">{e.title} →</a> : e.title}</th>
+              <td data-label="You get">{e.gets}</td>
+              <td data-label="Time">{e.time}</td>
+              <td data-label="How it's paid for">{e.funding}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </section>
 

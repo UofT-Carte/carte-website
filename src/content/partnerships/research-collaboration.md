@@ -2,6 +2,9 @@
 title: "Sponsored research"
 description: "Faculty and students work on your applied AI problem, and we help fund it through NSERC Alliance, Mitacs and other programs."
 featured: true
+gets: "Faculty and students working on your applied AI problem"
+time: "Scoped with you, up to multi-year"
+funding: "Your funding, often leveraged through NSERC Alliance or Mitacs"
 order: 1
 link: "/research"
 ---
