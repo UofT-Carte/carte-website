@@ -9,7 +9,7 @@ link: "/training"
 We design and deliver AI training programs tailored to your organization's needs, industry context, and skill levels.
 
 **Training options include:**
-- Executive AI briefings for C-Suite and senior leaders
+- Executive AI briefings for C-suite and senior leaders
 - Multi-day technical workshops for employees
 - Half-day workshops on specific topics
 - Ongoing project guidance and mentorship

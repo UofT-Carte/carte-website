@@ -1,11 +1,10 @@
 ---
 title: "Machine learning training for faculty"
-audience: "Faculty Members"
+audience: "Faculty members"
 duration: "5 days"
 description: "Annual week-long intensive in collaboration with the Data Sciences Institute, designed to equip faculty with AI and machine learning skills applicable to their research domains."
 featured: false
 icon: "academic"
-tags: ["Faculty", "Intensive", "Annual"]
 order: 10
 testimonial:
   quote: "I've learned more in one week than in one year of self-directed efforts, which are generally bumped off track by the nature of running a lab/teaching."

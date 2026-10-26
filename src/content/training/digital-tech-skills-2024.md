@@ -1,12 +1,11 @@
 ---
 title: "Digital tech skills cohort"
-audience: "Graduate Students & Early-Career Staff"
+audience: "Graduate students & early-career staff"
 duration: "Multi-session cohort"
 year: 2024
 description: "A multi-session cohort program with the Data Sciences Institute focused on digital literacy, data skills, and practical AI techniques for non-specialists."
 featured: false
 icon: "academic"
-tags: ["Digital Skills", "Cohort", "Introductory"]
 order: 13
 ---
 

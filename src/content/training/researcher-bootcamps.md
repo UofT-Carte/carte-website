@@ -1,11 +1,10 @@
 ---
 title: "Customized ML training for research groups"
-audience: "Research Groups"
+audience: "Research groups"
 duration: "3-5 days"
 description: "Fully customized machine learning training tailored to specific research domains, from biomedical sciences to postdoctoral fellows in AI-adjacent fields."
 featured: false
 icon: "flask"
-tags: ["Researchers", "Custom", "Domain-Specific"]
 order: 11
 testimonial:
   quote: "Very interesting material, knowledgeable instructor and helpers, felt like a comprehensive overview of topics."
