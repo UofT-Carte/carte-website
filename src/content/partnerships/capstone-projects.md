@@ -1,9 +1,8 @@
 ---
 title: "Capstone design projects"
-description: "Engage talented upper-year engineering students to work on applied AI projects for your organization through our capstone design program."
+description: "Upper-year engineering students work on your applied AI problem for a semester, with faculty supervision."
 featured: false
 icon: "academic"
-tags: ["Students", "Projects"]
 order: 4
 ---
 

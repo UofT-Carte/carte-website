@@ -1,8 +1,7 @@
 ---
 title: "Corporate training"
-description: "Upskill your workforce with customized AI training programs—from executive briefings for leadership to hands-on technical workshops for your teams."
+description: "Training built around your teams, from executive briefings for leadership to multi-day technical workshops."
 featured: true
-tags: ["Training", "Upskilling", "Custom"]
 order: 2
 link: "/training"
 ---

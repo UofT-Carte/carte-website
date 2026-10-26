@@ -1,9 +1,8 @@
 ---
 title: "Industry speaker seminars"
-description: "Share your organization's AI journey with the UofT community. Our speaker seminars connect industry leaders with students, faculty, and potential collaborators."
+description: "Speak to UofT students, faculty and researchers about how your organization uses AI."
 featured: false
 icon: "mic"
-tags: ["Events", "Networking"]
 order: 5
 ---
 
