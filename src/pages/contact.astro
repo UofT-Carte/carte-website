@@ -193,5 +193,17 @@ import alexHeadshot from '../assets/alex-headshot.jpg';
 
   <script>
     import "../scripts/subscribe";
+
+    // Links to /contact#newsletter (e.g. from the students page) should land on
+    // an open form, not a closed disclosure.
+    const newsletter = document.getElementById('newsletter') as HTMLDetailsElement | null;
+    function openNewsletterFromHash() {
+      if (newsletter && location.hash === '#newsletter') {
+        newsletter.open = true;
+        newsletter.scrollIntoView({ block: 'start' });
+      }
+    }
+    openNewsletterFromHash();
+    window.addEventListener('hashchange', openNewsletterFromHash);
   </script>
 </BaseLayout>
