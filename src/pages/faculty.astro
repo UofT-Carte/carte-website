@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CheckItem from '../components/CheckItem.astro';
+import SectionIndex from '../components/SectionIndex.astro';
 
 // One index drives both the sticky desktop rail and the phone link row.
 const sections = [
@@ -24,26 +25,12 @@ const fundingMailto = `mailto:carte@utoronto.ca?subject=${encodeURIComponent('Fu
         </p>
       </div>
 
-      <!-- Phone and tablet: the index as a row of links -->
-      <nav class="lg:hidden mt-8" aria-label="On this page">
-        <ul class="flex flex-wrap gap-x-6 gap-y-2">
-          {sections.map(s => (
-            <li><a href={`#${s.id}`} class="link-arrow">{s.label} →</a></li>
-          ))}
-        </ul>
-      </nav>
+      <SectionIndex sections={sections} variant="row" />
     </div>
   </section>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-16">
-    <!-- Desktop: sticky index beside the content -->
-    <nav class="hidden lg:block" aria-label="On this page">
-      <ul class="sticky top-32 space-y-3 border-l border-subtle pl-5">
-        {sections.map(s => (
-          <li><a href={`#${s.id}`} class="text-sm font-semibold text-muted hover:text-secondary-blue transition-colors">{s.label}</a></li>
-        ))}
-      </ul>
-    </nav>
+    <SectionIndex sections={sections} variant="rail" />
 
     <div class="max-w-[36rem]">
       <!-- Mitacs Accelerate -->
