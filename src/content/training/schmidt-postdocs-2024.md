@@ -1,12 +1,11 @@
 ---
 title: "Schmidt AI postdocs tutorial series"
-audience: "Schmidt AI Postdoctoral Fellows"
+audience: "Schmidt AI postdoctoral fellows"
 duration: "Half-day tutorials"
 year: 2024
 description: "Intensive half-day tutorials on Explainability & Fairness in ML (XAI) and Generative AI/NLP, designed to equip postdocs with AI skills directly relevant to their research."
 featured: false
 icon: "academic"
-tags: ["Postdocs", "XAI", "GenAI"]
 order: 5
 ---
 

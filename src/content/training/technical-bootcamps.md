@@ -1,10 +1,9 @@
 ---
 title: "Customized technical training"
-audience: "Technical Teams & Staff"
+audience: "Technical teams & staff"
 duration: "3-5 days"
 description: "Intensive, hands-on machine learning training customized to your industry and use cases. Employees gain practical skills in Python, data handling, and building ML models relevant to your business."
 featured: true
-tags: ["Hands-On", "Technical", "Customized"]
 order: 2
 testimonial:
   quote: "I have been hearing about AI in the news, and wanted to understand how it could apply to my role."
