@@ -12,8 +12,6 @@ const research = defineCollection({
     partner: z.string().optional(),
     description: z.string(),
     featured: z.boolean().default(false),
-    // For secondary papers (smaller cards with icons)
-    icon: z.enum(["database", "health", "air", "code", "chart", "globe", "houses", "people"]).optional(),
     tags: z.array(z.string()).default([]),
     order: z.number().default(99),
   }),
@@ -28,8 +26,6 @@ const training = defineCollection({
     year: z.number().optional(),
     description: z.string(),
     featured: z.boolean().default(false),
-    // For secondary trainings (smaller cards with icons)
-    icon: z.enum(["academic", "flask", "briefcase", "users", "globe", "calendar"]).optional(),
     tags: z.array(z.string()).default([]),
     order: z.number().default(99),
     // Optional testimonial
@@ -50,8 +46,6 @@ const partnerships = defineCollection({
     gets: z.string().optional(),
     time: z.string().optional(),
     funding: z.string().optional(),
-    // For secondary services (smaller cards with icons)
-    icon: z.enum(["beaker", "academic", "briefcase", "users", "mic", "trophy"]).optional(),
     tags: z.array(z.string()).default([]),
     order: z.number().default(99),
     // Optional link to another page

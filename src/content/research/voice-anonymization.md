@@ -5,7 +5,6 @@ venue: "4th Symposium on Security and Privacy in Speech Communication"
 year: 2024
 description: "Anonymizes speakers' voices with speech-to-text and text-to-speech models while carrying emotional features through."
 featured: false
-icon: "people"
 tags: ["Speech"]
 order: 23
 ---

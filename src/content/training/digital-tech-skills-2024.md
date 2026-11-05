@@ -5,7 +5,6 @@ duration: "Multi-session cohort"
 year: 2024
 description: "A multi-session cohort program with the Data Sciences Institute focused on digital literacy, data skills, and practical AI techniques for non-specialists."
 featured: false
-icon: "academic"
 order: 13
 ---
 

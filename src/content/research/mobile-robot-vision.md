@@ -5,7 +5,6 @@ venue: "International Conference on Artificial Intelligence in Information and C
 year: 2025
 description: "Compares depth cameras and ordinary colour cameras for judging distance on a mobile robot, and the computing cost of each."
 featured: false
-icon: "code"
 tags: ["Robotics"]
 order: 22
 ---

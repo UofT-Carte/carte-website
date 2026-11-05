@@ -6,7 +6,6 @@ year: 2025
 partner: "LG Electronics Toronto AI Lab"
 description: "A method for merging LoRA adapters across languages."
 featured: false
-icon: "globe"
 tags: ["Language models"]
 order: 33
 ---

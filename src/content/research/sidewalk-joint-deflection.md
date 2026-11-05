@@ -6,7 +6,6 @@ year: 2025
 partner: "IRIS R&D Group"
 description: "Stereo vision that measures sidewalk joint deflection more accurately than the monocular method."
 featured: false
-icon: "houses"
 tags: ["Computer vision"]
 order: 20
 ---

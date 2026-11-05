@@ -6,7 +6,6 @@ venue: "NML@ICDM 2025 (Workshop co-located with ICDM, Washington DC)"
 year: 2025
 description: "Machine learning models for predicting candidate interview engagement on a real-time recruitment platform under extreme class imbalance, highlighting the importance of behavioral and temporal features alongside algorithmic match scores."
 featured: false
-icon: "people"
 tags: ["Machine Learning", "User Behavior", "Imbalanced Data"]
 order: 8
 ---

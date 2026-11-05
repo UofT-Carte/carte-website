@@ -6,7 +6,6 @@ year: 2025
 partner: "LG Electronics Toronto AI Lab"
 description: "Fine-tunes ControlNet with reinforcement learning so that generated figures match a requested pose."
 featured: false
-icon: "code"
 tags: ["Computer vision"]
 order: 21
 ---

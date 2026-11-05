@@ -5,7 +5,6 @@ venue: "ACM SIGCAS/SIGCHI COMPASS"
 year: 2022
 description: "A conference note demonstrating how deep learning models can infer key residential house attributes directly from imagery, laying the groundwork for scalable, data-driven housing and sustainability analysis."
 featured: false
-icon: "houses"
 tags: ["Computer Vision", "Sustainability"]
 order: 7
 ---

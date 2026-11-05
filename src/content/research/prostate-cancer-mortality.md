@@ -6,7 +6,6 @@ year: 2026
 partner: "Sunnybrook Health Sciences Centre"
 description: "A prognostic model that updates as the patient's health record grows, combining lab results, imaging, physician notes and weight. It outperformed models using any one type of data alone."
 featured: false
-icon: "health"
 tags: ["Health"]
 order: 31
 ---

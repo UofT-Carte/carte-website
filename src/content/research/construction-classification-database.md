@@ -5,7 +5,6 @@ venue: "Scientific Data (Nature)"
 year: 2022
 description: "A comprehensive database enabling researchers to analyze resource consumption patterns in construction."
 featured: false
-icon: "database"
 tags: ["Infrastructure", "Data"]
 order: 4
 ---

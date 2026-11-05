@@ -6,7 +6,6 @@ year: 2025
 partner: "Nexxt Intelligence"
 description: "Scores open-ended survey responses automatically and explains its scores, without needing reference answers."
 featured: false
-icon: "people"
 tags: ["Language models"]
 order: 26
 ---

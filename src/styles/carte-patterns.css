@@ -143,3 +143,10 @@
 }
 .door .cta:hover { color: var(--brand-secondary); }
 .door .cta .label { border-bottom: 2px solid var(--brand-accent-warm); padding-bottom: 2px; }
+
+/* ---- Carousel edge fades ------------------------------------------ */
+/* CarouselNav marks the frame at its start or end; hide the fade there so it
+   never sits over the first or last card. */
+[data-at-start="true"] > [data-fade="start"],
+[data-at-end="true"] > [data-fade="end"] { opacity: 0; }
+[data-fade] { transition: opacity var(--dur-base, 200ms) ease; }
